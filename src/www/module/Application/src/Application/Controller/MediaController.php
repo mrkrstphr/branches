@@ -11,7 +11,7 @@ use Zend\View\Model\ViewModel;
 /**
  *
  */
-class IndexController extends AbstractActionController
+class MediaController extends AbstractActionController
 {
     /**
      *
