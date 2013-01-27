@@ -5,6 +5,8 @@
 
 namespace Branches\Domain\Model\Person;
 
+use Branches\Domain\Model\Relationship;
+
 /**
  *
  */
@@ -13,9 +15,15 @@ class Person extends \Branches\Domain\Model\Entity
     use \Branches\Domain\Model\Timestamped;
 
     /**
+     *
      * @var string
      */
     protected $_refId;
+
+    /**
+     * @var string
+     */
+    protected $_gender;
 
     /**
      *
@@ -24,6 +32,19 @@ class Person extends \Branches\Domain\Model\Entity
     protected $_names = array();
 
     /**
+     *
+     * @var array
+     */
+    protected $_relationships = array();
+
+    /**
+     *
+     * @var array
+     */
+    protected $_parents = array();
+
+    /**
+     *
      * @return string
      */
     public function getRefId()
@@ -32,6 +53,7 @@ class Person extends \Branches\Domain\Model\Entity
     }
 
     /**
+     *
      * @param string $refId
      * @return Person
      */
@@ -40,6 +62,31 @@ class Person extends \Branches\Domain\Model\Entity
         $this->_refId = $refId;
 
         return $this;
+    }
+
+    /**
+     *
+     * @param string $gender
+     * @throws \Exception
+     */
+    public function setGender($gender)
+    {
+        $gender = strtoupper($gender);
+
+        if (!in_array($gender, array('M','F'))) {
+            throw new \Exception('Unknown gender specified: ' . $gender);
+        }
+
+        $this->_gender = $gender;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->_gender;
     }
 
     /**
@@ -67,5 +114,125 @@ class Person extends \Branches\Domain\Model\Entity
     public function getNames()
     {
         return $this->_names;
+    }
+
+    /**
+     *
+     * @return Name
+     */
+    public function getConfirmedName()
+    {
+        $confirmed = null;
+
+        foreach ($this->getNames() as $name) {
+            if ($confirmed) {
+                if ($name->getConfidence() > $confirmed->getConfidence()) {
+                    $confirmed = $name;
+                }
+            } else {
+                $confirmed = $name;
+            }
+        }
+
+        return $confirmed;
+    }
+
+    /**
+     *
+     * @param array $relationships
+     */
+    public function setRelationships($relationships)
+    {
+        $this->_relationships = $relationships;
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function getRelationships()
+    {
+        return $this->_relationships;
+    }
+
+    /**
+     *
+     * @param Relationship $relationship
+     */
+    public function addRelationship(Relationship $relationship)
+    {
+        $this->_relationships[] = $relationship;
+    }
+
+    /**
+     *
+     * @param array $parents
+     */
+    public function setParents($parents)
+    {
+        $this->_parents = $parents;
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function getParents($linkage = '')
+    {
+        $linkage = strtolower($linkage);
+        if (!empty($linkage)) {
+            if (isset($this->_parents[$linkage])) {
+                return $this->_parents[$linkage];
+            } else {
+                return array();
+            }
+        }
+
+        return $this->_parents;
+    }
+
+    /**
+     *
+     * @param Relationship $parents
+     * @param string $linkage
+     * @param int $confidence
+     * @throws \Exception
+     */
+    public function addParents(Relationship $parents, $linkage)
+    {
+        $linkage = strtolower($linkage);
+        if (!in_array($linkage, Relationship::$famcLinkage)) {
+            throw new \Exception('Invalid child pedigree linkage: ' . $linkage);
+        }
+
+        $this->_parents[$linkage][] = $parents;
+    }
+
+    /**
+     *
+     * @return Relationship
+     */
+    public function getConfirmedParents()
+    {
+        $confirmed = null;
+        $confirmedType = null;
+
+        foreach ($this->_parents as $type => $parents)
+        {
+            foreach ($parents as $parent) {
+                if ($type == 'adopted') {
+                    $confirmed = $parent;
+                    $confirmedType = $type;
+                } else if ($type == 'birth' && $confirmedType != 'adopted') {
+                    $confirmed = $parent;
+                    $confirmedType = $type;
+                } else if (is_null($type)) {
+                    $confirmed = $parent;
+                    $confirmedType = $type;
+                }
+            }
+        }
+
+        return $confirmed;
     }
 }

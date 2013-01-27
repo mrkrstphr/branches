@@ -10,7 +10,7 @@ namespace Branches\Domain\Model\Person;
  */
 class Name extends \Branches\Domain\Model\Entity
 {
-    use \Branches\Domain\Model\Sourceable;
+    #use \Branches\Domain\Model\Sourceable;
 
     /**
      *
@@ -23,6 +23,28 @@ class Name extends \Branches\Domain\Model\Entity
      * @var string
      */
     protected $_surname;
+
+    /**
+     *
+     * @var int
+     */
+    protected $_confidence;
+
+    /**
+     *
+     * @param string $givenName
+     * @param string $surname
+     * @param int $confidence
+     */
+    public function __construct($givenName = '', $surname = '', $confidence = 0)
+    {
+        $this->_givenName = $givenName;
+        $this->_surname = $surname;
+
+        if ($confidence) {
+            $this->_confidence = $confidence;
+        }
+    }
 
     /**
      *
@@ -60,6 +82,21 @@ class Name extends \Branches\Domain\Model\Entity
         return $this->_surname;
     }
 
+    /**
+     *
+     * @param int $confidence
+     */
+    public function setConfidence($confidence)
+    {
+        $this->_confidence = $confidence;
+    }
 
-
+    /**
+     *
+     * @return int
+     */
+    public function getConfidence()
+    {
+        return $this->_confidence;
+    }
 }
