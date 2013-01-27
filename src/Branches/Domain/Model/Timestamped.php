@@ -20,7 +20,7 @@ trait Timestamped
     /**
      * @var DateTime
      */
-    protected $_modified;
+    protected $_updated;
 
     /**
      * @return DateTime
@@ -43,18 +43,18 @@ trait Timestamped
     /**
      * @return DateTime
      */
-    public function getModified()
+    public function getUpdated()
     {
-        return $this->_modified;
+        return $this->_updated;
     }
 
     /**
-     * @param DateTime $modified
+     * @param DateTime $updated
      * @return Timestamped
      */
-    public function setModified(DateTime $modified)
+    public function setUpdated(DateTime $updated)
     {
-        $this->_modified = $modified;
+        $this->_updated = $updated;
         return $this;
     }
 }
