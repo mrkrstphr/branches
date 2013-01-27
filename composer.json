@@ -6,6 +6,9 @@
             "Branches":["src/"]
         }
     },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
     "require": {
         "php": ">=5.4",
         "zendframework/zendframework": "2.*",
