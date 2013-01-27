@@ -8,7 +8,7 @@ namespace Branches\Domain\Model;
 /**
  *
  */
-trait Sourceable
+trait Sourced
 {
     /**
      *
@@ -36,7 +36,7 @@ trait Sourceable
 
     /**
      *
-     * @param Branches\Domain\Model\Source\Source $source
+     * @param Source\Source $source
      */
     public function addSource(Source\Source $source)
     {

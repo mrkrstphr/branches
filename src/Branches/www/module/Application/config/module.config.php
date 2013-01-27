@@ -69,11 +69,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\People' => 'Application\Controller\PeopleController',
-            'Application\Controller\Places' => 'Application\Controller\PlacesController',
-            'Application\Controller\Media' => 'Application\Controller\MediaController',
-            'Application\Controller\Sources' => 'Application\Controller\SourcesController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController'
         ),
     ),
     'view_manager' => array(

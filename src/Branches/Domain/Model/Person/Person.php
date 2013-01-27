@@ -10,13 +10,17 @@ namespace Branches\Domain\Model\Person;
  */
 class Person extends \Branches\Domain\Model\Entity
 {
-    use \Branches\Domain\Model\Timestampable;
+    use \Branches\Domain\Model\Timestamped;
 
     /**
      * @var string
      */
     protected $_refId;
 
+    /**
+     *
+     * @var array
+     */
     protected $_names = array();
 
     /**
@@ -65,4 +69,3 @@ class Person extends \Branches\Domain\Model\Entity
         return $this->_names;
     }
 }
-

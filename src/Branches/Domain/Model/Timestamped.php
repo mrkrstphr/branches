@@ -10,7 +10,7 @@ use \DateTime;
 /**
  *
  */
-trait Timestampable
+trait Timestamped
 {
     /**
      * @var DateTime
@@ -32,7 +32,7 @@ trait Timestampable
 
     /**
      * @param DateTime $created
-     * @return Timestampable
+     * @return Timestamped
      */
     public function setCreated(DateTime $created)
     {
@@ -50,7 +50,7 @@ trait Timestampable
 
     /**
      * @param DateTime $modified
-     * @return Timestampable
+     * @return Timestamped
      */
     public function setModified(DateTime $modified)
     {

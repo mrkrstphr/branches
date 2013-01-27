@@ -1,6 +1,11 @@
 {
     "name": "branches",
     "description": "",
+    "autoload":{
+        "psr-0":{
+            "Branches":["src/"]
+        }
+    },
     "require": {
         "php": ">=5.4",
         "zendframework/zendframework": "2.*",
