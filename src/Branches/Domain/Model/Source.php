@@ -3,7 +3,7 @@
  *
  */
 
-namespace Branches\Domain\Model\Source;
+namespace Branches\Domain\Model;
 
 /**
  *

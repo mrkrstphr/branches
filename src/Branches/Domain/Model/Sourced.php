@@ -36,9 +36,9 @@ trait Sourced
 
     /**
      *
-     * @param Source\Source $source
+     * @param Source $source
      */
-    public function addSource(Source\Source $source)
+    public function addSource(Source $source)
     {
         $this->_sources[] = $source;
     }

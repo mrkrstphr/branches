@@ -3,7 +3,7 @@
     "description": "",
     "autoload":{
         "psr-0":{
-            "Branches":["src/"]
+            "Branches":["src/","tests/unit"]
         }
     },
     "require-dev": {
