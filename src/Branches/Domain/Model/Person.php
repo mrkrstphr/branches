@@ -3,14 +3,14 @@
  *
  */
 
-namespace Branches\Domain\Model\Person;
+namespace Branches\Domain\Model;
 
 use Branches\Domain\Model\Relationship;
 
 /**
  *
  */
-class Person extends \Branches\Domain\Model\Entity
+class Person extends Entity
 {
     use \Branches\Domain\Model\Timestamped;
 
@@ -217,8 +217,7 @@ class Person extends \Branches\Domain\Model\Entity
         $confirmed = null;
         $confirmedType = null;
 
-        foreach ($this->_parents as $type => $parents)
-        {
+        foreach ($this->_parents as $type => $parents) {
             foreach ($parents as $parent) {
                 if ($type == 'adopted') {
                     $confirmed = $parent;

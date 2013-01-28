@@ -5,17 +5,29 @@
 
 namespace Branches\Domain\Model;
 
-use \DateTime,
-    Branches\Domain\Model\Person\Person,
-    Branches\Domain\Model\Person\Name;
+use \DateTime;
 
 /**
  * Provides unit testing against the Relationship object.
  */
 class RelationshipTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     *
+     * @var Relationship
+     */
     protected $_relationship = null;
+
+    /**
+     *
+     * @var Person
+     */
     protected $_husband = null;
+
+    /**
+     *
+     * @var Person
+     */
     protected $_wife = null;
 
     /**

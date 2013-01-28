@@ -5,8 +5,6 @@
 
 namespace Branches\Domain\Model;
 
-use Branches\Domain\Model\Person\Person;
-
 /**
  *
  */

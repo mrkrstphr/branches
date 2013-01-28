@@ -3,12 +3,12 @@
  *
  */
 
-namespace Branches\Domain\Model\Person;
+namespace Branches\Domain\Model;
 
 /**
  *
  */
-class Name extends \Branches\Domain\Model\Entity
+class Name extends Entity
 {
     #use \Branches\Domain\Model\Sourceable;
 

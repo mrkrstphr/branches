@@ -3,7 +3,7 @@
  *
  */
 
-namespace Branches\Domain\Model\Person;
+namespace Branches\Domain\Model;
 
 use \DateTime;
 
