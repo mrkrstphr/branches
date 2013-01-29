@@ -1,5 +1,5 @@
 {
-    "hash": "fd240a661c8fd06c8160e1b3536e873f",
+    "hash": "cb39531c684281a3b1b3fe73263efbd1",
     "packages": [
         {
             "name": "doctrine/common",
@@ -205,42 +205,42 @@
         },
         {
             "name": "mrkrstphr/php-gedcom",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "git://github.com/mrkrstphr/php-gedcom.git",
-                "reference": "14aaf6818780fcb760ae60f03e69e16b2c59c009"
+                "url": "https://github.com/mrkrstphr/php-gedcom",
+                "reference": "1.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mrkrstphr/php-gedcom/zipball/14aaf6818780fcb760ae60f03e69e16b2c59c009",
-                "reference": "14aaf6818780fcb760ae60f03e69e16b2c59c009",
+                "url": "https://github.com/mrkrstphr/php-gedcom/archive/1.0.0.zip",
+                "reference": "1.0.0",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4"
+                "php": ">=5.3"
             },
             "require-dev": {
                 "phpunit/phpunit": "3.7.*",
                 "squizlabs/php_codesniffer": "1.*"
             },
-            "time": "2013-01-28 21:47:00",
+            "time": "2013-01-29 01:45:58",
             "type": "library",
             "autoload": {
                 "psr-0": {
                     "PhpGedcom\\": "library/"
                 }
             },
-            "description": "A GEDCOM file parser (read + write) for PHP 5.4+",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "description": "A GEDCOM file parser (read + write) for PHP 5.3+",
             "homepage": "http://github.com/mrkrstphr/php-gedcom",
             "keywords": [
-                "gedcom",
-                "parser"
-            ],
-            "support": {
-                "source": "https://github.com/mrkrstphr/php-gedcom/tree/master",
-                "issues": "https://github.com/mrkrstphr/php-gedcom/issues"
-            }
+                "parser",
+                "gedcom"
+            ]
         },
         {
             "name": "symfony/console",
@@ -395,7 +395,7 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "mrkrstphr/php-gedcom": 20
-    }
+    "stability-flags": [
+
+    ]
 }
