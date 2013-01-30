@@ -3,12 +3,14 @@
  *
  */
 
-namespace Branches\Domain\Model\Person;
+namespace Branches\Domain\Repository;
 
 use Branches\Domain\Model\Entity;
-use Branches\Domain\Model\Repository;
 
-interface PeopleRepository extends Repository
+/**
+ *
+ */
+interface Repository
 {
     /**
      *

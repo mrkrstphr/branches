@@ -5,7 +5,7 @@
 
 namespace Branches\Persistence\Repositories;
 
-use Branches\Domain\Model\Repository,
+use Branches\Domain\Repository\Repository,
     Branches\Domain\Model\Entity,
     Branches\Persistence\EntityManagerFactory,
     Doctrine\ORM\EntityManager;

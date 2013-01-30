@@ -56,7 +56,7 @@ class Module
                     return EntityManagerFactory::getSingleton();
                 },
 
-                'Branches\Domain\Model\Person\PeopleRepository' =>  function(ServiceManager $sm) {
+                'Branches\Domain\Repository\PeopleRepository' =>  function(ServiceManager $sm) {
                     $em = $sm->get('Doctrine\ORM\EntityManager');
                     return new PeopleRepository($em);
                 }
@@ -91,7 +91,7 @@ class Module
         return array(
             'factories' => array(
                 'Application\Controller\People' => function(ControllerManager $cm) {
-                    $people = $cm->getServiceLocator()->get('Branches\Domain\Model\Person\PeopleRepository');
+                    $people = $cm->getServiceLocator()->get('Branches\Domain\Repository\PeopleRepository');
                     return new PeopleController($people);
                 }
             )
