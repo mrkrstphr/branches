@@ -45,6 +45,12 @@ class Person extends Entity
 
     /**
      *
+     * @var array
+     */
+    protected $events = array();
+
+    /**
+     *
      * @return string
      */
     public function getRefId()
@@ -233,5 +239,32 @@ class Person extends Entity
         }
 
         return $confirmed;
+    }
+
+    /**
+     *
+     * @param array $events
+     */
+    public function setEvents(array $events)
+    {
+        $this->events = $events;
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     *
+     * @param Event $event
+     */
+    public function addEvent(Event $event)
+    {
+        $this->events[] = $event;
     }
 }

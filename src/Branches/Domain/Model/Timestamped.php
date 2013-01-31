@@ -15,19 +15,19 @@ trait Timestamped
     /**
      * @var DateTime
      */
-    protected $_created;
+    protected $created;
 
     /**
      * @var DateTime
      */
-    protected $_updated;
+    protected $updated;
 
     /**
      * @return DateTime
      */
     public function getCreated()
     {
-        return $this->_created;
+        return $this->created;
     }
 
     /**
@@ -36,7 +36,7 @@ trait Timestamped
      */
     public function setCreated(DateTime $created)
     {
-        $this->_created = $created;
+        $this->created = $created;
         return $this;
     }
 
@@ -45,7 +45,7 @@ trait Timestamped
      */
     public function getUpdated()
     {
-        return $this->_updated;
+        return $this->updated;
     }
 
     /**
@@ -54,7 +54,7 @@ trait Timestamped
      */
     public function setUpdated(DateTime $updated)
     {
-        $this->_updated = $updated;
+        $this->updated = $updated;
         return $this;
     }
 }

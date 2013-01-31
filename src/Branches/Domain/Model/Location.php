@@ -22,56 +22,56 @@ class Location extends Entity
      *
      * @var string
      */
-    protected $_address1;
+    protected $address1;
 
     /**
      *
      * @var string
      */
-    protected $_address2;
+    protected $address2;
 
     /**
      *
      * @var string
      */
-    protected $_address3;
+    protected $address3;
 
     /**
      *
      * @var string
      */
-    protected $_city;
+    protected $city;
 
     /**
      *
      * @var string
      */
-    protected $_stateProvince;
+    protected $stateProvince;
 
     /**
      *
      * @var string
      */
-    protected $_postalCode;
+    protected $postalCode;
 
     /**
      *
      * @var string
      */
-    protected $_countryCode;
+    protected $country;
 
     /**
      *
      * @var string
      */
-    protected $_phoneNumber;
+    protected $phone;
 
     /**
      * @param string $address1
      */
     public function setAddress1($address1)
     {
-        $this->_address1 = $address1;
+        $this->address1 = $address1;
     }
 
     /**
@@ -79,7 +79,7 @@ class Location extends Entity
      */
     public function getAddress1()
     {
-        return $this->_address1;
+        return $this->address1;
     }
 
     /**
@@ -87,7 +87,7 @@ class Location extends Entity
      */
     public function setAddress2($address2)
     {
-        $this->_address2 = $address2;
+        $this->address2 = $address2;
     }
 
     /**
@@ -95,7 +95,7 @@ class Location extends Entity
      */
     public function getAddress2()
     {
-        return $this->_address2;
+        return $this->address2;
     }
 
     /**
@@ -103,7 +103,7 @@ class Location extends Entity
      */
     public function setAddress3($address3)
     {
-        $this->_address3 = $address3;
+        $this->address3 = $address3;
     }
 
     /**
@@ -111,7 +111,7 @@ class Location extends Entity
      */
     public function getAddress3()
     {
-        return $this->_address3;
+        return $this->address3;
     }
 
     /**
@@ -119,7 +119,7 @@ class Location extends Entity
      */
     public function setCity($city)
     {
-        $this->_city = $city;
+        $this->city = $city;
     }
 
     /**
@@ -127,23 +127,23 @@ class Location extends Entity
      */
     public function getCity()
     {
-        return $this->_city;
+        return $this->city;
     }
 
     /**
      * @param string $countryCode
      */
-    public function setCountryCode($countryCode)
+    public function setCountry($countryCode)
     {
-        $this->_countryCode = $countryCode;
+        $this->country = $countryCode;
     }
 
     /**
      * @return string
      */
-    public function getCountryCode()
+    public function getCountry()
     {
-        return $this->_countryCode;
+        return $this->country;
     }
 
     /**
@@ -165,17 +165,17 @@ class Location extends Entity
     /**
      * @param string $phoneNumber
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhone($phoneNumber)
     {
-        $this->_phoneNumber = $phoneNumber;
+        $this->phone = $phoneNumber;
     }
 
     /**
      * @return string
      */
-    public function getPhoneNumber()
+    public function getPhone()
     {
-        return $this->_phoneNumber;
+        return $this->phone;
     }
 
     /**
@@ -183,7 +183,7 @@ class Location extends Entity
      */
     public function setPostalCode($postalCode)
     {
-        $this->_postalCode = $postalCode;
+        $this->postalCode = $postalCode;
     }
 
     /**
@@ -191,7 +191,7 @@ class Location extends Entity
      */
     public function getPostalCode()
     {
-        return $this->_postalCode;
+        return $this->postalCode;
     }
 
     /**
@@ -199,7 +199,7 @@ class Location extends Entity
      */
     public function setStateProvince($stateProvince)
     {
-        $this->_stateProvince = $stateProvince;
+        $this->stateProvince = $stateProvince;
     }
 
     /**
@@ -207,6 +207,6 @@ class Location extends Entity
      */
     public function getStateProvince()
     {
-        return $this->_stateProvince;
+        return $this->stateProvince;
     }
 }

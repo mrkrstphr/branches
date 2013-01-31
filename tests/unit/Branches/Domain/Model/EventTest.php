@@ -51,7 +51,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $location->setCity($city);
         $location->setStateProvince($state);
         $location->setPostalCode($postal);
-        $location->setCountryCode($country);
+        $location->setCountry($country);
 
         $this->assertEquals($description, $location->getDescription());
         $this->assertEquals($address1, $location->getAddress1());
@@ -60,7 +60,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($city, $location->getCity());
         $this->assertEquals($state, $location->getStateProvince());
         $this->assertEquals($postal, $location->getPostalCode());
-        $this->assertEquals($country, $location->getCountryCode());
+        $this->assertEquals($country, $location->getCountry());
 
         $event->setLocation($location);
         $this->assertEquals($location, $event->getLocation());
