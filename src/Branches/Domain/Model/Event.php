@@ -16,38 +16,38 @@ class Event extends Entity
      *
      * @var string
      */
-    protected $_eventType;
+    protected $eventType;
 
     /**
      *
      * @var string
      */
-    protected $_eventDate;
+    protected $eventDate;
 
     /**
      *
      * @var string
      */
-    protected $_eventStamp;
+    protected $eventStamp;
 
     /**
      *
      * @var Location
      */
-    protected $_location;
+    protected $location;
 
     /**
      *
      * @var int
      */
-    protected $_confidenceLevel;
+    protected $confidenceLevel;
 
     /**
      * @param int $confidenceLevel
      */
     public function setConfidenceLevel($confidenceLevel)
     {
-        $this->_confidenceLevel = $confidenceLevel;
+        $this->confidenceLevel = $confidenceLevel;
     }
 
     /**
@@ -55,7 +55,7 @@ class Event extends Entity
      */
     public function getConfidenceLevel()
     {
-        return $this->_confidenceLevel;
+        return $this->confidenceLevel;
     }
 
     /**
@@ -63,7 +63,7 @@ class Event extends Entity
      */
     public function setEventDate($eventDate)
     {
-        $this->_eventDate = $eventDate;
+        $this->eventDate = $eventDate;
 
         $eventDate = strtolower($eventDate);
         $eventDate = trim(
@@ -106,7 +106,7 @@ class Event extends Entity
      */
     public function getEventDate()
     {
-        return $this->_eventDate;
+        return $this->eventDate;
     }
 
     /**
@@ -114,7 +114,7 @@ class Event extends Entity
      */
     protected function _setEventStamp($eventStamp)
     {
-        $this->_eventStamp = $eventStamp;
+        $this->eventStamp = $eventStamp;
     }
 
     /**
@@ -122,7 +122,7 @@ class Event extends Entity
      */
     public function getEventStamp()
     {
-        return $this->_eventStamp;
+        return $this->eventStamp;
     }
 
     /**
@@ -130,7 +130,7 @@ class Event extends Entity
      */
     public function setEventType($eventType)
     {
-        $this->_eventType = $eventType;
+        $this->eventType = $eventType;
     }
 
     /**
@@ -138,7 +138,7 @@ class Event extends Entity
      */
     public function getEventType()
     {
-        return $this->_eventType;
+        return $this->eventType;
     }
 
     /**
@@ -146,7 +146,7 @@ class Event extends Entity
      */
     public function setLocation(Location $location)
     {
-        $this->_location = $location;
+        $this->location = $location;
     }
 
     /**
@@ -154,7 +154,7 @@ class Event extends Entity
      */
     public function getLocation()
     {
-        return $this->_location;
+        return $this->location;
     }
 
 }

@@ -13,14 +13,14 @@ abstract class Entity
     /**
      * @var int
      */
-    protected $_id;
+    protected $id;
 
     /**
      * @return int
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -30,7 +30,7 @@ abstract class Entity
      */
     public function setId($id)
     {
-        $this->_id = $id;
+        $this->id = $id;
         return $this;
     }
 }

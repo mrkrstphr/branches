@@ -16,7 +16,7 @@ class Location extends Entity
      *
      * @var string
      */
-    protected $_description;
+    protected $description;
 
     /**
      *
@@ -151,7 +151,7 @@ class Location extends Entity
      */
     public function setDescription($description)
     {
-        $this->_description = $description;
+        $this->description = $description;
     }
 
     /**
@@ -159,7 +159,7 @@ class Location extends Entity
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**

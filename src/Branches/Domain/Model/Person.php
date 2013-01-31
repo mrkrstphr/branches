@@ -18,12 +18,12 @@ class Person extends Entity
      *
      * @var string
      */
-    protected $_refId;
+    protected $refId;
 
     /**
      * @var string
      */
-    protected $_gender;
+    protected $gender;
 
     /**
      *
@@ -49,7 +49,7 @@ class Person extends Entity
      */
     public function getRefId()
     {
-        return $this->_refId;
+        return $this->refId;
     }
 
     /**
@@ -59,7 +59,7 @@ class Person extends Entity
      */
     public function setRefId($refId)
     {
-        $this->_refId = $refId;
+        $this->refId = $refId;
 
         return $this;
     }
@@ -77,7 +77,7 @@ class Person extends Entity
             throw new \Exception('Unknown gender specified: ' . $gender);
         }
 
-        $this->_gender = $gender;
+        $this->gender = $gender;
     }
 
     /**
@@ -86,7 +86,7 @@ class Person extends Entity
      */
     public function getGender()
     {
-        return $this->_gender;
+        return $this->gender;
     }
 
     /**
