@@ -17,7 +17,7 @@ class EntityManagerFactory
      *
      * @var \Doctrine\ORM\EntityManager
      */
-    private static $_singleton;
+    private static $singleton;
 
     /**
      *
@@ -37,16 +37,8 @@ class EntityManagerFactory
      */
     public static function getDbParams()
     {
-        $json = __DIR__ . DIRECTORY_SEPARATOR . 'doctrine.cfg.json';
-        $configs = json_decode(file_get_contents($json));
-
-        $paramsKey = (getenv('ENV') == 'development') ? 'development' : 'production';
-
-        if (!property_exists($configs->params, $paramsKey)) {
-            return array();
-        }
-
-        return get_object_vars($configs->params->{$paramsKey});
+        $params = include __DIR__ . '/../config/db.local.php';
+        return $params;
     }
 
     /**
@@ -55,9 +47,10 @@ class EntityManagerFactory
      */
     public static function getSingleton()
     {
-        if(is_null(self::$_singleton))
-            self::$_singleton = self::getNewManager();
+        if (is_null(self::$singleton)) {
+            self::$singleton = self::getNewManager();
+        }
 
-        return self::$_singleton;
+        return self::$singleton;
     }
 }
