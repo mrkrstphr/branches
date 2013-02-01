@@ -1,0 +1,231 @@
+
+<h2><?= 'Person Name' #$person->getName(); ?></h2>
+
+<div class="tabbable" id="person-tabs">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#generic-information" data-toggle="tab">Generic Information</a></li>
+        <li><a href="#names" data-toggle="tab">Names/Aliases <span class="badge badge-info"><?= 1 #count($this->person->getNames()); ?></span></a></li>
+        <li><a href="#events" data-toggle="tab">Events <span class="badge badge-info"><?= 0 #count($this->person->getEvents()); ?></span></a></li>
+        <li><a href="#attributes" data-toggle="tab">Attributes <span class="badge badge-info"><?= 0 #count($this->person->getAttributes()); ?></span></a></li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">General Sources <span class="badge badge-info">0</span></a></a></li>
+                <li><a href="#">Something Else</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="generic-information">
+
+
+
+            <div class="container-fluid">
+                <form class="form-horizontal" id="person-quick-save">
+                    <input type="hidden" name="person_id" value="<?= '' #$this->person->getId(); ?>">
+                    <input type="hidden" name="person_name_id" value="<?= '' #$this->person->getPersonNameId(); ?>">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="row-fluid">
+                                <div class="span6 bgcolor">
+                                    <div class="control-group">
+                                        <label class="control-label" for="given_name">Given Name</label>
+                                        <div class="controls">
+                                            <input type="text" id="given_name" name="given_name" value="<?= '' #$this->person->getGivenName(); ?>">
+                                        </div>
+                                    </div>
+                                </div><!--/span-->
+                                <div class="span6 bgcolor">
+                                    <div class="control-group">
+                                        <label class="control-label" for="surname">Surname</label>
+                                        <div class="controls">
+                                            <input type="text" id="surname" name="surname" value="<?= '' #$this->person->getSurname(); ?>">
+                                        </div>
+                                    </div>
+                                </div><!--/span-->
+                            </div><!--/row-->
+                            <div class="row-fluid">
+                                <div class="span6 bgcolor">
+                                    <div class="control-group">
+                                        <label class="control-label" for="birth_date">Birth Date</label>
+                                        <div class="controls">
+                                            <input type="text" id="birth_date" name="birth_date" value="<?= '' #$this->person->getBirthDate(); ?>">
+                                        </div>
+                                    </div>
+                                </div><!--/span-->
+                                <div class="span6 bgcolor">
+                                    <div class="control-group">
+                                        <label class="control-label" for="birth_location">Birth Location</label>
+                                        <div class="controls">
+                                            <input type="text" id="birth_location" name="birth_location" value="<?= '' #$this->person->getBirthLocation(); ?>">
+                                        </div>
+                                    </div>
+                                </div><!--/span-->
+                            </div><!--/row-->
+                            <div class="row-fluid">
+                                <div class="span6 bgcolor">
+                                    <div class="control-group">
+                                        <label class="control-label" for="death_date">Death Date</label>
+                                        <div class="controls">
+                                            <input type="text" id="death_date" name="death_date" value="<?= '' #$this->person->getDeathDate(); ?>">
+                                        </div>
+                                    </div>
+                                </div><!--/span-->
+                                <div class="span6 bgcolor">
+                                    <div class="control-group">
+                                        <label class="control-label" for="death_location">Death Location</label>
+                                        <div class="controls">
+                                            <input type="text" id="death_location" name="death_location" value="<?= '' #$this->person->getDeathLocation(); ?>">
+                                        </div>
+                                    </div>
+                                </div><!--/span-->
+                            </div><!--/row-->
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary pull-right">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane" id="names">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <th>Given Name</th>
+                    <th>Surname</th>
+                </thead>
+                <tbody>
+                    <?php #foreach ($this->person->getNames() as $name): ?>
+                    <tr>
+                        <td><?= 'Person' #$name->getGivenName(); ?></td>
+                        <td><?= 'Name' #$name->getSurname(); ?></td>
+                    </tr>
+                    <?php #endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane" id="events">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>&nbsp;</th>
+                </thead>
+                <tbody>
+                    <?php #foreach ($this->person->getEvents() as $event): ?>
+                    <tr>
+                        <td><?= '' #$event->getEventType(); ?></td>
+                        <td><?= '' #$event->getEventDate(); ?></td>
+                        <td><?= '' #$event->getLocation() ? $event->getLocation()->getDescription() : ''; ?></td>
+                        <td></td>
+                    </tr>
+                    <?php #endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane" id="attributes">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Location</th>
+                </thead>
+                <tbody>
+                    <?php #foreach ($this->person->getAttributes() as $attribute): ?>
+                    <tr>
+                        <td><?= '' #$attribute->getAttributeType(); ?></td>
+                        <td><?= '' #$attribute->getEventDate(); ?></td>
+                        <td><?= '' #$attribute->getDescription(); ?></td>
+                        <td><?= '' #$attribute->getLocation() ? $attribute->getLocation()->getDescription() : ''; ?></td>
+                    </tr>
+                    <?php #endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<h3>Relationships</h3>
+
+<div class="tabbable" id="person-tabs">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#spouse1-children" data-toggle="tab">Spouse #1 <span class="badge badge-info">1</span></a></li>
+        <li><a href="#spouse2-children" data-toggle="tab">Spouse #2 <span class="badge badge-info">2</span></a></li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">General Sources <span class="badge badge-info">0</span></a></a></li>
+                <li><a href="#">Something Else</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="spouse1-children">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <th>Name</th>
+                    <th>Born</th>
+                    <th>Died</th>
+                    <th>&nbsp;</th>
+                </thead>
+                <tbody>
+                <?php #foreach ($this->people as $person): //foreach ($this->person->getEvents() as $event): ?>
+                <tr>
+                    <td><a href="/people/view/<?php #echo $person->getId(); ?>">Somebody Here</a></td>
+                    <td>Sometime</td>
+                    <td>Never</td>
+                    <td></td>
+                </tr>
+                <?php #endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane" id="spouse2-children">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <th>Name</th>
+                    <th>Born</th>
+                    <th>Died</th>
+                    <th>&nbsp;</th>
+                </thead>
+                <tbody>
+                <?php #foreach ($this->people as $person): //foreach ($this->person->getEvents() as $event): ?>
+                <tr>
+                    <td><a href="/people/view/<?php #echo $person->getId(); ?>">Somebody Else</a></td>
+                    <td>Sometime</td>
+                    <td>Never</td>
+                    <td></td>
+                </tr>
+                <?php #endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $('#person-tabs .nav-tabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $('form#person-quick-save').on('submit', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: '/people/quick-save',
+            type: 'post',
+            data: $(this).serialize(),
+            error: function (xhr, status, error) {
+
+            },
+            success: function (data, status, xhr) {
+
+            }
+        });
+    });
+</script>
