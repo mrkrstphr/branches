@@ -26,11 +26,11 @@ class ConfigurationFactory
      */
     public function build()
     {
-        if (getenv('ENV') == 'development') {
+        #if (getenv('ENV') == 'development') {
             return $this->buildDevConfig();
-        }
+        #}
 
-        return $this->buildProdConfig();
+        #return $this->buildProdConfig();
     }
 
     /**
@@ -50,7 +50,7 @@ class ConfigurationFactory
     {
         $proxies = __DIR__ . DIRECTORY_SEPARATOR . 'proxies';
         $config = Setup::createXMLMetadataConfiguration($this->paths, false, $proxies);
-        $config->setProxyNamespace('Consumed\\Infrastructure\\Persistence\\Doctrine\\Proxies');
+        $config->setProxyNamespace('Branches\\Infrastructure\\Persistence\\Proxies');
 
         return $config;
     }
