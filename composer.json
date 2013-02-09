@@ -6,9 +6,17 @@
             "Branches":["src/","tests/unit"]
         }
     },
+    "config": {
+        "bin-dir": "bin/"
+    },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
-        "phpunit/dbunit": "1.2.*"
+        "phpunit/dbunit": "1.2.*",
+        "behat/behat": "2.4.*@stable",
+        "behat/mink": "1.4.*@stable",
+        "behat/mink-extension": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver": "*"
     },
     "require": {
         "php": ">=5.4",
