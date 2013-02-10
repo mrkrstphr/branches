@@ -13,8 +13,9 @@ use Branches\Domain\Model\Relationship;
  */
 class Person extends Entity
 {
+    use Noted;
     use Sourced;
-    use \Branches\Domain\Model\Timestamped;
+    use Timestamped;
 
     /**
      *
@@ -50,16 +51,6 @@ class Person extends Entity
      * @var ArrayCollection
      */
     protected $events;
-
-    /**
-     * @var ArrayCollection
-     */
-    protected $sources;
-
-    /**
-     * @var ArrayCollection
-     */
-    protected $notes;
 
     /**
      *
