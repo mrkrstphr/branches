@@ -18,7 +18,7 @@ trait SourcedTest
     /**
      *
      */
-    public function testTestConfigurated()
+    public function testSourcedConfigurated()
     {
         $this->assertNotEmpty($this->entity, 'No entity was configured for Sourced test for ' . get_class($this));
     }

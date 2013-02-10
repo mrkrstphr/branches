@@ -12,141 +12,183 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Event extends Entity
 {
+    use Noted;
     use Sourced;
-    use \Branches\Domain\Model\Timestamped;
+    use Timestamped;
 
     /**
-     *
      * @var string
      */
-    protected $eventType;
+    protected $type;
 
     /**
-     *
      * @var string
      */
-    protected $eventDate;
+    protected $date;
 
     /**
-     *
      * @var string
      */
-    protected $eventStamp;
+    protected $stamp;
 
     /**
-     *
      * @var Location
      */
     protected $location;
 
     /**
-     *
+     * @var integer
+     */
+    protected $age;
+
+    /**
+     * @var string
+     */
+    protected $cause;
+
+    /**
      * @var int
      */
-    protected $confidenceLevel;
+    protected $certainty;
 
+    /**
+     *
+     */
     public function __construct()
     {
+        $this->notes = new ArrayCollection();
         $this->sources = new ArrayCollection();
     }
 
     /**
-     * @param int $confidenceLevel
+     * @param int $certainty
      */
-    public function setConfidenceLevel($confidenceLevel)
+    public function setCertainty($certainty)
     {
-        $this->confidenceLevel = $confidenceLevel;
+        $this->certainty = $certainty;
     }
 
     /**
      * @return int
      */
-    public function getConfidenceLevel()
+    public function getCertainty()
     {
-        return $this->confidenceLevel;
+        return $this->certainty;
     }
 
     /**
-     * @param string $eventDate
+     * @param string $date
      */
-    public function setEventDate($eventDate)
+    public function setDate($date)
     {
-        $this->eventDate = $eventDate;
+        $this->date = $date;
 
-        $eventDate = strtolower($eventDate);
-        $eventDate = trim(
+        $date = strtolower($date);
+        $date = trim(
             str_replace(
                 array('bef', 'aft', 'bet', 'abt', 'from'),
                 '',
-                $eventDate
+                $date
             )
         );
 
-        if (preg_match('/^(.*) and (.*)$/', $eventDate)) {
-            $eventDate = explode(' and ', $eventDate);
-            $eventDate = $eventDate[0];
+        if (preg_match('/^(.*) and (.*)$/', $date)) {
+            $date = explode(' and ', $date);
+            $date = $date[0];
         }
 
         $month = 'jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec';
         $matches = array();
-        if (preg_match('/^([0-9]{1,2}) (' . $month . ') ([0-9]{4})$/', $eventDate, $matches)) {
+        if (preg_match('/^([0-9]{1,2}) (' . $month . ') ([0-9]{4})$/', $date, $matches)) {
             $index = array_search($matches[2], explode('|', $month));
 
             if ($index) {
                 $stamp = $matches[3] . str_pad(($index + 1), 2, '0', STR_PAD_LEFT) .
                     str_pad($matches[1], 2, '0', STR_PAD_LEFT);
-                $this->_setEventStamp($stamp);
+                $this->_setStamp($stamp);
             }
-        } else if (preg_match('/^(' . $month . ') ([0-9]{4})$/', $eventDate, $matches)) {
+        } else if (preg_match('/^(' . $month . ') ([0-9]{4})$/', $date, $matches)) {
             $index = array_search($matches[1], explode('|', $month));
 
             if ($index) {
                 $stamp = $matches[2] . str_pad(($index + 1), 2, '0', STR_PAD_LEFT) . '00';
-                $this->_setEventStamp($stamp);
+                $this->_setStamp($stamp);
             }
-        } else if (preg_match('/^[0-9]{4}$/', $eventDate)) {
-            $this->_setEventStamp($eventDate . '0000');
+        } else if (preg_match('/^[0-9]{4}$/', $date)) {
+            $this->_setStamp($date . '0000');
         }
     }
 
     /**
      * @return string
      */
-    public function getEventDate()
+    public function getDate()
     {
-        return $this->eventDate;
+        return $this->date;
     }
 
     /**
-     * @param string $eventStamp
+     * @param string $stamp
      */
-    protected function _setEventStamp($eventStamp)
+    protected function _setStamp($stamp)
     {
-        $this->eventStamp = $eventStamp;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEventStamp()
-    {
-        return $this->eventStamp;
-    }
-
-    /**
-     * @param string $eventType
-     */
-    public function setEventType($eventType)
-    {
-        $this->eventType = $eventType;
+        $this->stamp = $stamp;
     }
 
     /**
      * @return string
      */
-    public function getEventType()
+    public function getStamp()
     {
-        return $this->eventType;
+        return $this->stamp;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $age
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * @param string $cause
+     */
+    public function setCause($cause)
+    {
+        $this->cause = $cause;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCause()
+    {
+        return $this->cause;
     }
 
     /**
@@ -164,5 +206,4 @@ class Event extends Entity
     {
         return $this->location;
     }
-
 }

@@ -18,7 +18,7 @@ trait NotedTest
     /**
      *
      */
-    public function testTestConfigurated()
+    public function testNotedConfigurated()
     {
         $this->assertNotEmpty($this->entity, 'No entity was configured for Noted test for ' . get_class($this));
     }

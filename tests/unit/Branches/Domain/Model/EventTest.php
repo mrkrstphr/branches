@@ -10,7 +10,9 @@ namespace Branches\Domain\Model;
  */
 class EventTest extends \PHPUnit_Framework_TestCase
 {
-    use TimestampedTest, SourcedTest;
+    use NotedTest;
+    use SourcedTest;
+    use TimestampedTest;
 
     /**
      *
@@ -27,43 +29,21 @@ class EventTest extends \PHPUnit_Framework_TestCase
     {
         $type = 'BIRT';
         $eventDate = '14 Apr 1900';
-        $description = 'test description';
-        $address1 = 'Attn Wicked Dude';
-        $address2 = '123 Any Street';
-        $address3 = 'Apt #14';
-        $city = 'Chicago';
-        $state = 'IL';
-        $postal = '60602';
-        $country = 'US';
 
         $event = new Event();
-        $event->setEventType($type);
-        $event->setConfidenceLevel(100);
-        $event->setEventDate($eventDate);
+        $event->setType($type);
+        $event->setCertainty(100);
+        $event->setDate($eventDate);
+        $event->setAge(14);
+        $event->setCause('Penguin Attack');
 
-        $this->assertEquals($type, $event->getEventType());
-        $this->assertEquals(100, $event->getConfidenceLevel());
-        $this->assertEquals($eventDate, $event->getEventDate());
+        $this->assertEquals($type, $event->getType());
+        $this->assertEquals(100, $event->getCertainty());
+        $this->assertEquals($eventDate, $event->getDate());
+        $this->assertEquals(14, $event->getAge());
+        $this->assertEquals('Penguin Attack', $event->getCause());
 
         $location = new Location();
-        $location->setDescription($description);
-        $location->setAddress1($address1);
-        $location->setAddress2($address2);
-        $location->setAddress3($address3);
-        $location->setCity($city);
-        $location->setStateProvince($state);
-        $location->setPostalCode($postal);
-        $location->setCountry($country);
-
-        $this->assertEquals($description, $location->getDescription());
-        $this->assertEquals($address1, $location->getAddress1());
-        $this->assertEquals($address2, $location->getAddress2());
-        $this->assertEquals($address3, $location->getAddress3());
-        $this->assertEquals($city, $location->getCity());
-        $this->assertEquals($state, $location->getStateProvince());
-        $this->assertEquals($postal, $location->getPostalCode());
-        $this->assertEquals($country, $location->getCountry());
-
         $event->setLocation($location);
         $this->assertEquals($location, $event->getLocation());
     }
@@ -77,10 +57,10 @@ class EventTest extends \PHPUnit_Framework_TestCase
     public function testDateStamp($date, $stamp)
     {
         $event = new Event();
-        $event->setEventDate($date);
+        $event->setDate($date);
 
-        $this->assertEquals($date, $event->getEventDate());
-        $this->assertEquals($stamp, $event->getEventStamp());
+        $this->assertEquals($date, $event->getDate());
+        $this->assertEquals($stamp, $event->getStamp());
     }
 
     /**
