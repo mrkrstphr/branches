@@ -23,6 +23,30 @@ class PersonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     *
+     */
+    public function testPerson()
+    {
+        $person = new Person();
+        $person->setGender('M');
+        $person->setRefId('I2012');
+
+        $this->assertEquals('M', $person->getGender());
+        $this->assertEquals('I2012', $person->getRefId());
+    }
+
+    /**
+     *
+     */
+    public function testIncorrectGender()
+    {
+        $this->setExpectedException('\Exception');
+
+        $person = new Person();
+        $person->setGender('Male');
+    }
+
+    /**
      * A person should have one or more names, with one of those names being considered their primary
      * name.
      */
@@ -36,13 +60,13 @@ class PersonTest extends \PHPUnit_Framework_TestCase
         $primary = new Name('Kristopher Lee', 'Wilson', 100);
         $secondary = new Name('Chris', 'Wilson', 80);
 
-        $person->addName($primary);
+        $person->getNames()->add($secondary);
         $this->assertCount(1, $person->getNames());
 
         $primaryCheck = $person->getConfirmedName();
-        $this->assertEquals($primaryCheck, $primary);
+        $this->assertEquals($primaryCheck, $secondary);
 
-        $person->addName($secondary);
+        $person->getNames()->add($primary);
         $this->assertCount(2, $person->getNames());
 
         $primaryCheck = $person->getConfirmedName();

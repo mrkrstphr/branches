@@ -112,24 +112,6 @@ class Person extends Entity
 
     /**
      *
-     * @param Name $name
-     */
-    public function addName(Name $name)
-    {
-        $this->names[] = $name;
-    }
-
-    /**
-     *
-     * @param array $names
-     */
-    public function setNames(array $names)
-    {
-        $this->names = $names;
-    }
-
-    /**
-     *
      * @return array
      */
     public function getNames()
