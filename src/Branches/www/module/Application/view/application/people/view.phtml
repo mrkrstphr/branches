@@ -1,17 +1,16 @@
 
-<h2><?= 'Person Name' #$person->getName(); ?></h2>
+<h2><?= 'Tillotson Terrell' #$person->getName(); ?></h2>
 
 <div class="tabbable" id="person-tabs">
     <ul class="nav nav-tabs">
         <li class="active"><a href="#generic-information" data-toggle="tab">Generic Information</a></li>
         <li><a href="#names" data-toggle="tab">Names/Aliases <span class="badge badge-info"><?= 1 #count($this->person->getNames()); ?></span></a></li>
-        <li><a href="#events" data-toggle="tab">Events <span class="badge badge-info"><?= 0 #count($this->person->getEvents()); ?></span></a></li>
-        <li><a href="#attributes" data-toggle="tab">Attributes <span class="badge badge-info"><?= 0 #count($this->person->getAttributes()); ?></span></a></li>
+        <li><a href="#events" data-toggle="tab">Events <span class="badge badge-info"><?= 6 #count($this->person->getEvents()); ?></span></a></li>
+        <li><a href="#attributes" data-toggle="tab">Attributes <span class="badge badge-info"><?= 1 #count($this->person->getAttributes()); ?></span></a></li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li><a href="#">General Sources <span class="badge badge-info">0</span></a></a></li>
-                <li><a href="#">Something Else</a></li>
+                <li><a href="#">General Sources <span class="badge badge-info">1</span></a></li>
             </ul>
         </li>
     </ul>
@@ -31,7 +30,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="given_name">Given Name</label>
                                         <div class="controls">
-                                            <input type="text" id="given_name" name="given_name" value="<?= '' #$this->person->getGivenName(); ?>">
+                                            <input type="text" id="given_name" name="given_name" value="<?= 'Tillotson T.' #$this->person->getGivenName(); ?>">
                                         </div>
                                     </div>
                                 </div><!--/span-->
@@ -39,7 +38,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="surname">Surname</label>
                                         <div class="controls">
-                                            <input type="text" id="surname" name="surname" value="<?= '' #$this->person->getSurname(); ?>">
+                                            <input type="text" id="surname" name="surname" value="<?= 'Terrell' #$this->person->getSurname(); ?>">
                                         </div>
                                     </div>
                                 </div><!--/span-->
@@ -49,7 +48,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="birth_date">Birth Date</label>
                                         <div class="controls">
-                                            <input type="text" id="birth_date" name="birth_date" value="<?= '' #$this->person->getBirthDate(); ?>">
+                                            <input type="text" id="birth_date" name="birth_date" value="<?= '04 Mar 1821' #$this->person->getBirthDate(); ?>">
                                         </div>
                                     </div>
                                 </div><!--/span-->
@@ -57,7 +56,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="birth_location">Birth Location</label>
                                         <div class="controls">
-                                            <input type="text" id="birth_location" name="birth_location" value="<?= '' #$this->person->getBirthLocation(); ?>">
+                                            <input type="text" id="birth_location" name="birth_location" value="<?= 'Ohio' #$this->person->getBirthLocation(); ?>">
                                         </div>
                                     </div>
                                 </div><!--/span-->
@@ -67,7 +66,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="death_date">Death Date</label>
                                         <div class="controls">
-                                            <input type="text" id="death_date" name="death_date" value="<?= '' #$this->person->getDeathDate(); ?>">
+                                            <input type="text" id="death_date" name="death_date" value="<?= '23 Jan 1900' #$this->person->getDeathDate(); ?>">
                                         </div>
                                     </div>
                                 </div><!--/span-->
@@ -75,7 +74,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="death_location">Death Location</label>
                                         <div class="controls">
-                                            <input type="text" id="death_location" name="death_location" value="<?= '' #$this->person->getDeathLocation(); ?>">
+                                            <input type="text" id="death_location" name="death_location" value="<?= 'Paris Township, Kent County, Michigan' #$this->person->getDeathLocation(); ?>">
                                         </div>
                                     </div>
                                 </div><!--/span-->
@@ -90,6 +89,20 @@
             </div>
         </div>
         <div class="tab-pane" id="names">
+            <div id="edit-name-dialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">Edit Person Name</h3>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body…</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+
             <table class="table table-striped table-hover">
                 <thead>
                     <th>Given Name</th>
@@ -98,8 +111,12 @@
                 <tbody>
                     <?php #foreach ($this->person->getNames() as $name): ?>
                     <tr>
-                        <td><?= 'Person' #$name->getGivenName(); ?></td>
-                        <td><?= 'Name' #$name->getSurname(); ?></td>
+                        <td><?= 'Tillotson T.' #$name->getGivenName(); ?></td>
+                        <td><?= 'Terrell' #$name->getSurname(); ?></td>
+                        <td>
+                            <a class="btn btn-mini" class="edit-name" ref="{person_name_id}" href="#edit-name-dialog" data-toggle="modal"><i class="icon-pencil"></i> Edit</a>
+                            <a class="btn btn-mini" href="#"><i class="icon-book"></i> Sources (3)</a>
+                        </td>
                     </tr>
                     <?php #endforeach; ?>
                 </tbody>
