@@ -14,9 +14,11 @@ class PersonTest extends \PHPUnit_Framework_TestCase
 
     /**
      *
-     * @var string
      */
-    protected $_entity = 'Branches\\Domain\\Model\\Person';
+    public function setUp()
+    {
+        $this->entity = 'Branches\\Domain\\Model\\Person';
+    }
 
     /**
      * A person should have one or more names, with one of those names being considered their primary

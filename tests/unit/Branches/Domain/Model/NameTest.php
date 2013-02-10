@@ -14,9 +14,11 @@ class NameTest extends \PHPUnit_Framework_TestCase
 
     /**
      *
-     * @var string
      */
-    protected $_entity = 'Branches\\Domain\\Model\\Name';
+    public function setUp()
+    {
+        $this->entity = 'Branches\\Domain\\Model\\Name';
+    }
 
     /**
      *

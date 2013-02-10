@@ -10,4 +10,4 @@ before_script:
 
 script:
     - bin/phpunit -c tests/unit/phpunit.xml tests/unit/
-    - bin/phpcs --standard=PSR2 tests/unit/ src/
+#    - bin/phpcs --standard=PSR2 tests/unit/ src/

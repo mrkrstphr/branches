@@ -13,6 +13,7 @@ use Branches\Domain\Model\Relationship;
  */
 class Person extends Entity
 {
+    use Sourced;
     use \Branches\Domain\Model\Timestamped;
 
     /**

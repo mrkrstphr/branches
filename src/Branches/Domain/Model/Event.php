@@ -5,11 +5,14 @@
 
 namespace Branches\Domain\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  *
  */
 class Event extends Entity
 {
+    use Sourced;
     use \Branches\Domain\Model\Timestamped;
 
     /**
@@ -41,6 +44,11 @@ class Event extends Entity
      * @var int
      */
     protected $confidenceLevel;
+
+    public function __construct()
+    {
+        $this->sources = new ArrayCollection();
+    }
 
     /**
      * @param int $confidenceLevel
