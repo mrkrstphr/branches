@@ -5,6 +5,8 @@
 
 namespace Branches\Domain\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  *
  */
@@ -14,32 +16,14 @@ trait Sourced
      *
      * @var array
      */
-    protected $_sources = array();
+    protected $sources;
 
     /**
      *
-     * @param array $sources
-     */
-    public function setSources(array $sources)
-    {
-        $this->_sources = $sources;
-    }
-
-    /**
-     *
-     * @return array
+     * @return ArrayCollection
      */
     public function getSources()
     {
-        return $this->_sources;
-    }
-
-    /**
-     *
-     * @param Source $source
-     */
-    public function addSource(Source $source)
-    {
-        $this->_sources[] = $source;
+        return $this->sources;
     }
 }
