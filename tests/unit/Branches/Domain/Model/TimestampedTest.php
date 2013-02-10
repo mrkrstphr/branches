@@ -19,8 +19,7 @@ trait TimestampedTest
      */
     public function testInheritsTimestamped()
     {
-        /*
-        $entity = new $this->_entity();
+        $entity = new $this->entity();
 
         $this->assertTrue(method_exists($entity, 'getCreated'));
         $this->assertTrue(method_exists($entity, 'setCreated'));
@@ -35,6 +34,5 @@ trait TimestampedTest
 
         $entity->setUpdated($updated);
         $this->assertEquals($updated, $entity->getUpdated());
-        */
     }
 }
