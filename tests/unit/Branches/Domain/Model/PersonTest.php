@@ -29,17 +29,19 @@ class PersonTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(1441, $person->getId());
 
-        $primary = new Name('Kristopher', 'Wilson', 100);
-        $this->assertEquals('Kristopher', $primary->getGivenName());
-        $this->assertEquals('Wilson', $primary->getSurname());
-        $this->assertEquals(100, $primary->getConfidence());
+        $primary = new Name('Kristopher Lee', 'Wilson', 100);
+        $secondary = new Name('Chris', 'Wilson', 80);
 
         $person->addName($primary);
-
         $this->assertCount(1, $person->getNames());
 
         $primaryCheck = $person->getConfirmedName();
+        $this->assertEquals($primaryCheck, $primary);
 
+        $person->addName($secondary);
+        $this->assertCount(2, $person->getNames());
+
+        $primaryCheck = $person->getConfirmedName();
         $this->assertEquals($primaryCheck, $primary);
     }
 }

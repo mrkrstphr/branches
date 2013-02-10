@@ -5,6 +5,7 @@
 
 namespace Branches\Domain\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Branches\Domain\Model\Relationship;
 
 /**
@@ -27,27 +28,49 @@ class Person extends Entity
 
     /**
      *
-     * @var array
+     * @var ArrayCollection
      */
-    protected $_names = array();
+    protected $names;
 
     /**
      *
-     * @var array
+     * @var ArrayCollection
      */
-    protected $_relationships = array();
+    protected $relationships;
 
     /**
      *
-     * @var array
+     * @var ArrayCollection
      */
-    protected $_parents = array();
+    protected $parents;
 
     /**
      *
-     * @var array
+     * @var ArrayCollection
      */
-    protected $events = array();
+    protected $events;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $sources;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $notes;
+
+    /**
+     *
+     */
+    public function __construct()
+    {
+        $this->names = new ArrayCollection();
+        $this->events = new ArrayCollection();
+        $this->relationships = new ArrayCollection();
+        $this->sources = new ArrayCollection();
+        $this->notes = new ArrayCollection();
+    }
 
     /**
      *
@@ -101,7 +124,7 @@ class Person extends Entity
      */
     public function addName(Name $name)
     {
-        $this->_names[] = $name;
+        $this->names[] = $name;
     }
 
     /**
@@ -110,7 +133,7 @@ class Person extends Entity
      */
     public function setNames(array $names)
     {
-        $this->_names = $names;
+        $this->names = $names;
     }
 
     /**
@@ -119,7 +142,7 @@ class Person extends Entity
      */
     public function getNames()
     {
-        return $this->_names;
+        return $this->names;
     }
 
     /**
@@ -132,7 +155,7 @@ class Person extends Entity
 
         foreach ($this->getNames() as $name) {
             if ($confirmed) {
-                if ($name->getConfidence() > $confirmed->getConfidence()) {
+                if ($name->getCertainty() > $confirmed->getCertainty()) {
                     $confirmed = $name;
                 }
             } else {
@@ -145,29 +168,11 @@ class Person extends Entity
 
     /**
      *
-     * @param array $relationships
-     */
-    public function setRelationships($relationships)
-    {
-        $this->_relationships = $relationships;
-    }
-
-    /**
-     *
-     * @return array
+     * @return ArrayCollection
      */
     public function getRelationships()
     {
-        return $this->_relationships;
-    }
-
-    /**
-     *
-     * @param Relationship $relationship
-     */
-    public function addRelationship(Relationship $relationship)
-    {
-        $this->_relationships[] = $relationship;
+        return $this->relationships;
     }
 
     /**
@@ -176,7 +181,7 @@ class Person extends Entity
      */
     public function setParents($parents)
     {
-        $this->_parents = $parents;
+        $this->parents = $parents;
     }
 
     /**
@@ -187,14 +192,14 @@ class Person extends Entity
     {
         $linkage = strtolower($linkage);
         if (!empty($linkage)) {
-            if (isset($this->_parents[$linkage])) {
-                return $this->_parents[$linkage];
+            if (isset($this->parents[$linkage])) {
+                return $this->parents[$linkage];
             } else {
                 return array();
             }
         }
 
-        return $this->_parents;
+        return $this->parents;
     }
 
     /**
@@ -211,7 +216,7 @@ class Person extends Entity
             throw new \Exception('Invalid child pedigree linkage: ' . $linkage);
         }
 
-        $this->_parents[$linkage][] = $parents;
+        $this->parents[$linkage][] = $parents;
     }
 
     /**
@@ -223,7 +228,7 @@ class Person extends Entity
         $confirmed = null;
         $confirmedType = null;
 
-        foreach ($this->_parents as $type => $parents) {
+        foreach ($this->parents as $type => $parents) {
             foreach ($parents as $parent) {
                 if ($type == 'adopted') {
                     $confirmed = $parent;
