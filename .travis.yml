@@ -8,7 +8,5 @@ before_script:
     - curl -s https://getcomposer.org/installer | php
     - php composer.phar install --prefer-source --dev
 
-
 script:
-    - vendor/bin/phpunit -c tests/unit/phpunit.xml tests/unit/
-
+    - bin/phpunit -c tests/unit/phpunit.xml tests/unit/
