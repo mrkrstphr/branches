@@ -5,82 +5,55 @@
 
 namespace Branches\Domain\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  *
  */
 class Relationship extends Entity
 {
-    use \Branches\Domain\Model\Timestamped;
+    use Noted;
+    use Sourced;
+    use Timestamped;
 
     /**
      * @var string
      */
-    const ADOPTED = 'adopted';
+    protected $refId;
 
     /**
-     * @var string
+     * @var ArrayCollection
      */
-    const BIRTH = 'birth';
+    protected $parents = array();
 
     /**
-     * @var string
+     * @var ArrayCollection
      */
-    const FOSTER = 'foster';
+    protected $children = array();
 
-    /**
-     * @var string
-     */
-    const SEALING = 'sealing';
-
-    /**
-     * @var string
-     */
-    protected $_refId;
-
-    /**
-     * @var array
-     */
-    protected $_parents = array();
-
-    /**
-     * @var array
-     */
-    protected $_children = array();
-
-    /**
-     * @var array
-     */
-    public static $famcLinkage = array(
-        self::ADOPTED, self::BIRTH, self::FOSTER, self::SEALING
-    );
-
-    /**
-     *
-     * @param Person $person
-     */
-    public function addParent(Person $person)
+    public function __construct()
     {
-        $person->addRelationship($this);
-        $this->_parents[] = $person;
+        $this->children = new ArrayCollection();
+        $this->parents = new ArrayCollection();
     }
 
     /**
      *
-     * @return array
+     * @return ArrayCollection
      */
     public function getParents()
     {
-        return $this->_parents;
+        return $this->parents;
     }
 
     /**
      *
      * @param Person $person
-     * @return Person
+     * @return boolean|Person
      */
     public function getSpouseOf(Person $person)
     {
-        foreach ($this->_parents as $spouse) {
+        foreach ($this->parents as $spouse) {
             if ($person !== $spouse) {
                 return $spouse;
             }
@@ -93,17 +66,17 @@ class Relationship extends Entity
      * If same sex couple, we randomly pick index 0 as the father and index 1 as the mother. This should
      * be handled in the UI to not mislabel a partner in a same sex relationship as the wrong gender.
      *
-     * @return Person
+     * @return boolean|Person
      */
     public function getMother()
     {
-        if (count($this->_parents) == 2) {
-            if ($this->_parents[0]->getGender() == $this->_parents[1]->getGender()) {
-                return $this->_parents[1];
+        if (count($this->parents) == 2) {
+            if ($this->parents[0]->getGender() == $this->parents[1]->getGender()) {
+                return $this->parents[1];
             }
         }
 
-        foreach ($this->_parents as $parent) {
+        foreach ($this->parents as $parent) {
             if ($parent->getGender() == 'F') {
                 return $parent;
             }
@@ -116,17 +89,17 @@ class Relationship extends Entity
      * If same sex couple, we randomly pick index 0 as the father and index 1 as the mother. This should
      * be handled in the UI to not mislabel a partner in a same sex relationship as the wrong gender.
      *
-     * @return Person
+     * @return boolean|Person
      */
     public function getFather()
     {
-        if (count($this->_parents) == 2) {
-            if ($this->_parents[0]->getGender() == $this->_parents[1]->getGender()) {
-                return $this->_parents[0];
+        if (count($this->parents) == 2) {
+            if ($this->parents[0]->getGender() == $this->parents[1]->getGender()) {
+                return $this->parents[0];
             }
         }
 
-        foreach ($this->_parents as $parent) {
+        foreach ($this->parents as $parent) {
             if ($parent->getGender() == 'M') {
                 return $parent;
             }
@@ -136,33 +109,10 @@ class Relationship extends Entity
     }
 
     /**
-     * @param array $children
-     */
-    public function setChildren($children)
-    {
-        $this->_children = $children;
-    }
-
-    /**
-     * @return array
+     * @return ArrayCollection
      */
     public function getChildren()
     {
-        return $this->_children;
-    }
-
-    /**
-     *
-     * @throws \Exception
-     * @param Person $child
-     */
-    public function addChild(Person $child, $linkage)
-    {
-        if (!in_array(strtolower($linkage), self::$famcLinkage)) {
-            throw new \Exception('Invalid child pedigree linkage: ' . $linkage);
-        }
-
-        $child->addParents($this, $linkage);
-        $this->_children[] = $child;
+        return $this->children;
     }
 }

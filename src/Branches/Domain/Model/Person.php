@@ -50,6 +50,12 @@ class Person extends Entity
      *
      * @var ArrayCollection
      */
+    protected $attributes;
+
+    /**
+     *
+     * @var ArrayCollection
+     */
     protected $events;
 
     /**
@@ -58,6 +64,7 @@ class Person extends Entity
     public function __construct()
     {
         $this->names = new ArrayCollection();
+        $this->attributes = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->relationships = new ArrayCollection();
         $this->sources = new ArrayCollection();
@@ -112,7 +119,7 @@ class Person extends Entity
 
     /**
      *
-     * @return array
+     * @return ArrayCollection
      */
     public function getNames()
     {
@@ -151,46 +158,11 @@ class Person extends Entity
 
     /**
      *
-     * @param array $parents
+     * @return ArrayCollection
      */
-    public function setParents($parents)
+    public function getParents()
     {
-        $this->parents = $parents;
-    }
-
-    /**
-     *
-     * @return array
-     */
-    public function getParents($linkage = '')
-    {
-        $linkage = strtolower($linkage);
-        if (!empty($linkage)) {
-            if (isset($this->parents[$linkage])) {
-                return $this->parents[$linkage];
-            } else {
-                return array();
-            }
-        }
-
         return $this->parents;
-    }
-
-    /**
-     *
-     * @param Relationship $parents
-     * @param string $linkage
-     * @param int $confidence
-     * @throws \Exception
-     */
-    public function addParents(Relationship $parents, $linkage)
-    {
-        $linkage = strtolower($linkage);
-        if (!in_array($linkage, Relationship::$famcLinkage)) {
-            throw new \Exception('Invalid child pedigree linkage: ' . $linkage);
-        }
-
-        $this->parents[$linkage][] = $parents;
     }
 
     /**
@@ -199,6 +171,7 @@ class Person extends Entity
      */
     public function getConfirmedParents()
     {
+        /*
         $confirmed = null;
         $confirmedType = null;
 
@@ -218,32 +191,22 @@ class Person extends Entity
         }
 
         return $confirmed;
+        */
     }
 
     /**
-     *
-     * @param array $events
+     * @return ArrayCollection
      */
-    public function setEvents(array $events)
+    public function getAttributes()
     {
-        $this->events = $events;
+        return $this->attributes;
     }
 
     /**
-     *
-     * @return array
+     * @return ArrayCollection
      */
     public function getEvents()
     {
         return $this->events;
-    }
-
-    /**
-     *
-     * @param Event $event
-     */
-    public function addEvent(Event $event)
-    {
-        $this->events[] = $event;
     }
 }

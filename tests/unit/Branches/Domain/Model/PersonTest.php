@@ -47,6 +47,50 @@ class PersonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     *
+     */
+    public function testEvents()
+    {
+        $person = new Person();
+
+        $this->assertCount(0, $person->getEvents());
+
+        $event = new Event();
+        $person->getEvents()->add($event);
+        $this->assertCount(1, $person->getEvents());
+        $this->assertInstanceOf('Branches\Domain\Model\Event', $person->getEvents()->first());
+    }
+
+    /**
+     *
+     */
+    public function testRelationships()
+    {
+        $relationship = new Relationship();
+        $person = new Person();
+
+        $this->assertCount(0, $person->getRelationships());
+
+        $person->getRelationships()->add($relationship);
+        $this->assertCount(1, $person->getRelationships());
+    }
+
+    /**
+     *
+     */
+    public function testAttributes()
+    {
+        $person = new Person();
+
+        $this->assertCount(0, $person->getAttributes());
+
+        $attribute = new Attribute();
+        $person->getAttributes()->add($attribute);
+        $this->assertCount(1, $person->getAttributes());
+        $this->assertInstanceOf('Branches\Domain\Model\Attribute', $person->getAttributes()->first());
+    }
+
+    /**
      * A person should have one or more names, with one of those names being considered their primary
      * name.
      */

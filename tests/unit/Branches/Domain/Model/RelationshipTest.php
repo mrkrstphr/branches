@@ -13,55 +13,55 @@ use \DateTime;
 class RelationshipTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     *
-     * @var Relationship
-     */
-    protected $_relationship = null;
-
-    /**
-     *
-     * @var Person
-     */
-    protected $_husband = null;
-
-    /**
-     *
-     * @var Person
-     */
-    protected $_wife = null;
-
-    /**
-     *
-     */
-    protected function _createRelationship()
-    {
-//        $this->_relationship = new Relationship();
-//        $this->_wife = new Person();
-//        $this->_wife->addName(new Name('Mary Ann', 'Todd', 100));
-//        $this->_wife->setGender('F');
-//
-//        $this->_husband = new Person();
-//        $this->_husband->addName(new Name('Abraham', 'Lincoln', 100));
-//        $this->_husband->setGender('M');
-//
-//        $this->_relationship->addParent($this->_wife);
-//        $this->_relationship->addParent($this->_husband);
-    }
-
-    /**
      * Tests creating and retrieving relationships between persons.
      */
     public function testRelationships()
     {
-//        $this->_createRelationship();
+        $relationship = new Relationship();
+        $wife = new Person();
+        $wife->getNames()->add(new Name('Mary Ann', 'Todd', 100));
+        $wife->setGender('F');
+
+        $this->assertFalse($relationship->getMother());
+        $this->assertFalse($relationship->getFather());
+
+        $husband = new Person();
+        $husband->getNames()->add(new Name('Abraham', 'Lincoln', 100));
+        $husband->setGender('M');
+
+        $relationship->getParents()->add($wife);
+        $wife->getRelationships()->add($relationship);
+
+        $this->assertFalse($relationship->getSpouseOf($wife));
+
+        $relationship->getParents()->add($husband);
+        $husband->getRelationships()->add($relationship);
+
+        $this->assertCount(2, $relationship->getParents());
+
+        $this->assertEquals($wife, $relationship->getSpouseOf($husband));
+        $this->assertEquals($husband, $relationship->getSpouseOf($wife));
+
+        $this->assertCount(1, $wife->getRelationships());
+        $this->assertCount(1, $husband->getRelationships());
+    }
+
+    /**
+     *
+     */
+    public function testSameSexUnion()
+    {
+//        $wife2 = new Person();
+//        $wife2->getNames()->add(new Name('Mary\'s', 'Mistress', 10));
+//        $wife2->setGender('F');
 //
-//        $this->assertCount(2, $this->_relationship->getParents());
+//        $relationship = new Relationship();
+//        $relationship->getParents()->add($wife);
+//        $relationship->getParents()->add($wife2);
 //
-//        $this->assertCount(1, $this->_wife->getRelationships());
-//        $this->assertCount(1, $this->_husband->getRelationships());
 //
-//        $this->assertEquals($this->_husband, $this->_relationship->getSpouseOf($this->_wife));
-//        $this->assertEquals($this->_wife, $this->_relationship->getSpouseOf($this->_husband));
+//        $this->assertEquals($wife2, $relationship->getMother());
+//        $this->assertEquals($wife, $relationship->getFather());
     }
 
     /**
@@ -74,15 +74,15 @@ class RelationshipTest extends \PHPUnit_Framework_TestCase
 //        $child = new Person();
 //        $child->addName(new Name('Robert Todd', 'Lincoln', 100));
 //
-//        $this->_relationship->addChild($child, 'birth');
+//        $this->relationship->addChild($child, 'birth');
 //
-//        $this->assertCount(1, $this->_relationship->getChildren());
+//        $this->assertCount(1, $this->relationship->getChildren());
 //
 //        $parents = $child->getConfirmedParents();
 //        $this->assertInstanceOf('Branches\\Domain\\Model\\Relationship', $parents);
 //
-//        $this->assertEquals($this->_wife, $parents->getMother());
-//        $this->assertEquals($this->_husband, $parents->getFather());
+//        $this->assertEquals($this->wife, $parents->getMother());
+//        $this->assertEquals($this->husband, $parents->getFather());
 //
 //        $this->assertCount(1, $child->getParents());
 //        $this->assertEquals(Relationship::BIRTH, key($child->getParents()));
