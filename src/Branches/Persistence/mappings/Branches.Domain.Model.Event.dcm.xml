@@ -6,10 +6,10 @@
             <generator strategy="IDENTITY" />
         </id>
 
-        <field name="eventType" column="event_type" type="string" length="4" nullable="true" />
-        <field name="eventDate" column="event_date" type="string" length="100" nullable="true" />
-        <field name="eventStamp" column="event_stamp" type="string" length="8" nullable="true" />
-        <field name="confidenceLevel" column="confidence_level" type="integer" nullable="false" />
+        <field name="type" type="string" length="4" nullable="true" />
+        <field name="date" type="string" length="100" nullable="true" />
+        <field name="stamp" type="string" length="8" nullable="true" />
+        <field name="certainty" type="integer" nullable="false" />
 
         <many-to-one field="location" target-entity="Location">
             <join-column name="location_id" on-delete="RESTRICT" on-update="RESTRICT" />
