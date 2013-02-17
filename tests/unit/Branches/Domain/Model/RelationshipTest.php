@@ -42,6 +42,9 @@ class RelationshipTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($wife, $relationship->getSpouseOf($husband));
         $this->assertEquals($husband, $relationship->getSpouseOf($wife));
 
+        $this->assertEquals($wife, $relationship->getMother());
+        $this->assertEquals($husband, $relationship->getFather());
+
         $this->assertCount(1, $wife->getRelationships());
         $this->assertCount(1, $husband->getRelationships());
     }
@@ -99,6 +102,64 @@ class RelationshipTest extends \PHPUnit_Framework_TestCase
      */
     public function testRelationshipChildren()
     {
+        $mother = new Person();
+        $mother->getNames()->add(new Name('Mary Ann', 'Todd'));
 
+        $father = new Person();
+        $father->getNames()->add(new Name('Abraham', 'Lincoln'));
+
+        $child = new Person();
+        $child->getNames()->add(new Name('Todd', 'Lincoln'));
+
+        $relationship = new Relationship();
+        $relationship->getParents()->add($mother);
+        $relationship->getParents()->add($father);
+
+        $parent = new Parents();
+        $parent->setPerson($child);
+        $parent->setRelationship($relationship);
+        $parent->setPedigree('birth');
+
+        $child->getParents()->add($parent);
+
+        $this->assertEquals($child, $parent->getPerson());
+        $this->assertEquals($relationship, $parent->getRelationship());
+        $this->assertEquals('birth', $parent->getPedigree());
+
+        $this->assertEquals($parent, $child->getConfirmedParents());
+
+        $this->assertCount(1, $relationship->getChildren());
+    }
+
+    /**
+     *
+     */
+    public function testMultipleParents()
+    {
+        $child = new Person();
+        $child2 = new Person();
+        $child3 = new Person();
+
+        $parentAdop = new Parents();
+        $parentAdop->setPedigree('adopted');
+
+        $parentBirt = new Parents();
+        $parentBirt->setPedigree('birth');
+
+        $parentFost = new Parents();
+        $parentFost->setPedigree('foster');
+
+        $child->getParents()->add($parentAdop);
+        $child->getParents()->add($parentBirt);
+
+        $child2->getParents()->add($parentBirt);
+        $child2->getParents()->add($parentAdop);
+
+        $child3->getParents()->add($parentFost);
+        $child3->getParents()->add($parentBirt);
+
+        $this->assertEquals($parentAdop, $child->getConfirmedParents());
+        $this->assertEquals($parentAdop, $child2->getConfirmedParents());
+        $this->assertEquals($parentBirt, $child3->getConfirmedParents());
     }
 }

@@ -66,6 +66,7 @@ class Person extends Entity
         $this->names = new ArrayCollection();
         $this->attributes = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->parents = new ArrayCollection();
         $this->relationships = new ArrayCollection();
         $this->sources = new ArrayCollection();
         $this->notes = new ArrayCollection();
@@ -171,27 +172,25 @@ class Person extends Entity
      */
     public function getConfirmedParents()
     {
-        /*
         $confirmed = null;
-        $confirmedType = null;
+        $confirmedPedigree = null;
 
-        foreach ($this->parents as $type => $parents) {
-            foreach ($parents as $parent) {
-                if ($type == 'adopted') {
-                    $confirmed = $parent;
-                    $confirmedType = $type;
-                } else if ($type == 'birth' && $confirmedType != 'adopted') {
-                    $confirmed = $parent;
-                    $confirmedType = $type;
-                } else if (is_null($type)) {
-                    $confirmed = $parent;
-                    $confirmedType = $type;
-                }
+        foreach ($this->parents as $parent) {
+            $pedigree = $parent->getPedigree();
+
+            if ($pedigree == 'adopted') {
+                $confirmed = $parent;
+                $confirmedPedigree = $pedigree;
+            } elseif ($pedigree == 'birth' && $confirmedPedigree != 'adopted') {
+                $confirmed = $parent;
+                $confirmedPedigree = $pedigree;
+            } elseif (is_null($confirmedPedigree)) {
+                $confirmed = $parent;
+                $confirmedPedigree = $pedigree;
             }
         }
 
         return $confirmed;
-        */
     }
 
     /**
