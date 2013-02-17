@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Name extends Entity
 {
     use Sourced;
+    use Timestamped;
 
     /**
      * @var string

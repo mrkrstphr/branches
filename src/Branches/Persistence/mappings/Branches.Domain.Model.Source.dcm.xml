@@ -10,9 +10,5 @@
         <field name="dateOfEntry" column="date_of_entry" type="string" length="100" nullable="true" />
         <field name="text" type="string" length="8" nullable="true" />
         <field name="certainty" type="integer" nullable="false" />
-
-        <many-to-one field="location" target-entity="Location">
-            <join-column name="location_id" on-delete="RESTRICT" on-update="RESTRICT" />
-        </many-to-one>
     </entity>
 </doctrine-mapping>
