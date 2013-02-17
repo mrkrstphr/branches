@@ -105,17 +105,17 @@ class Event extends Entity
             if ($index) {
                 $stamp = $matches[3] . str_pad(($index + 1), 2, '0', STR_PAD_LEFT) .
                     str_pad($matches[1], 2, '0', STR_PAD_LEFT);
-                $this->_setStamp($stamp);
+                $this->setStamp($stamp);
             }
-        } else if (preg_match('/^(' . $month . ') ([0-9]{4})$/', $date, $matches)) {
+        } elseif (preg_match('/^(' . $month . ') ([0-9]{4})$/', $date, $matches)) {
             $index = array_search($matches[1], explode('|', $month));
 
             if ($index) {
                 $stamp = $matches[2] . str_pad(($index + 1), 2, '0', STR_PAD_LEFT) . '00';
-                $this->_setStamp($stamp);
+                $this->setStamp($stamp);
             }
-        } else if (preg_match('/^[0-9]{4}$/', $date)) {
-            $this->_setStamp($date . '0000');
+        } elseif (preg_match('/^[0-9]{4}$/', $date)) {
+            $this->setStamp($date . '0000');
         }
     }
 
@@ -130,7 +130,7 @@ class Event extends Entity
     /**
      * @param string $stamp
      */
-    protected function _setStamp($stamp)
+    protected function setStamp($stamp)
     {
         $this->stamp = $stamp;
     }
