@@ -49,19 +49,49 @@ class RelationshipTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function testSameSexUnion()
+    public function testSameSexFemaleUnion()
     {
-//        $wife2 = new Person();
-//        $wife2->getNames()->add(new Name('Mary\'s', 'Mistress', 10));
-//        $wife2->setGender('F');
-//
-//        $relationship = new Relationship();
-//        $relationship->getParents()->add($wife);
-//        $relationship->getParents()->add($wife2);
-//
-//
-//        $this->assertEquals($wife2, $relationship->getMother());
-//        $this->assertEquals($wife, $relationship->getFather());
+        $wife = new Person();
+        $wife->getNames()->add(new Name('Mary Ann', 'Todd', 100));
+        $wife->setGender('F');
+
+        $wife2 = new Person();
+        $wife2->getNames()->add(new Name('Mary\'s', 'Mistress', 10));
+        $wife2->setGender('F');
+
+        $relationship = new Relationship();
+        $relationship->getParents()->add($wife);
+        $relationship->getParents()->add($wife2);
+
+        $this->assertEquals($wife2, $relationship->getMother());
+        $this->assertEquals($wife, $relationship->getFather());
+
+        $this->assertEquals($wife, $relationship->getSpouseOf($wife2));
+        $this->assertEquals($wife2, $relationship->getSpouseOf($wife));
+    }
+
+    /**
+     *
+     */
+    public function testSameSexMaleUnion()
+    {
+        $husband = new Person();
+        $husband->getNames()->add(new Name('Abraham', 'Lincoln', 100));
+        $husband->setGender('M');
+
+        $husband2 = new Person();
+        $husband2->getNames()->add(new Name('Abe\'s', 'Mister', 100));
+        $husband2->setGender('M');
+
+        $relationship = new Relationship();
+        $relationship->getParents()->add($husband);
+        $relationship->getParents()->add($husband2);
+
+        $this->assertEquals($husband2, $relationship->getMother());
+        $this->assertEquals($husband, $relationship->getFather());
+
+        $this->assertEquals($husband, $relationship->getSpouseOf($husband2));
+        $this->assertEquals($husband2, $relationship->getSpouseOf($husband));
     }
 
     /**
@@ -69,26 +99,6 @@ class RelationshipTest extends \PHPUnit_Framework_TestCase
      */
     public function testRelationshipChildren()
     {
-//        $this->_createRelationship();
-//
-//        $child = new Person();
-//        $child->addName(new Name('Robert Todd', 'Lincoln', 100));
-//
-//        $this->relationship->addChild($child, 'birth');
-//
-//        $this->assertCount(1, $this->relationship->getChildren());
-//
-//        $parents = $child->getConfirmedParents();
-//        $this->assertInstanceOf('Branches\\Domain\\Model\\Relationship', $parents);
-//
-//        $this->assertEquals($this->wife, $parents->getMother());
-//        $this->assertEquals($this->husband, $parents->getFather());
-//
-//        $this->assertCount(1, $child->getParents());
-//        $this->assertEquals(Relationship::BIRTH, key($child->getParents()));
-//        $this->assertCount(1, current($child->getParents()));
-//        $this->assertCount(1, $child->getParents(Relationship::BIRTH));
-//
-//        $this->assertCount(0, $child->getParents('adopted'));
+
     }
 }
