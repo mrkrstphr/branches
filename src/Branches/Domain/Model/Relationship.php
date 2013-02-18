@@ -24,17 +24,31 @@ class Relationship extends Entity
     /**
      * @var ArrayCollection
      */
-    protected $parents = array();
+    protected $events;
 
     /**
      * @var ArrayCollection
      */
-    protected $children = array();
+    protected $parents;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $children;
 
     public function __construct()
     {
+        $this->events = new ArrayCollection();
         $this->children = new ArrayCollection();
         $this->parents = new ArrayCollection();
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 
     /**

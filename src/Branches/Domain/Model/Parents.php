@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  */
-class Parents
+class Parents extends Entity
 {
     use Noted;
     use Sourced;
