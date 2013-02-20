@@ -11,11 +11,6 @@ namespace Branches\Domain\Model;
 trait NotedTest
 {
     /**
-     * @var string
-     */
-    protected $entity;
-
-    /**
      *
      */
     public function testNotedConfigurated()

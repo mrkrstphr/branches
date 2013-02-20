@@ -50,12 +50,6 @@ class Source extends \Branches\Domain\Model\Entity
      */
     protected $rin;
 
-
-    /**
-     * @var ArrayCollection
-     */
-    protected $notes;
-
     /**
      *
      */
@@ -110,14 +104,6 @@ class Source extends \Branches\Domain\Model\Entity
     public function getAuthor()
     {
         return $this->author;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getNotes()
-    {
-        return $this->notes;
     }
 
     /**

@@ -11,11 +11,6 @@ namespace Branches\Domain\Model;
 trait SourcedTest
 {
     /**
-     * @var string
-     */
-    protected $entity;
-
-    /**
      *
      */
     public function testSourcedConfigurated()

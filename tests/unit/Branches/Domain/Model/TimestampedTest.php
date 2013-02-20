@@ -13,6 +13,14 @@ use \DateTime;
 trait TimestampedTest
 {
     /**
+     *
+     */
+    public function testTimestampedConfigurated()
+    {
+        $this->assertNotEmpty($this->entity, 'No entity was configured for Timestamped test for ' . get_class($this));
+    }
+
+    /**
      * Events should inherit the traits Timestamped, which gives it a created and modified DateTime
      * that can be manipulated through a getter and setter. This test verifies that those inheritance
      * is properly configured.
