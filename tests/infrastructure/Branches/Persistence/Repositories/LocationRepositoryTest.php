@@ -45,5 +45,9 @@ class LocationRepositoryTest extends SqliteInMemory
         $locations = $repository->getAll();
 
         $this->assertCount(2, $locations);
+
+        foreach ($locations as $location) {
+            $this->assertInstanceOf('\\Branches\\Domain\Model\\Location', $location);
+        }
     }
 }

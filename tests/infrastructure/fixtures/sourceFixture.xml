@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<dataset>
+    <table name="sources">
+        <column>id</column>
+        <column>title</column>
+        <column>author</column>
+        <column>publication</column>
+        <column>agency</column>
+        <column>abbr</column>
+        <column>text</column>
+        <column>created</column>
+        <row>
+            <value>1</value>
+            <value>The Big Book of Names, Dates and Places</value>
+            <value>Some Guy</value>
+            <null/>
+            <null/>
+            <null/>
+            <null/>
+            <value>1914-10-31 14:52:01</value>
+        </row>
+    </table>
+</dataset>
