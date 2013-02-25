@@ -3,11 +3,11 @@
  * 
  */
 
-namespace Application\Controller;
+namespace Branches\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Branches\Domain\Repository\PeopleRepository;
+use Branches\Domain\Repository\PeopleRepositoryInterface;
 
 /**
  *
@@ -16,15 +16,15 @@ class PeopleController extends AbstractActionController
 {
     /**
      *
-     * @var \Branches\Domain\Repository\PeopleRepository
+     * @var PeopleRepositoryInterface
      */
     protected $_people;
 
     /**
      *
-     * @param \Branches\Domain\Repository\PeopleRepository $people
+     * @param PeopleRepositoryInterface $people
      */
-    public function __construct(PeopleRepository $people)
+    public function __construct(PeopleRepositoryInterface $people)
     {
         $this->_people = $people;
     }

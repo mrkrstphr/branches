@@ -3,7 +3,7 @@
  * 
  */
 
-namespace Application\Controller;
+namespace Branches\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -11,7 +11,7 @@ use Zend\View\Model\ViewModel;
 /**
  *
  */
-class MediaController extends AbstractActionController
+class SourcesController extends AbstractActionController
 {
     /**
      *
