@@ -5,15 +5,15 @@
 
 namespace Branches\Persistence\Repositories;
 
-use Branches\Domain\Repository\Repository;
-use Branches\Domain\Model\Entity;
-use Branches\Persistence\EntityManagerFactory;
 use Doctrine\ORM\EntityManager;
+use Branches\Domain\Model\Entity;
+use Branches\Domain\Repository\RepositoryInterface;
+use Branches\Persistence\EntityManagerFactory;
 
 /**
  *
  */
-abstract class RepositoryBase implements Repository
+abstract class RepositoryBase implements RepositoryInterface
 {
     /**
      *

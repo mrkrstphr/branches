@@ -10,7 +10,7 @@ use Branches\Domain\Model\Entity;
 /**
  *
  */
-interface Repository
+interface RepositoryInterface
 {
     /**
      * @param int $id
@@ -20,18 +20,18 @@ interface Repository
 
     /**
      * @param Entity $entity
-     * @return Repository
+     * @return RepositoryInterface
      */
     public function store(Entity $entity);
 
     /**
      * @param int $id
-     * @return Repository
+     * @return RepositoryInterface
      */
     public function delete($id);
 
     /**
-     * @return Repository
+     * @return RepositoryInterface
      */
     public function flush();
 }

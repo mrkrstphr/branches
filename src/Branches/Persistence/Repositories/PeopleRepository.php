@@ -5,12 +5,12 @@
 
 namespace Branches\Persistence\Repositories;
 
-use Branches\Domain\Repository\PeopleRepository as IRepository;
+use Branches\Domain\Repository\PeopleRepositoryInterface;
 
 /**
  *
  */
-class PeopleRepository extends RepositoryBase implements IRepository
+class PeopleRepository extends RepositoryBase implements PeopleRepositoryInterface
 {
     /**
      *

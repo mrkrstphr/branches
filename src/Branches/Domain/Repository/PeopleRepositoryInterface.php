@@ -7,7 +7,7 @@ namespace Branches\Domain\Repository;
 
 use Branches\Domain\Model\Entity;
 
-interface PeopleRepository extends Repository
+interface PeopleRepositoryInterface extends RepositoryInterface
 {
     /**
      *
@@ -19,12 +19,14 @@ interface PeopleRepository extends Repository
     /**
      *
      * @param Entity $entity
+     * @return PeopleRepositoryInterface
      */
     public function store(Entity $entity);
 
     /**
      *
      * @param int $id
+     * @return PeopleRepositoryInterface
      */
     public function delete($id);
 }
