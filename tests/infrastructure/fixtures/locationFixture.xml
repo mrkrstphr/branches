@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<dataset>
+    <table name="locations">
+        <column>id</column>
+        <column>description</column>
+        <column>address1</column>
+        <column>city</column>
+        <column>state_province</column>
+        <row>
+            <value>1</value>
+            <value>New York, New York, United States</value>
+            <null/>
+            <value>New York</value>
+            <value>New York</value>
+        </row>
+        <row>
+            <value>2</value>
+            <value>AnyTown Public Library, AnyTown, Michigan, United States</value>
+            <value>123 AnyStreet</value>
+            <value>AnyTown</value>
+            <value>Michigan</value>
+        </row>
+    </table>
+</dataset>
