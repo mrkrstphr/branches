@@ -34,6 +34,7 @@ class PeopleController extends AbstractActionController
      */
     public function indexAction()
     {
+        $person = $this->_people->getById(14);
         return new ViewModel();
     }
 
