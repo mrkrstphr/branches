@@ -1,22 +1,15 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
  *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Application;
 
-use Application\Controller\PeopleController;
-use Zend\Mvc\Controller\ControllerManager;
 use Zend\ServiceManager\ServiceManager;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Branches\Persistence\EntityManagerFactory;
-use Branches\Persistence\Repositories\PeopleRepository;
 
 /**
  *
@@ -48,26 +41,6 @@ class Module
      *
      * @return array
      */
-    public function getServiceConfig()
-    {
-        return array(
-            'factories' => array(
-                'Doctrine\ORM\EntityManager' => function(ServiceManager $sm) {
-                    return EntityManagerFactory::getSingleton();
-                },
-
-                'Branches\Domain\Repository\PeopleRepository' =>  function(ServiceManager $sm) {
-                    $em = $sm->get('Doctrine\ORM\EntityManager');
-                    return new PeopleRepository($em);
-                }
-            ),
-        );
-    }
-
-    /**
-     *
-     * @return array
-     */
     public function getAutoloaderConfig()
     {
         return array(
@@ -79,22 +52,6 @@ class Module
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
             ),
-        );
-    }
-
-    /**
-     *
-     * @return array
-     */
-    public function getControllerConfig()
-    {
-        return array(
-            'factories' => array(
-                'Application\Controller\People' => function(ControllerManager $cm) {
-                    $people = $cm->getServiceLocator()->get('Branches\Domain\Repository\PeopleRepository');
-                    return new PeopleController($people);
-                }
-            )
         );
     }
 }
