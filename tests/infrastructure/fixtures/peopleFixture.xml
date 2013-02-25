@@ -45,10 +45,10 @@
     <table name="events">
         <column>id</column>
         <column>location_id</column>
-        <column>event_type</column>
-        <column>event_date</column>
-        <column>event_stamp</column>
-        <column>confidence_level</column>
+        <column>type</column>
+        <column>date</column>
+        <column>stamp</column>
+        <column>certainty</column>
         <row>
             <value>1</value>
             <value>1</value>

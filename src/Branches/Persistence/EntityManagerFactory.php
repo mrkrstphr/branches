@@ -1,56 +1,63 @@
 <?php
-/**
- *
- */
 
 namespace Branches\Persistence;
 
-use Branches\Persistence\ConfigurationFactory,
-    Doctrine\ORM\EntityManager;
+use Doctrine\DBAL\Types\Type;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\Setup;
 
-/**
- *
- */
 class EntityManagerFactory
 {
     /**
-     *
-     * @var \Doctrine\ORM\EntityManager
+     * @var ConfigurationFactory
      */
-    private static $singleton;
+    protected $configurationFactory;
+
+    /**
+     * @var array
+     */
+    protected static $singletons = array();
 
     /**
      *
-     * @return \Doctrine\ORM\EntityManager
+     * @param ConfigurationFactory $config
      */
-    public static function getNewManager()
+    public function __construct(ConfigurationFactory $config)
     {
-        $configFactory = new ConfigurationFactory();
-        $dbParams = self::getDbParams();
-
-        return EntityManager::create($dbParams, $configFactory->build());
+        $this->configurationFactory = $config;
     }
 
     /**
      *
-     * @return array
+     * @todo Handle Proxies
+     * @todo Handle EventManagers
+     * @return EntityManager
      */
-    public static function getDbParams()
+    public function getNewEntityManager()
     {
-        $params = include __DIR__ . '/../config/db.local.php';
-        return $params;
+        $dbParams = $this->configurationFactory->getDbParams();
+
+        return EntityManager::create(
+            $dbParams,
+            Setup::createXMLMetadataConfiguration($this->configurationFactory->getMappingPaths(), true),
+            $this->configurationFactory->getEventManager()
+        );
     }
 
     /**
-     *
-     * @return \Doctrine\ORM\EntityManager
+     * @return EntityManager
      */
-    public static function getSingleton()
+    public function getSingleton()
     {
-        if (is_null(self::$singleton)) {
-            self::$singleton = self::getNewManager();
+        $key = $this->configurationFactory->getEnvName();
+
+        if (isset(self::$singletons[$key])) {
+            return self::$singletons[$key];
         }
 
-        return self::$singleton;
+        $entityManager =  $this->getNewEntityManager();
+        self::$singletons[$key] = $entityManager;
+
+        return $entityManager;
     }
 }

@@ -1,57 +1,91 @@
 <?php
-/**
- *
- */
 
 namespace Branches\Persistence;
 
-use Doctrine\ORM\Tools\Setup;
+use Doctrine\Common\EventManager;
 
-/**
- *
- */
 class ConfigurationFactory
 {
     /**
-     *
+     * @var string
      */
-    public function __construct()
+    protected $envName;
+
+    /**
+     * @var string
+     */
+    protected $environment;
+
+    /**
+     * @var array
+     */
+    protected $dbParams = array();
+
+    /**
+     * @var array
+     */
+    protected $mappings = array();
+
+    /**
+     * @var EventManager
+     */
+    protected $eventManager;
+
+    /**
+     * @param array $config
+     */
+    public function loadConfiguration(array $config)
     {
-        $this->paths = array(__DIR__ . DIRECTORY_SEPARATOR . 'mappings');
+        if (isset($config['environment']) && is_string($config['environment'])) {
+            $this->environment = $config['environment'];
+        }
+
+        if (isset($config['params']) && is_array($config['params'])) {
+            $this->dbParams = $config['params'];
+        }
+
+        if (isset($config['mappings']) && is_array($config['mappings'])) {
+            $this->mappings = $config['mappings'];
+        }
     }
 
     /**
-     *
-     * @return \Doctrine\ORM\Configuration
+     * @param EventManager $eventManager
      */
-    public function build()
+    public function setEventManager(EventManager $eventManager)
     {
-        #if (getenv('ENV') == 'development') {
-            return $this->buildDevConfig();
-        #}
-
-        #return $this->buildProdConfig();
+        $this->eventManager = $eventManager;
     }
 
     /**
-     *
-     * @return \Doctrine\ORM\Configuration
+     * @return \Doctrine\Common\EventManager
      */
-    public function buildDevConfig()
+    public function getEventManager()
     {
-        return Setup::createXMLMetadataConfiguration($this->paths, true);
+        return $this->eventManager;
     }
 
     /**
-     *
-     * @return \Doctrine\ORM\Configuration
+     * @return string
      */
-    public function buildProdConfig()
+    public function getEnvName()
     {
-        $proxies = __DIR__ . DIRECTORY_SEPARATOR . 'proxies';
-        $config = Setup::createXMLMetadataConfiguration($this->paths, false, $proxies);
-        $config->setProxyNamespace('Branches\\Infrastructure\\Persistence\\Proxies');
+        return $this->envName;
+    }
 
-        return $config;
+    /**
+     * @return array
+     */
+    public function getDbParams()
+    {
+        return $this->dbParams;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMappingPaths()
+    {
+        return $this->mappings;
     }
 }

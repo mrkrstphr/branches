@@ -70,6 +70,8 @@ class Person extends Entity
         $this->relationships = new ArrayCollection();
         $this->sources = new ArrayCollection();
         $this->notes = new ArrayCollection();
+
+        $this->created = new \DateTime();
     }
 
     /**

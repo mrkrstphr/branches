@@ -16,6 +16,5 @@ class PeopleRepository extends RepositoryBase implements IRepository
      *
      * @var string
      */
-    protected $_type = 'Branches\\Domain\\Model\\Person';
-
+    protected $type = 'Branches\\Domain\\Model\\Person';
 }

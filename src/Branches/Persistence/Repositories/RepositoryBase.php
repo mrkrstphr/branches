@@ -5,10 +5,10 @@
 
 namespace Branches\Persistence\Repositories;
 
-use Branches\Domain\Repository\Repository,
-    Branches\Domain\Model\Entity,
-    Branches\Persistence\EntityManagerFactory,
-    Doctrine\ORM\EntityManager;
+use Branches\Domain\Repository\Repository;
+use Branches\Domain\Model\Entity;
+use Branches\Persistence\EntityManagerFactory;
+use Doctrine\ORM\EntityManager;
 
 /**
  *
@@ -19,37 +19,26 @@ abstract class RepositoryBase implements Repository
      *
      * @var \Doctrine\ORM\EntityManager
      */
-    protected $_manager;
+    protected $manager;
 
     /**
      *
      * @var string
      */
-    protected $_type;
+    protected $type;
 
     /**
      *
      * @throws \DomainException
-     * @throws \InvalidArgumentException
      * @param \Doctrine\ORM\EntityManager $em
      */
-    public function __construct(EntityManager $em = null)
+    public function __construct(EntityManager $em)
     {
-        if (!class_exists($this->_type)) {
+        if (!class_exists($this->type)) {
             throw new \DomainException('protected property $type must specify fully qualified Entity class name');
         }
 
-        if (is_null($em)) {
-            $em = EntityManagerFactory::getSingleton();
-        }
-
-        if (!is_a($em, 'Doctrine\\ORM\\EntityManager')) {
-            throw new \InvalidArgumentException(
-                'Repository must be constructed with an instance of Doctrine\\ORM\\EntityManager'
-            );
-        }
-
-        $this->_manager = $em;
+        $this->manager = $em;
     }
 
     /**
@@ -59,7 +48,7 @@ abstract class RepositoryBase implements Repository
      */
     public function getById($id)
     {
-        return $this->_manager->find($this->_type, $id);
+        return $this->manager->find($this->type, $id);
     }
 
     /**
@@ -68,8 +57,7 @@ abstract class RepositoryBase implements Repository
      */
     public function getAll()
     {
-        return $this->_manager->getRepository($this->_type)
-            ->findAll();
+        return $this->manager->getRepository($this->type)->findAll();
     }
 
     /**
@@ -79,28 +67,40 @@ abstract class RepositoryBase implements Repository
      */
     public function getBy($conditions)
     {
-        return $this->_manager->getRepository($this->_type)
-            ->findBy($conditions);
+        return $this->manager->getRepository($this->type)->findBy($conditions);
     }
 
     /**
      *
      * @param \Branches\Domain\Model\Entity $entity
+     * @return RepositoryBase
      */
     public function store(Entity $entity)
     {
         $this->verifyType($entity);
-        $this->_manager->persist($entity);
+        $this->manager->persist($entity);
+        return $this;
+    }
+
+    /**
+     * @return RepositoryBase
+     */
+    public function flush()
+    {
+        $this->manager->flush();
+        return $this;
     }
 
     /**
      *
      * @param int $id
+     * @return RepositoryBase
      */
     public function delete($id)
     {
-        $entity = $this->get($id);
-        $this->_manager->remove($entity);
+        $entity = $this->getById($id);
+        $this->manager->remove($entity);
+        return $this;
     }
 
     /**
@@ -110,8 +110,8 @@ abstract class RepositoryBase implements Repository
      */
     private function verifyType($entity)
     {
-        if (!is_a($entity, $this->_type)) {
-            throw new \DomainException("$entity is not an instance of {$this->_type}");
+        if (!is_a($entity, $this->type)) {
+            throw new \DomainException("$entity is not an instance of {$this->type}");
         }
     }
 }
