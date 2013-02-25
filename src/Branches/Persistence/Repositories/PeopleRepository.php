@@ -10,7 +10,7 @@ use Branches\Domain\Repository\PeopleRepositoryInterface;
 /**
  *
  */
-class PeopleRepository extends RepositoryBase implements PeopleRepositoryInterface
+class PeopleRepository extends RepositoryAbstract implements PeopleRepositoryInterface
 {
     /**
      *

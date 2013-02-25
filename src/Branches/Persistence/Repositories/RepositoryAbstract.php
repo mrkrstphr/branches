@@ -13,7 +13,7 @@ use Branches\Persistence\EntityManagerFactory;
 /**
  *
  */
-abstract class RepositoryBase implements RepositoryInterface
+abstract class RepositoryAbstract implements RepositoryInterface
 {
     /**
      *
