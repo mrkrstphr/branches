@@ -29,4 +29,11 @@ interface PeopleRepositoryInterface extends RepositoryInterface
      * @return PeopleRepositoryInterface
      */
     public function delete($id);
+
+    /**
+     * @param int $offset
+     * @param int $limit
+     * @return array
+     */
+    public function getList($offset = 0, $limit = 20);
 }

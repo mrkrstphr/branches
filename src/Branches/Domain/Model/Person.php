@@ -210,4 +210,22 @@ class Person extends Entity
     {
         return $this->events;
     }
+
+    /**
+     * @return Event
+     */
+    public function getConfirmedEvent($type)
+    {
+        $lastCertainty = 0;
+        $confirmedEvent = null;
+
+        foreach ($this->getEvents() as $event) {
+            if ($event->getType() == $type && intval($event->getCertainty()) > $lastCertainty) {
+                $confirmedEvent = $event;
+                $lastCertainty = intval($event->getCertainty());
+            }
+        }
+
+        return $confirmedEvent;
+    }
 }

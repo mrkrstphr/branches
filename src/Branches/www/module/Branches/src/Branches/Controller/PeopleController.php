@@ -18,7 +18,7 @@ class PeopleController extends AbstractActionController
      *
      * @var PeopleRepositoryInterface
      */
-    protected $_people;
+    protected $repository;
 
     /**
      *
@@ -26,7 +26,7 @@ class PeopleController extends AbstractActionController
      */
     public function __construct(PeopleRepositoryInterface $people)
     {
-        $this->_people = $people;
+        $this->repository = $people;
     }
 
     /**
@@ -34,8 +34,11 @@ class PeopleController extends AbstractActionController
      */
     public function indexAction()
     {
-        $person = $this->_people->getById(14);
-        return new ViewModel();
+        $people = $this->repository->getList();
+
+        return array(
+            'people' => $people
+        );
     }
 
     /**

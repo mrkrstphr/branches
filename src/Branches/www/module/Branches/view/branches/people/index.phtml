@@ -16,16 +16,37 @@
         <th>&nbsp;</th>
     </thead>
     <tbody>
-        <?php #foreach ($this->people as $person): //foreach ($this->person->getEvents() as $event): ?>
+        <?php foreach ($this->people as $person): ?>
         <tr>
-            <td><a href="/people/view/<?php #echo $person->getId(); ?>">Somebody</a></td>
-            <td>Sometime</td>
-            <td>Never</td>
-            <td>Someone Else</td>
-            <td>Someone Elser</td>
+            <td>
+                <a href="/people/view/<?= $person->getId(); ?>">
+                    <?= $person->getConfirmedName()->getSurnameFirst(); ?></a>
+            </td>
+            <td>
+                <?php if ($person->getConfirmedEvent('BIRT')): ?>
+                <?= $person->getConfirmedEvent('BIRT')->getDate(); ?>
+                <?php endif; ?>
+            </td>
+            <td>
+                <?php if ($person->getConfirmedEvent('DEAT')): ?>
+                <?= $person->getConfirmedEvent('DEAT')->getDate(); ?>
+                <?php endif; ?>
+            </td>
+            <td>
+                <?php if ($person->getConfirmedParents()): ?>
+                <a href="<?= $person->getConfirmedParents()->getRelationship()->getMother()->getId(); ?>">
+                    <?= $person->getConfirmedParents()->getRelationship()->getMother()->getConfirmedName()->getSurnameFirst(); ?></a>
+                <?php endif; ?>
+            </td>
+            <td>
+                <?php if ($person->getConfirmedParents()): ?>
+                <a href="<?= $person->getConfirmedParents()->getRelationship()->getFather()->getId(); ?>">
+                    <?= $person->getConfirmedParents()->getRelationship()->getFather()->getConfirmedName()->getSurnameFirst(); ?></a>
+                <?php endif; ?>
+            </td>
             <td></td>
         </tr>
-        <?php #endforeach; ?>
+        <?php endforeach; ?>
     </tbody>
 </table>
 
