@@ -20,7 +20,7 @@ return array(
                     'viewPeople' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route' => '/view/[:id]',
+                            'route' => 'view/[:id]',
                             'constraints' => array(
                                 'id' => '[0-9]+'
                             ),
