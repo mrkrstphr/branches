@@ -3,10 +3,6 @@ body {
     padding-bottom: 40px;
 }
 
-.zf-green {
-    color: #68b604; 
-}
-
 .btn-success {
   background-color: #57a900;
   background-image: -moz-linear-gradient(top, #70d900, #57a900);
@@ -31,7 +27,7 @@ body {
 }
 
 div.container a.brand {
-    background: url("../images/zf2-logo.png") no-repeat scroll 0 10px transparent;
     margin-left: 0;
-    padding: 8px 20px 12px 40px;
+    padding: 8px 20px 12px 0;
 }
+div.container a.brand img {height: 24px}
