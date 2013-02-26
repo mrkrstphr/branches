@@ -25,15 +25,7 @@
                     <img src="/images/leaf.png" alt="<?= $this->translate('Branches') ?>" />
                     <?= $this->translate('Branches') ?>
                 </a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/people">People</a></li>
-                        <li><a href="/places">Places</a></li>
-                        <li><a href="/media">Media</a></li>
-                        <li><a href="/sources">Sources</a></li>
-                    </ul>
-                </div>
+                <?= $this->navigation('Navigation')->menu()->setPartial('layout/menu')->render() ?>
             </div>
         </div>
     </div>
