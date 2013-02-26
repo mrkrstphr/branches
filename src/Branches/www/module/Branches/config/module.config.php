@@ -41,4 +41,28 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+    'navigation' => array(
+        'default' => array(
+            array(
+                'label' => 'Home',
+                'uri' => '/',
+            ),
+            array(
+                'label' => 'People',
+                'uri' => '/people',
+            ),
+            array(
+                'label' => 'Places',
+                'uri' => '/places',
+            ),
+            array(
+                'label' => 'Media',
+                'uri' => '/media',
+            ),
+            array(
+                'label' => 'Sources',
+                'uri' => '/sources',
+            )
+        ),
+    ),
 );
