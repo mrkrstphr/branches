@@ -1,7 +1,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                    https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
-    <entity name="Branches\Domain\Model\Name" table="names">
+    <entity name="Branches\Domain\Model\Name" table="person_names">
         <id name="id" type="bigint">
             <generator strategy="IDENTITY" />
         </id>
@@ -15,6 +15,8 @@
 
         <field name="created" type="datetimetz" nullable="false" />
         <field name="updated" type="datetimetz" nullable="true" />
+
+        <many-to-one field="person" target-entity="Person" />
 
         <many-to-many field="sources" target-entity="Source">
             <join-table name="name_sources">

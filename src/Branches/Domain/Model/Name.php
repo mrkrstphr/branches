@@ -16,6 +16,11 @@ class Name extends Entity
     use Timestamped;
 
     /**
+     * @var Person
+     */
+    protected $person;
+
+    /**
      * @var string
      */
     protected $givenName;

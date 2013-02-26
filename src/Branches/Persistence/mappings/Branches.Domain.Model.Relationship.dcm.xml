@@ -11,6 +11,17 @@
         <field name="created" type="datetimetz" nullable="false" />
         <field name="updated" type="datetimetz" nullable="true" />
 
+        <many-to-many field="parents" target-entity="Person">
+            <join-table name="relationship_people">
+                <join-columns>
+                    <join-column name="relationship_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="person_id" referenced-column-name="id" unique="true" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
         <many-to-many field="events" target-entity="Event">
             <join-table name="relationship_events">
                 <join-columns>

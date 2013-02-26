@@ -11,8 +11,21 @@
         <field name="created" type="datetime" nullable="false" />
         <field name="updated" type="datetime" nullable="true" />
 
+        <one-to-many field="names" target-entity="Name" mapped-by="person" />
+
+        <many-to-many field="parents" target-entity="Parents">
+            <join-table name="relationship_children">
+                <join-columns>
+                    <join-column name="child_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="id" referenced-column-name="id" unique="true" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
         <many-to-many field="events" target-entity="Event">
-            <join-table name="people_events">
+            <join-table name="person_events">
                 <join-columns>
                     <join-column name="person_id" referenced-column-name="id" />
                 </join-columns>
@@ -22,7 +35,7 @@
             </join-table>
         </many-to-many>
 
-        <many-to-many field="attributes" target-entity="Event">
+        <many-to-many field="attributes" target-entity="Attribute">
             <join-table name="person_attributes">
                 <join-columns>
                     <join-column name="person_id" referenced-column-name="id" />
