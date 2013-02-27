@@ -1,12 +1,23 @@
+<h2 xmlns="http://www.w3.org/1999/html"><?= $person->getConfirmedName()->getFullName(); ?></h2>
 
-<h2><?= 'Tillotson Terrell' #$person->getName(); ?></h2>
+<?php if ($person->getConfirmedParents()):
+    $parents = $person->getConfirmedParents();
+    $father = $parents->getRelationship()->getFather();
+    $mother = $parents->getRelationship()->getMother();
+    ?>
+<p>
+    <?= $person->getGender() == 'F' ? 'Daughter' : 'Son'; ?> of
+    <a href="/people/view/<?= $father->getId() ?>"><?= $father->getConfirmedName()->getGivenName() ?></a> and
+    <a href="/people/view/<?= $mother->getId() ?>"><?= $mother->getConfirmedName()->getFullName() ?></a>.
+</p>
+<?php endif; ?>
 
 <div class="tabbable" id="person-tabs">
     <ul class="nav nav-tabs">
         <li class="active"><a href="#generic-information" data-toggle="tab">Generic Information</a></li>
-        <li><a href="#names" data-toggle="tab">Names/Aliases <span class="badge badge-inverse"><?= 1 #count($this->person->getNames()); ?></span></a></li>
-        <li><a href="#events" data-toggle="tab">Events <span class="badge badge-inverse"><?= 6 #count($this->person->getEvents()); ?></span></a></li>
-        <li><a href="#attributes" data-toggle="tab">Attributes <span class="badge badge-inverse"><?= 1 #count($this->person->getAttributes()); ?></span></a></li>
+        <li><a href="#names" data-toggle="tab">Names/Aliases <span class="badge badge-inverse"><?= count($this->person->getNames()); ?></span></a></li>
+        <li><a href="#events" data-toggle="tab">Events <span class="badge badge-inverse"><?= count($this->person->getEvents()); ?></span></a></li>
+        <li><a href="#attributes" data-toggle="tab">Attributes <span class="badge badge-inverse"><?= count($this->person->getAttributes()); ?></span></a></li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -166,21 +177,22 @@
                     <th></th>
                 </thead>
                 <tbody>
-                    <?php #foreach ($this->person->getNames() as $name): ?>
+                    <?php foreach ($this->person->getNames() as $name): ?>
                     <tr>
                         <td></td>
-                        <td><?= 'Tillotson T.' #$name->getGivenName(); ?></td>
+                        <td><?= $name->getGivenName(); ?></td>
                         <td></td>
-                        <td><?= 'Terrell' #$name->getSurname(); ?></td>
+                        <td><?= $name->getSurname(); ?></td>
                         <td></td>
                         <td style="width:180px">
                             <a class="btn btn-inverse btn-small" class="edit-name" ref="{person_name_id}" href="#edit-name-dialog" data-toggle="modal">
                                 <i class="icon-pencil icon-white"></i> Edit
                             </a>
-                            <a class="btn btn-inverse btn-small" href="#"><i class="icon-book icon-white"></i> Sources (3)</a>
+                            <a class="btn btn-inverse btn-small" href="#">
+                                <i class="icon-book icon-white"></i> Sources (<?= count($name->getSources()); ?>)</a>
                         </td>
                     </tr>
-                    <?php #endforeach; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
@@ -193,14 +205,20 @@
                     <th>&nbsp;</th>
                 </thead>
                 <tbody>
-                    <?php #foreach ($this->person->getEvents() as $event): ?>
+                    <?php foreach ($this->person->getEvents() as $event): ?>
                     <tr>
-                        <td><?= '' #$event->getEventType(); ?></td>
-                        <td><?= '' #$event->getEventDate(); ?></td>
-                        <td><?= '' #$event->getLocation() ? $event->getLocation()->getDescription() : ''; ?></td>
-                        <td></td>
+                        <td><?= $event->getType(); ?></td>
+                        <td><?= $event->getDate(); ?></td>
+                        <td><?= $event->getLocation() ? $event->getLocation()->getDescription() : ''; ?></td>
+                        <td style="width:180px">
+                            <a class="btn btn-inverse btn-small" class="edit-name" ref="{person_name_id}" href="#edit-name-dialog" data-toggle="modal">
+                                <i class="icon-pencil icon-white"></i> Edit
+                            </a>
+                            <a class="btn btn-inverse btn-small" href="#">
+                                <i class="icon-book icon-white"></i> Sources (<?= count($event->getSources()); ?>)</a>
+                        </td>
                     </tr>
-                    <?php #endforeach; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
@@ -213,14 +231,14 @@
                     <th>Location</th>
                 </thead>
                 <tbody>
-                    <?php #foreach ($this->person->getAttributes() as $attribute): ?>
+                    <?php foreach ($this->person->getAttributes() as $attribute): ?>
                     <tr>
                         <td><?= '' #$attribute->getAttributeType(); ?></td>
                         <td><?= '' #$attribute->getEventDate(); ?></td>
                         <td><?= '' #$attribute->getDescription(); ?></td>
                         <td><?= '' #$attribute->getLocation() ? $attribute->getLocation()->getDescription() : ''; ?></td>
                     </tr>
-                    <?php #endforeach; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
@@ -231,8 +249,14 @@
 
 <div class="tabbable" id="person-tabs">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#spouse1-children" data-toggle="tab">Spouse #1 <span class="badge badge-inverse">1</span></a></li>
-        <li><a href="#spouse2-children" data-toggle="tab">Spouse #2 <span class="badge badge-inverse">2</span></a></li>
+        <?php foreach ($this->person->getRelationships() as $relationship):
+            $spouse = $relationship->getSpouseOf($this->person); ?>
+        <li>
+            <a href="#spouse-<?= $spouse->getId() ?>-children" data-toggle="tab">
+                <?= $spouse->getConfirmedName()->getFullName() ?>
+                <span class="badge badge-inverse"><?= count($relationship->getChildren()) ?></span></a>
+        </li>
+        <?php endforeach; ?>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><b class="caret"></b></a>
             <ul class="dropdown-menu">

@@ -56,6 +56,12 @@ class PeopleController extends AbstractActionController
      */
     public function viewAction()
     {
-        return new ViewModel();
+        $id = $this->params('id');
+
+        $person = $this->repository->getById($id);
+
+        return array(
+            'person' => $person
+        );
     }
 }
