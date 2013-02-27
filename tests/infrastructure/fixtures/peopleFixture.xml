@@ -20,6 +20,13 @@
             <value>2010-04-26 12:14:20</value>
             <value>2010-04-24 17:15:23</value>
         </row>
+        <row>
+            <value>3</value>
+            <value>I0003</value>
+            <value>F</value>
+            <value>2010-04-26 12:14:20</value>
+            <value>2010-04-24 17:15:23</value>
+        </row>
     </table>
     <table name="locations">
         <column>id</column>
@@ -66,7 +73,7 @@
             <value>100</value>
         </row>
     </table>
-    <table name="people_events">
+    <table name="person_events">
         <column>person_id</column>
         <column>event_id</column>
         <row>
@@ -76,6 +83,40 @@
         <row>
             <value>1</value>
             <value>2</value>
+        </row>
+    </table>
+    <table name="relationships">
+        <column>id</column>
+        <column>ref_id</column>
+        <column>created</column>
+        <row>
+            <value>1</value>
+            <value>F001</value>
+            <value>2012-05-15 6:14:99</value>
+        </row>
+    </table>
+    <table name="relationship_people">
+        <column>relationship_id</column>
+        <column>person_id</column>
+        <row>
+            <value>1</value>
+            <value>1</value>
+        </row>
+        <row>
+            <value>1</value>
+            <value>2</value>
+        </row>
+    </table>
+    <table name="relationship_children">
+        <column>relationship_id</column>
+        <column>child_id</column>
+        <column>pedigree</column>
+        <column>created</column>
+        <row>
+            <value>1</value>
+            <value>3</value>
+            <value>BIRTH</value>
+            <value>2012-05-15 6:14:99</value>
         </row>
     </table>
 </dataset>

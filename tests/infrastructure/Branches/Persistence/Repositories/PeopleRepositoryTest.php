@@ -45,6 +45,46 @@ class PeopleRepositoryTest extends SqliteInMemory
     /**
      *
      */
+    public function testRelationshipLoading()
+    {
+        $repository = new PeopleRepository($this->createEntityManager());
+
+        $person = $repository->getById(1);
+
+        $this->assertCount(1, $person->getRelationships());
+
+        $relationships = $person->getRelationships();
+
+        $this->assertInstanceOf('\\Branches\\Domain\\Model\\Person', $relationships[0]->getSpouseOf($person));
+        $this->assertEquals(2, $relationships[0]->getSpouseOf($person)->getId());
+    }
+
+    /**
+     *
+     */
+    public function testParentLoading()
+    {
+        $repository = new PeopleRepository($this->createEntityManager());
+
+        $person = $repository->getById(3);
+
+        $parents = $person->getConfirmedParents();
+
+        $this->assertInstanceOf('\\Branches\\Domain\\Model\\Parents', $parents);
+
+        $this->assertEquals('BIRTH', $parents->getPedigree());
+
+        $this->assertInstanceOf('\\Branches\\Domain\\Model\\Relationship', $parents->getRelationship());
+
+        $relationship = $parents->getRelationship();
+
+        $this->assertEquals(1, $relationship->getFather()->getId());
+        $this->assertEquals(2, $relationship->getMother()->getId());
+    }
+
+    /**
+     *
+     */
     public function testGetAll()
     {
         $entityManager = $this->createEntityManager();
@@ -52,7 +92,7 @@ class PeopleRepositoryTest extends SqliteInMemory
 
         $people = $repository->getAll();
 
-        $this->assertCount(2, $people);
+        $this->assertCount(3, $people);
 
 
         foreach ($people as $person) {
@@ -70,7 +110,7 @@ class PeopleRepositoryTest extends SqliteInMemory
 
         $people = $repository->getBy(array('gender' => 'F'));
 
-        $this->assertCount(1, $people);
+        $this->assertCount(2, $people);
 
         foreach ($people as $person) {
             $this->assertInstanceOf('\\Branches\\Domain\\Model\\Person', $person);
@@ -110,6 +150,6 @@ class PeopleRepositoryTest extends SqliteInMemory
 
         $people = $repository->getAll();
 
-        $this->assertCount(1, $people);
+        $this->assertCount(2, $people);
     }
 }
