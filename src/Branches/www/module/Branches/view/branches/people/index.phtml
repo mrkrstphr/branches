@@ -16,7 +16,7 @@
         <th>&nbsp;</th>
     </thead>
     <tbody>
-        <?php foreach ($this->people as $person): ?>
+        <?php foreach ($this->paginator as $person): ?>
         <tr>
             <td>
                 <a href="/people/view/<?= $person->getId(); ?>">
@@ -50,14 +50,6 @@
     </tbody>
 </table>
 
-<div class="pagination pagination-small pagination-right">
-    <ul>
-        <li class="disabled"><a href="#">Prev</a></li>
-        <li class="disabled"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">Next</a></li>
-    </ul>
-</div>
+
+<?= $this->paginationControl($this->paginator, 'Sliding', 'layout/pagination', array('route' => 'people')); ?>
 

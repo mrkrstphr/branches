@@ -6,8 +6,10 @@
 namespace Branches\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Paginator\Paginator;
 use Zend\View\Model\ViewModel;
 use Branches\Domain\Repository\PeopleRepositoryInterface;
+use Branches\Paginator\DoctrinePaginatorAdapter;
 
 /**
  *
@@ -30,14 +32,22 @@ class PeopleController extends AbstractActionController
     }
 
     /**
-     *
+     * Displays a list of individuals with a paginator, defaulting to 20 per page.
      */
     public function indexAction()
     {
-        $people = $this->repository->getList();
+        $pageNumber = $this->params('page');
+        $perPage = 20;
+
+        $people = $this->repository->getList(($pageNumber - 1) * 20, $perPage);
+
+        $adapter = new DoctrinePaginatorAdapter($people);
+        $paginator = new Paginator($adapter);
+        $paginator->setCurrentPageNumber($pageNumber);
+        $paginator->setItemCountPerPage(20);
 
         return array(
-            'people' => $people
+            'paginator' => $paginator
         );
     }
 

@@ -5,6 +5,7 @@
 
 namespace Branches\Persistence\Repositories;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Branches\Domain\Model\Person;
 use Branches\Domain\Repository\PeopleRepositoryInterface;
 
@@ -22,7 +23,7 @@ class PeopleRepository extends RepositoryAbstract implements PeopleRepositoryInt
     /**
      * @param int $offset
      * @param int $limit
-     * @return array
+     * @return Paginator
      */
     public function getList($offset = 0, $limit = 20)
     {
@@ -31,11 +32,12 @@ class PeopleRepository extends RepositoryAbstract implements PeopleRepositoryInt
             'LEFT JOIN p.events e ' .
             'ORDER BY n.surname, n.givenName ASC';
 
-        $query = $this->manager->createQuery($dql);
-        $query->setMaxResults($limit);
-        $query->setFirstResult($offset);
-        $people = $query->getResult();
+        $query = $this->manager->createQuery($dql)
+            ->setMaxResults(20)
+            ->setFirstResult($offset);
 
-        return $people;
+        $paginator = new Paginator($query, $fetchJoinCollection = true);
+
+        return $paginator;
     }
 }

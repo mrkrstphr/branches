@@ -9,11 +9,15 @@ return array(
             'people' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route'    => '/people[/]',
-                    'defaults' => array(
-                        'controller' => 'Branches\Controller\People',
-                        'action'     => 'index',
+                    'route'    => '/people[/[:page]]',
+                    'constraints' => array(
+                        'page' => '[0-9]+'
                     ),
+                    'defaults' => array(
+                        'controller'    => 'Branches\Controller\People',
+                        'action'        => 'index',
+                        'page'          => 1
+                    )
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
@@ -25,13 +29,13 @@ return array(
                                 'id' => '[0-9]+'
                             ),
                             'defaults' => array(
-                                'action'     => 'view',
-                            ),
-                        ),
+                                'action' => 'view'
+                            )
+                        )
                     )
                 )
-            ),
-        ),
+            )
+        )
     ),
     'controllers' => array(
         'invokables' => array(),
