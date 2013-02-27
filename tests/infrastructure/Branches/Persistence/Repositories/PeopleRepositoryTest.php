@@ -85,6 +85,30 @@ class PeopleRepositoryTest extends SqliteInMemory
     /**
      *
      */
+    public function testChildrenLoading()
+    {
+        $repository = new PeopleRepository($this->createEntityManager());
+
+        $person = $repository->getById(1);
+
+        $this->assertCount(1, $person->getRelationships());
+
+        $relationships = $person->getRelationships();
+        $relationship = $relationships[0];
+
+        $this->assertInstanceOf('\\Branches\\Domain\\Model\\Relationship', $relationship);
+
+        $this->assertCount(1, $relationship->getChildren());
+
+        $children = $relationship->getChildren();
+        $child = $children[0];
+
+        $this->assertEquals(3, $child->getPerson()->getId());
+    }
+
+    /**
+     *
+     */
     public function testGetAll()
     {
         $entityManager = $this->createEntityManager();

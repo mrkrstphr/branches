@@ -12,6 +12,7 @@
         <field name="updated" type="datetimetz" nullable="true" />
 
         <many-to-many field="parents" target-entity="Person" mapped-by="relationships" />
+        <one-to-many field="children" target-entity="Parents" mapped-by="relationship" />
 
         <many-to-many field="events" target-entity="Event">
             <join-table name="relationship_events">
