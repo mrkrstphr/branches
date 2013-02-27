@@ -5,6 +5,7 @@
 
 namespace Branches\Domain\Repository;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Branches\Domain\Model\Entity;
 
 interface PeopleRepositoryInterface extends RepositoryInterface
@@ -33,7 +34,7 @@ interface PeopleRepositoryInterface extends RepositoryInterface
     /**
      * @param int $offset
      * @param int $limit
-     * @return array
+     * @return Paginator
      */
-    public function getList($offset = 0, $limit = 20);
+    public function getPaginator($offset = 0, $limit = 20);
 }

@@ -36,15 +36,15 @@ class PeopleController extends AbstractActionController
      */
     public function indexAction()
     {
-        $pageNumber = $this->params('page');
-        $perPage = 20;
+        $page = $this->params('page');
+        $max = 20;
 
-        $people = $this->repository->getList(($pageNumber - 1) * 20, $perPage);
+        $people = $this->repository->getPaginator(($page - 1) * 20, $max);
 
         $adapter = new DoctrinePaginatorAdapter($people);
         $paginator = new Paginator($adapter);
-        $paginator->setCurrentPageNumber($pageNumber);
-        $paginator->setItemCountPerPage(20);
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setItemCountPerPage($max);
 
         return array(
             'paginator' => $paginator

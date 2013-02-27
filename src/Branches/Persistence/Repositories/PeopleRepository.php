@@ -25,7 +25,7 @@ class PeopleRepository extends RepositoryAbstract implements PeopleRepositoryInt
      * @param int $limit
      * @return Paginator
      */
-    public function getList($offset = 0, $limit = 20)
+    public function getPaginator($offset = 0, $limit = 20)
     {
         $dql = 'SELECT p, n, e FROM Branches\\Domain\\Model\\Person p ' .
             'JOIN p.names n ' .
@@ -33,7 +33,7 @@ class PeopleRepository extends RepositoryAbstract implements PeopleRepositoryInt
             'ORDER BY n.surname, n.givenName ASC';
 
         $query = $this->manager->createQuery($dql)
-            ->setMaxResults(20)
+            ->setMaxResults($limit)
             ->setFirstResult($offset);
 
         $paginator = new Paginator($query, $fetchJoinCollection = true);
