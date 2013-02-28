@@ -2,7 +2,7 @@
 <div class="nav-collapse collapse">
     <ul class="nav">
         <?php foreach ($this->container as $page): ?>
-        <li<?= $page->isActive() ? ' class="active"' : ''; ?>>
+        <li<?= $page->isActive(true) ? ' class="active"' : '' ?>>
             <a href="<?= $page->getHref() ?>"><?= $page->getLabel() ?></a></li>
         <?php endforeach; ?>
     </ul>

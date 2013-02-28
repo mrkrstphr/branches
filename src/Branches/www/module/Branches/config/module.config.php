@@ -48,12 +48,13 @@ return array(
     'navigation' => array(
         'default' => array(
             array(
-                'label' => 'Home',
-                'uri' => '/',
-            ),
-            array(
                 'label' => 'People',
-                'uri' => '/people',
+                'route' => 'people',
+                'pages' => array(
+                    array(
+                        'route' => 'people/viewPeople'
+                    )
+                )
             ),
             array(
                 'label' => 'Places',
