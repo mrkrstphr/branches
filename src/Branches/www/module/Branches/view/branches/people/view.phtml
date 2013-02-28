@@ -229,14 +229,22 @@
                     <th>Date</th>
                     <th>Description</th>
                     <th>Location</th>
+                    <th></th>
                 </thead>
                 <tbody>
                     <?php foreach ($this->person->getAttributes() as $attribute): ?>
                     <tr>
-                        <td><?= '' #$attribute->getAttributeType(); ?></td>
-                        <td><?= '' #$attribute->getEventDate(); ?></td>
-                        <td><?= '' #$attribute->getDescription(); ?></td>
-                        <td><?= '' #$attribute->getLocation() ? $attribute->getLocation()->getDescription() : ''; ?></td>
+                        <td><?= $attribute->getType() ?></td>
+                        <td><?= $attribute->getDate() ?></td>
+                        <td><?= $attribute->getDescription() ?></td>
+                        <td><?= $attribute->getLocation() ? $attribute->getLocation()->getDescription() : '' ?></td>
+                        <td style="width:180px">
+                            <a class="btn btn-inverse btn-small" class="edit-name" ref="{person_name_id}" href="#edit-name-dialog" data-toggle="modal">
+                                <i class="icon-pencil icon-white"></i> Edit
+                            </a>
+                            <a class="btn btn-inverse btn-small" href="#">
+                                <i class="icon-book icon-white"></i> Sources (<?= count($attribute->getSources()); ?>)</a>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -266,6 +274,7 @@
         </li>
     </ul>
     <div class="tab-content">
+        <h4>Children</h4>
         <div class="tab-pane active" id="spouse1-children">
             <table class="table table-striped table-hover">
                 <thead>
@@ -275,14 +284,31 @@
                     <th>&nbsp;</th>
                 </thead>
                 <tbody>
-                <?php #foreach ($this->people as $person): //foreach ($this->person->getEvents() as $event): ?>
+                <?php foreach ($relationship->getChildren() as $parent): ?>
                 <tr>
-                    <td><a href="/people/view/<?php #echo $person->getId(); ?>">Somebody Here</a></td>
-                    <td>Sometime</td>
-                    <td>Never</td>
-                    <td></td>
+                    <td>
+                        <a href="/people/view/<?= $parent->getPerson()->getId() ?>">
+                            <?= $parent->getPerson()->getConfirmedName()->getGivenName() ?></a>
+                    </td>
+                    <td>
+                        <?php if ($parent->getPerson()->getConfirmedEvent('BIRT')): ?>
+                        <?= $parent->getPerson()->getConfirmedEvent('BIRT')->getDate(); ?>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php if ($parent->getPerson()->getConfirmedEvent('DEAT')): ?>
+                        <?= $parent->getPerson()->getConfirmedEvent('DEAT')->getDate(); ?>
+                        <?php endif; ?>
+                    </td>
+                    <td style="width:180px">
+                        <a class="btn btn-inverse btn-small" class="edit-name" ref="{person_name_id}" href="#edit-name-dialog" data-toggle="modal">
+                            <i class="icon-pencil icon-white"></i> Edit
+                        </a>
+                        <a class="btn btn-inverse btn-small" href="#">
+                            <i class="icon-book icon-white"></i> Sources (<?= count($parent->getSources()); ?>)</a>
+                    </td>
                 </tr>
-                <?php #endforeach; ?>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
