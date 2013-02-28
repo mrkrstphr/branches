@@ -337,6 +337,10 @@
         <?php foreach ($this->person->getRelationships() as $count => $relationship):
             $spouse = $relationship->getSpouseOf($this->person); ?>
         <div class="tab-pane<?= $count == 0 ? ' active' : '' ?>" id="spouse-<?= $relationship->getId() ?>">
+            <p>
+                View <a href="/people/view/<?= $spouse->getId() ?>">
+                    <?= $spouse->getConfirmedName()->getFullName(); ?></a>.
+            </p>
             <h4>Events</h4>
 
             <?php if (!count($relationship->getEvents())): ?>
@@ -401,7 +405,7 @@
                 <tr>
                     <td>
                         <a href="/people/view/<?= $parent->getPerson()->getId() ?>">
-                            <?= $parent->getPerson()->getConfirmedName()->getGivenName() ?></a>
+                            <?= $parent->getPerson()->getConfirmedName()->getFullName() ?></a>
                     </td>
                     <td>
                         <?php if ($parent->getPerson()->getConfirmedEvent('BIRT')): ?>
