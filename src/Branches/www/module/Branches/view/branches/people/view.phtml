@@ -14,19 +14,16 @@
 
 <div class="tabbable" id="person-tabs">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#generic-information" data-toggle="tab">Generic Information</a></li>
-        <li><a href="#names" data-toggle="tab">Names/Aliases <span class="badge badge-inverse"><?= count($this->person->getNames()); ?></span></a></li>
-        <li><a href="#events" data-toggle="tab">Events <span class="badge badge-inverse"><?= count($this->person->getEvents()); ?></span></a></li>
-        <li><a href="#attributes" data-toggle="tab">Attributes <span class="badge badge-inverse"><?= count($this->person->getAttributes()); ?></span></a></li>
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li><a href="#">General Sources <span class="badge badge-inverse">1</span></a></li>
-            </ul>
-        </li>
+        <li class="active"><a href="#tab-generic-information" data-toggle="tab">Generic Information</a></li>
+        <li><a href="#tab-names" data-toggle="tab">Names/Aliases <span class="badge badge-inverse"><?= count($this->person->getNames()); ?></span></a></li>
+        <li><a href="#tab-events" data-toggle="tab">Events <span class="badge badge-inverse"><?= count($this->person->getEvents()); ?></span></a></li>
+        <li><a href="#tab-attributes" data-toggle="tab">Attributes <span class="badge badge-inverse"><?= count($this->person->getAttributes()); ?></span></a></li>
+        <li><a href="#tab-sources" data-toggle="tab">Sources <span class="badge badge-inverse"><?= count($this->person->getSources()); ?></span></a></li>
+        <li><a href="#tab-notes" data-toggle="tab">Notes <span class="badge badge-inverse"><?= count($this->person->getNotes()); ?></span></a></li>
+        <li><a href="#tab-todos" data-toggle="tab">Todos <span class="badge badge-inverse">0</span></a></li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane active" id="generic-information">
+        <div class="tab-pane active" id="tab-generic-information">
 
 
 
@@ -99,7 +96,7 @@
                 </form>
             </div>
         </div>
-        <div class="tab-pane" id="names">
+        <div class="tab-pane" id="tab-names">
             <div id="edit-name-dialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -196,7 +193,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="tab-pane" id="events">
+        <div class="tab-pane" id="tab-events">
             <?php if (!count($this->person->getEvents())): ?>
             <div class="well">
                 <p>
@@ -233,7 +230,7 @@
             </table>
             <?php endif; ?>
         </div>
-        <div class="tab-pane" id="attributes">
+        <div class="tab-pane" id="tab-attributes">
             <?php if (!count($this->person->getAttributes())): ?>
             <div class="well">
                 <p>
@@ -271,6 +268,39 @@
                 </tbody>
             </table>
             <?php endif; ?>
+        </div>
+
+        <div class="tab-pane" id="tab-sources">
+            <div class="well">
+                <p>
+                    There are no recorded sources for
+                    <strong><?= $this->person->getConfirmedName()->getFullName() ?></strong>.
+                    &nbsp;&nbsp;
+                    <a class="btn btn-primary btn-medium">Create One!</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="tab-notes">
+            <div class="well">
+                <p>
+                    There are no notes for
+                    <strong><?= $this->person->getConfirmedName()->getFullName() ?></strong>.
+                    &nbsp;&nbsp;
+                    <a class="btn btn-primary btn-medium">Create One!</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="tab-todos">
+            <div class="well">
+                <p>
+                    There are no todo items for
+                    <strong><?= $this->person->getConfirmedName()->getFullName() ?></strong>.
+                    &nbsp;&nbsp;
+                    <a class="btn btn-primary btn-medium">Create One!</a>
+                </p>
+            </div>
         </div>
     </div>
 </div>
