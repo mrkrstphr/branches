@@ -21,7 +21,7 @@
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li><a href="#">General Sources <span class="badge badge-info">1</span></a></li>
+                <li><a href="#">General Sources <span class="badge badge-inverse">1</span></a></li>
             </ul>
         </li>
     </ul>
@@ -197,6 +197,16 @@
             </table>
         </div>
         <div class="tab-pane" id="events">
+            <?php if (!count($this->person->getEvents())): ?>
+            <div class="well">
+                <p>
+                    There are no recorded events for
+                    <strong><?= $this->person->getConfirmedName()->getFullName() ?></strong>.
+                    &nbsp;&nbsp;
+                    <a class="btn btn-primary btn-medium">Create One!</a>
+                </p>
+            </div>
+            <?php else: ?>
             <table class="table table-striped table-hover">
                 <thead>
                     <th>Type</th>
@@ -221,8 +231,19 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <?php endif; ?>
         </div>
         <div class="tab-pane" id="attributes">
+            <?php if (!count($this->person->getAttributes())): ?>
+            <div class="well">
+                <p>
+                    There are no recorded attributes for
+                    <strong><?= $this->person->getConfirmedName()->getFullName() ?></strong>.
+                    &nbsp;&nbsp;
+                    <a class="btn btn-primary btn-medium">Create One!</a>
+                </p>
+            </div>
+            <?php else: ?>
             <table class="table table-striped table-hover">
                 <thead>
                     <th>Type</th>
@@ -249,12 +270,22 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <?php endif; ?>
         </div>
     </div>
 </div>
 
 <h3>Relationships</h3>
 
+<?php if (!count($this->person->getRelationships())): ?>
+<div class="well">
+    <p>
+        There are no relationships for <strong><?= $this->person->getConfirmedName()->getFullName() ?></strong>.
+        &nbsp;&nbsp;
+        <a class="btn btn-primary btn-medium">Create One!</a>
+    </p>
+</div>
+<?php else: ?>
 <div class="tabbable" id="relationship-tabs">
     <ul class="nav nav-tabs">
         <?php foreach ($this->person->getRelationships() as $relationship):
@@ -273,10 +304,22 @@
         </li>
     </ul>
     <div class="tab-content">
-        <?php foreach ($this->person->getRelationships() as $count => $relationship): ?>
+        <?php foreach ($this->person->getRelationships() as $count => $relationship):
+            $spouse = $relationship->getSpouseOf($this->person); ?>
         <div class="tab-pane<?= $count == 0 ? ' active' : '' ?>" id="spouse-<?= $relationship->getId() ?>-children">
             <h4>Children</h4>
 
+            <?php if (!count($relationship->getChildren())): ?>
+            <div class="well">
+                <p>
+                    There are no recorded children for
+                    <strong><?= $this->person->getConfirmedName()->getFullName() ?></strong> and
+                    <strong><?= $spouse->getConfirmedName()->getFullName() ?></strong>.
+                    &nbsp;&nbsp;
+                    <a class="btn btn-primary btn-medium">Create One!</a>
+                </p>
+            </div>
+            <?php else: ?>
             <table class="table table-striped table-hover">
                 <thead>
                     <th>Name</th>
@@ -312,11 +355,12 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
+            <?php endif; ?>
         </div>
         <?php endforeach; ?>
     </div>
 </div>
-
+<?php endif; ?>
 
 <script type="text/javascript">
     $('#relationship-tabs a:first').tab('show');
