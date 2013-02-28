@@ -6,8 +6,9 @@ php:
 
 before_script:
     - curl -s https://getcomposer.org/installer | php
-    - php composer.phar install --prefer-source --dev
+    - php composer.phar install --dev
 
 script:
     - bin/phpunit -c tests/unit/phpunit.xml tests/unit/
+    - bin/phpunit -c tests/infrastructure/phpunit.xml tests/infrastructure/
 #    - bin/phpcs --standard=PSR2 tests/unit/ src/
