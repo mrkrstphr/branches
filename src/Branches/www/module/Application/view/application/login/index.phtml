@@ -1,0 +1,19 @@
+
+<div class="login-form">
+    <h2>Login</h2>
+
+    <?php $form = $this->form->prepare(); ?>
+
+    <?= $this->form()->openTag($form) ?>
+    <div class="clearfix">
+        <?= $this->formInput($form->get('email')) ?>
+        <?= $this->formElementErrors($form->get('email')) ?>
+    </div>
+    <div class="clearfix">
+        <?= $this->formPassword($form->get('password')) ?>
+        <?= $this->formElementErrors($form->get('password')) ?>
+    </div>
+    <?= $this->formSubmit($form->get('submit')) ?>
+    <?= $this->formElementErrors($form->get('submit')) ?>
+    <?= $this->form()->closeTag() ?>
+</div>
