@@ -6,6 +6,7 @@
 namespace Branches;
 
 use Branches\Controller\PeopleController;
+use Branches\Controller\PlacesController;
 use Zend\Mvc\Controller\ControllerManager;
 use Zend\ServiceManager\ServiceManager;
 
@@ -13,6 +14,7 @@ use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Branches\Persistence\ConfigurationFactory;
 use Branches\Persistence\EntityManagerFactory;
+use Branches\Persistence\Repositories\LocationRepository;
 use Branches\Persistence\Repositories\PeopleRepository;
 
 /**
@@ -68,6 +70,10 @@ class Module
                 'PeopleRepository' =>  function (ServiceManager $sm) {
                     $em = $sm->get('EntityManager');
                     return new PeopleRepository($em);
+                },
+                'LocationRepository' =>  function (ServiceManager $sm) {
+                    $em = $sm->get('EntityManager');
+                    return new LocationRepository($em);
                 }
             ),
         );
@@ -97,8 +103,12 @@ class Module
         return array(
             'factories' => array(
                 'Branches\Controller\People' => function (ControllerManager $cm) {
-                    $people = $cm->getServiceLocator()->get('PeopleRepository');
-                    return new PeopleController($people);
+                    $repository = $cm->getServiceLocator()->get('PeopleRepository');
+                    return new PeopleController($repository);
+                },
+                'Branches\Controller\Places' => function (ControllerManager $cm) {
+                    $repository = $cm->getServiceLocator()->get('LocationRepository');
+                    return new PlacesController($repository);
                 }
             )
         );

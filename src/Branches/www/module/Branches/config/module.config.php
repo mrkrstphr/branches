@@ -34,6 +34,35 @@ return array(
                         )
                     )
                 )
+            ),
+            'places' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route'    => '/places[/[:page]]',
+                    'constraints' => array(
+                        'page' => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller'    => 'Branches\Controller\Places',
+                        'action'        => 'index',
+                        'page'          => 1
+                    )
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'viewPlace' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route' => 'view/[:id]',
+                            'constraints' => array(
+                                'id' => '[0-9]+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'view'
+                            )
+                        )
+                    )
+                )
             )
         )
     ),
