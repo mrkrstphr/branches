@@ -67,6 +67,16 @@ class Location extends Entity
     protected $phone;
 
     /**
+     * @var float
+     */
+    protected $latitude;
+
+    /**
+     * @var float
+     */
+    protected $longitude;
+
+    /**
      * @param string $address1
      */
     public function setAddress1($address1)
@@ -208,5 +218,37 @@ class Location extends Entity
     public function getStateProvince()
     {
         return $this->stateProvince;
+    }
+
+    /**
+     * @param float $latitude
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param float $longitude
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
     }
 }

@@ -15,5 +15,7 @@
         <field name="postalCode" column="postal_code" type="string" length="10" nullable="true" />
         <field name="country" type="string" length="60" nullable="true" />
         <field name="phone" type="string" length="25" nullable="true" />
+        <field name="latitude" type="float" nullable="true" />
+        <field name="longitude" type="float" nullable="true" />
     </entity>
 </doctrine-mapping>
