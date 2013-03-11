@@ -34,6 +34,6 @@ class LoginForm extends Form implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification()
     {
-
+        return array();
     }
 }

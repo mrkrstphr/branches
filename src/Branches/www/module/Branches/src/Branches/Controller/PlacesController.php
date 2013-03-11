@@ -58,7 +58,10 @@ class PlacesController extends AbstractActionController
 
         $location = $this->repository->getById($id);
 
+        $form = $this->getServiceLocator()->get('LocationForm');
+
         return array(
+            'form' => $form,
             'location' => $location
         );
     }

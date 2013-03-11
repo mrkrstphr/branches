@@ -1,6 +1,20 @@
 
 <h2><?= $this->location->getDescription() ?></h2>
 
+
+<?php $form = $this->form->prepare(); ?>
+<?= $this->form()->openTag($form); ?>
+    <div class="control-group">
+        <?= $this->formLabel($form->get('description')) ?>
+        <div class="controls">
+            <?= $this->formInput($form->get('description')) ?>
+        </div>
+    </div>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+<?= $this->form()->closeTag() ?>
+
 <?php if ($this->location->getLatitude() && $this->location->getLongitude()):
     $mapExtLink = 'http://www.openstreetmap.org/?lat=' . $this->location->getLatitude() .
         '&amp;lon=' . $this->location->getLongitude() . '&amp;zoom=12&amp;layers=M' .
@@ -22,13 +36,11 @@
             map.getProjectionObject() // to Spherical Mercator Projection
         );
 
-    var zoom=12;
-
     var markers = new OpenLayers.Layer.Markers('Markers');
     map.addLayer(markers);
 
     markers.addMarker(new OpenLayers.Marker(lonLat));
 
-    map.setCenter(lonLat, zoom);
+    map.setCenter(lonLat, 12);
 </script>
 <?php endif; ?>
