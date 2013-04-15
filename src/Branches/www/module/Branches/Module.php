@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 
 namespace Branches;
 
@@ -18,18 +15,18 @@ use Branches\Persistence\Repositories\LocationRepository;
 use Branches\Persistence\Repositories\PeopleRepository;
 
 /**
- *
+ * Class Module
+ * @package Branches
  */
 class Module
 {
     /**
-     *
      * @param \Zend\Mvc\MvcEvent $e
      */
     public function onBootstrap(MvcEvent $e)
     {
         $e->getApplication()->getServiceManager()->get('translator');
-        $eventManager        = $e->getApplication()->getEventManager();
+        $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
     }
@@ -43,6 +40,7 @@ class Module
     }
 
     /**
+     * @throws \Exception
      * @return array
      */
     public function getServiceConfig()

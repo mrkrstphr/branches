@@ -1,33 +1,7 @@
 <?php
-/**
- *
- */
 
 return array(
-    'router' => array(
-        'routes' => array(
-            'home' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),
-            'login' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/login',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Login',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),
-        ),
-    ),
+    'router' => require __DIR__ . '/router.config.php',
     'service_manager' => array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',

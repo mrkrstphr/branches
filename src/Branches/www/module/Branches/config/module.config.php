@@ -1,102 +1,113 @@
 <?php
-/**
- *
- */
 
-return array(
-    'router' => array(
-        'routes' => array(
-            'people' => array(
+return [
+    'router' => [
+        'routes' => [
+            'people' => [
                 'type' => 'Zend\Mvc\Router\Http\Segment',
-                'options' => array(
+                'options' => [
                     'route'    => '/people[/[:page]]',
-                    'constraints' => array(
+                    'constraints' => [
                         'page' => '[0-9]+'
-                    ),
-                    'defaults' => array(
+                    ],
+                    'defaults' => [
                         'controller'    => 'Branches\Controller\People',
                         'action'        => 'index',
                         'page'          => 1
-                    )
-                ),
+                    ]
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'viewPeople' => array(
+                'child_routes' => [
+                    'viewPeople' => [
                         'type'    => 'Segment',
-                        'options' => array(
+                        'options' => [
                             'route' => 'view/[:id]',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]+'
-                            ),
-                            'defaults' => array(
+                            ],
+                            'defaults' => [
                                 'action' => 'view'
-                            )
-                        )
-                    )
-                )
-            ),
-            'places' => array(
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'places' => [
                 'type' => 'Zend\Mvc\Router\Http\Segment',
-                'options' => array(
-                    'route'    => '/places[/[:page]]',
-                    'constraints' => array(
-                        'page' => '[0-9]+'
-                    ),
-                    'defaults' => array(
-                        'controller'    => 'Branches\Controller\Places',
-                        'action'        => 'index',
-                        'page'          => 1
-                    )
-                ),
+                'options' => [
+                    'route'    => '/places',
+                    'defaults' => [
+                        'controller' => 'Branches\Controller\Places',
+                        'action' => 'index',
+                        'page' => 1
+                    ]
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'viewPlace' => array(
+                'child_routes' => [
+                    'paginate' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/[:page]',
+                            'constraints' => [
+                                'page' => '[0-9]+'
+                            ],
+                            'defaults' => [
+                                'page' => 1
+                            ]
+                        ]
+                    ],
+                    'view-place' => [
                         'type'    => 'Segment',
-                        'options' => array(
-                            'route' => 'view/[:id]',
-                            'constraints' => array(
+                        'options' => [
+                            'route' => '/view/[:id]',
+                            'constraints' => [
                                 'id' => '[0-9]+'
-                            ),
-                            'defaults' => array(
+                            ],
+                            'defaults' => [
                                 'action' => 'view'
-                            )
-                        )
-                    )
-                )
-            )
-        )
-    ),
-    'controllers' => array(
-        'invokables' => array(),
-    ),
-    'view_manager' => array(
-        'template_path_stack' => array(
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ],
+    'controllers' => [
+        'invokables' => [],
+    ],
+    'view_manager' => [
+        'template_path_stack' => [
             __DIR__ . '/../view',
-        ),
-    ),
-    'navigation' => array(
-        'default' => array(
-            array(
+        ],
+    ],
+    'navigation' => [
+        'default' => [
+            [
                 'label' => 'People',
                 'route' => 'people',
-                'pages' => array(
-                    array(
+                'pages' => [
+                    [
                         'route' => 'people/viewPeople'
-                    )
-                )
-            ),
-            array(
+                    ]
+                ]
+            ],
+            [
                 'label' => 'Places',
-                'uri' => '/places',
-            ),
-            array(
+                'route' => 'places',
+                'pages' => [
+                    [
+                        'route' => 'places/view-place'
+                    ]
+                ]
+            ],
+            [
                 'label' => 'Media',
                 'uri' => '/media',
-            ),
-            array(
+            ],
+            [
                 'label' => 'Sources',
                 'uri' => '/sources',
-            )
-        ),
-    ),
-);
+            ]
+        ],
+    ],
+];

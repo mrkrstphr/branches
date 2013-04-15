@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 
 namespace Application;
 
@@ -12,24 +9,23 @@ use Zend\Mvc\MvcEvent;
 use Branches\Persistence\EntityManagerFactory;
 
 /**
- *
+ * Class Module
+ * @package Application
  */
 class Module
 {
     /**
-     *
      * @param \Zend\Mvc\MvcEvent $e
      */
     public function onBootstrap(MvcEvent $e)
     {
         $e->getApplication()->getServiceManager()->get('translator');
-        $eventManager        = $e->getApplication()->getEventManager();
+        $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
     }
 
     /**
-     *
      * @return array
      */
     public function getConfig()
@@ -38,7 +34,6 @@ class Module
     }
 
     /**
-     *
      * @return array
      */
     public function getAutoloaderConfig()
