@@ -75,7 +75,7 @@ abstract class RepositoryAbstract implements RepositoryInterface
      * @param \Branches\Domain\Model\Entity $entity
      * @return RepositoryBase
      */
-    public function store(Entity $entity)
+    public function persist(Entity $entity)
     {
         $this->verifyType($entity);
         $this->manager->persist($entity);

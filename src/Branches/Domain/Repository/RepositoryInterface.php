@@ -1,14 +1,12 @@
 <?php
-/**
- *
- */
 
 namespace Branches\Domain\Repository;
 
 use Branches\Domain\Model\Entity;
 
 /**
- *
+ * Class RepositoryInterface
+ * @package Branches\Domain\Repository
  */
 interface RepositoryInterface
 {
@@ -22,7 +20,7 @@ interface RepositoryInterface
      * @param Entity $entity
      * @return RepositoryInterface
      */
-    public function store(Entity $entity);
+    public function persist(Entity $entity);
 
     /**
      * @param int $id
