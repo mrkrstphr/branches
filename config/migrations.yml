@@ -1,0 +1,4 @@
+name: Branches Doctrine Migrations
+migrations_namespace: Branches\Persistence\Migration
+table_name: versions
+migrations_directory: src/Branches/Persistence/Migration
