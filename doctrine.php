@@ -10,7 +10,7 @@ require 'vendor/autoload.php';
 $paths = array(__DIR__ . '/src/Branches/Persistence/Mapping');
 $isDevMode = true;
 
-$params = require 'src/Branches/www/config/autoload/db.local.php';
+$params = require 'config/autoload/db.local.php';
 
 $config = Setup::createXMLMetadataConfiguration($paths, $isDevMode);
 $config->addEntityNamespace('', 'Branches\Domain\Model');
