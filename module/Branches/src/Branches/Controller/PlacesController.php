@@ -1,18 +1,14 @@
 <?php
-/**
- * 
- */
 
 namespace Branches\Controller;
 
+use JMS\Serializer\Serializer;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Paginator\Paginator;
-use Zend\View\Model\ViewModel;
 use Branches\Domain\Repository\LocationRepositoryInterface;
-use Branches\Paginator\DoctrinePaginatorAdapter;
 
 /**
- *
+ * Class PlacesController
+ * @package Branches\Controller
  */
 class PlacesController extends AbstractActionController
 {
@@ -22,11 +18,18 @@ class PlacesController extends AbstractActionController
     protected $repository;
 
     /**
-     * @param LocationRepositoryInterface $locations
+     * @var Serializer
      */
-    public function __construct(LocationRepositoryInterface $locations)
+    protected $serializer;
+
+    /**
+     * @param LocationRepositoryInterface $locations
+     * @param Serializer $serializer
+     */
+    public function __construct(LocationRepositoryInterface $locations, Serializer $serializer)
     {
         $this->repository = $locations;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -34,19 +37,12 @@ class PlacesController extends AbstractActionController
      */
     public function indexAction()
     {
-        $page = $this->params('page');
-        $max = 20;
+        $places = $this->repository->getAll();
 
-        $people = $this->repository->getPaginator(($page - 1) * 20, $max);
+        $jsonContent = $this->serializer->serialize($places, 'json');
 
-        $adapter = new DoctrinePaginatorAdapter($people);
-        $paginator = new Paginator($adapter);
-        $paginator->setCurrentPageNumber($page);
-        $paginator->setItemCountPerPage($max);
-
-        return array(
-            'paginator' => $paginator
-        );
+        echo $jsonContent;
+        exit; // todo fixme
     }
 
     /**
@@ -58,11 +54,9 @@ class PlacesController extends AbstractActionController
 
         $location = $this->repository->getById($id);
 
-        $form = $this->getServiceLocator()->get('LocationForm');
+        $jsonContent = $this->serializer->serialize($location, 'json');
 
-        return array(
-            'form' => $form,
-            'location' => $location
-        );
+        echo $jsonContent;
+        exit; // todo fixme
     }
 }

@@ -109,7 +109,8 @@ class Module
                 },
                 'Branches\Controller\Places' => function (ControllerManager $cm) {
                     $repository = $cm->getServiceLocator()->get('LocationRepository');
-                    return new PlacesController($repository);
+                    $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
+                    return new PlacesController($repository, $serializer);
                 }
             )
         );

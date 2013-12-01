@@ -1,5 +1,5 @@
 <?= $this->doctype(); ?>
-<html lang="en">
+<html lang="en" ng-app="branchesApp">
 <head>
     <meta charset="utf-8">
     <?= $this->headTitle('Branches')->setSeparator(' - ')->setAutoEscape(false) ?>
@@ -9,8 +9,14 @@
         ->appendStylesheet($this->basePath() . '/css/style.css')
         ->appendStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css') ?>
     
-    <?= $this->headScript()->prependFile($this->basePath() . '/js/bootstrap.min.js')
-        ->prependFile($this->basePath() . '/js/jquery.min.js') ?>
+    <?= $this->headScript()->prependFile($this->basePath() . '/js/jquery.min.js')
+        ->appendFile($this->basePath() . '/js/bootstrap.min.js')
+        ->appendFile('https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js')
+        ->appendFile('https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular-route.min.js')
+        ->appendFile('https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular-resource.min.js')
+        ->appendFile($this->basePath() . '/js/app.js')
+        ->appendFile($this->basePath() . '/js/controllers.js')
+        ->appendFile($this->basePath() . '/js/services.js')  ?>
 </head>
 <body>
     <div class="navbar navbar-fixed-top">
@@ -30,7 +36,7 @@
         </div>
     </div>
     <div class="container">
-        <?= $this->content; ?>
+        <div ng-view></div>
         <hr>
         <footer>
             <p>Branches.</p>
