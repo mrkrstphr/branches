@@ -47,19 +47,7 @@ return [
                     'paginate' => [
                         'type' => 'Segment',
                         'options' => [
-                            'route' => '/[:page]',
-                            'constraints' => [
-                                'page' => '[0-9]+'
-                            ],
-                            'defaults' => [
-                                'page' => 1
-                            ]
-                        ]
-                    ],
-                    'view-place' => [
-                        'type'    => 'Segment',
-                        'options' => [
-                            'route' => '/view/[:id]',
+                            'route' => '/[:id]',
                             'constraints' => [
                                 'id' => '[0-9]+'
                             ],
@@ -79,6 +67,9 @@ return [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
+        'strategies' => [
+            'ViewJsonStrategy'
+        ]
     ],
     'navigation' => [
         'default' => [
