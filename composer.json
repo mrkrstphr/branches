@@ -6,26 +6,15 @@
             "Branches":["src/","tests/unit"]
         }
     },
-    "config": {
-        "bin-dir": "bin/"
-    },
     "require-dev": {
-        "squizlabs/php_codesniffer": "1.*",
-        "phpunit/phpunit": "3.7.*",
-        "phpunit/dbunit": "1.2.*",
-        "behat/behat": "2.4.*@stable",
-        "behat/mink": "1.4.*@stable",
-        "behat/mink-extension": "*",
-        "behat/mink-goutte-driver": "*",
-        "behat/mink-selenium2-driver": "*"
+        "phpunit/phpunit": "3.7.*"
     },
     "require": {
         "php": ">=5.4",
-        "zendframework/zendframework": "2.*",
-        "doctrine/orm": "2.*",
+        "silex/silex": "~1.1",
+        "symfony/yaml": "~2.4",
+        "dflydev/doctrine-orm-service-provider": "~1.0",
         "doctrine/migrations": "*@alpha",
-        "mrkrstphr/php-gedcom": "1.*",
-        "beberlei/DoctrineExtensions": "0.*",
-        "jms/serializer": "0.13"
+        "mrkrstphr/php-gedcom": "dev-streaming-parser"
     }
 }

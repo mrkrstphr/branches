@@ -1,6 +1,0 @@
-<ul class="nav navbar-nav">
-    <?php foreach ($this->container as $page): ?>
-        <li<?= $page->isActive(true) ? ' class="active"' : '' ?>>
-            <a href="<?= $page->getHref() ?>"><?= $page->getLabel() ?></a></li>
-    <?php endforeach; ?>
-</ul>
