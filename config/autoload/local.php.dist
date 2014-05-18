@@ -1,0 +1,23 @@
+<?php
+
+return [
+    'application_environment' => 'development',
+    'doctrine' => [
+        'connection' => [
+            'orm_default' => [
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'params' => [
+                    'host' => '',
+                    'port' => 5432,
+                    'dbname' => '',
+                    'user' => '',
+                    'password' => ''
+                ]
+            ]
+        ],
+    ],
+    'view_manager' => [
+        'display_not_found_reason' => true,
+        'display_exceptions' => true,
+    ],
+];

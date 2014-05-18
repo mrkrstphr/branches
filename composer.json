@@ -3,18 +3,17 @@
     "description": "",
     "autoload":{
         "psr-0":{
-            "Branches":["src/","tests/unit"]
+            "Branches": ["src/", "tests/unit"]
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "~4.0"
     },
     "require": {
-        "php": ">=5.4",
-        "silex/silex": "~1.1",
+        "php": ">=5.5",
+        "zendframework/zendframework": "~2.3",
+        "doctrine/doctrine-orm-module": "0.*",
         "symfony/yaml": "~2.4",
-        "dflydev/doctrine-orm-service-provider": "~1.0",
-        "doctrine/migrations": "*@alpha",
         "mrkrstphr/php-gedcom": "dev-streaming-parser"
     }
 }

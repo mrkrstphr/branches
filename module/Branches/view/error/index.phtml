@@ -1,0 +1,25 @@
+<h1>An error occurred</h1>
+<h2><?= $this->message ?></h2>
+
+<?php if (isset($this->display_exceptions) && $this->display_exceptions): ?>
+    <?php if (isset($this->exception) && $this->exception instanceof Exception): ?>
+        <hr/>
+        <h2>Additional information:</h2>
+        <?= $this->partial('error/partial/exception', ['exception' => $this->exception]) ?>
+        <?php if ($this->exception->getPrevious()): $e = $this->exception->getPrevious(); ?>
+            <hr/>
+            <h2>Previous exceptions:</h2>
+            <ul class="unstyled">
+                <?php while($e) : ?>
+                    <li>
+                        <?= $this->partial('error/partial/exception', ['exception' => $e]) ?>
+                    </li>
+                    <?php
+                    $e = $e->getPrevious();
+                endwhile; ?>
+            </ul>
+        <?php endif; ?>
+    <?php else: ?>
+        <h3><?= $this->translate('No Exception available') ?></h3>
+    <?php endif ?>
+<?php endif ?>
