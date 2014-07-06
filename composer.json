@@ -1,0 +1,14 @@
+{
+    "name": "branches/branches",
+    "description": "",
+    "autoload": {
+        "psr-4": {
+            "Branches\\": "src/"
+        }
+    },
+    "require": {
+        "zendframework/zendframework": "2.3.*",
+        "zendframework/zend-developer-tools": "0.0.*",
+        "doctrine/collections": "1.*"
+    }
+}
