@@ -40,7 +40,24 @@
         Attributes Grid Goes Here
     </div>
     <div class="tab-pane" id="parents">
-        Parents Grid Goes Here
+        <table class="table table-striped">
+            <tr>
+                <th>Father</th>
+                <th>Mother</th>
+                <th>Type</th>
+                <th>Primary</th>
+            </tr>
+            <?php foreach ($this->person->getParents() as $family): ?>
+            <tr>
+                <td><?= $family->getFamily()->getParent(0)->getDisplayName() ?></td>
+                <td><?= $family->getFamily()->getParent(1)->getDisplayName() ?></td>
+                <td><?= ucwords($family->getPedigree()) ?></td>
+                <td>
+                    <i class="fa fa-star text-primary"></i>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
     </div>
     <div class="tab-pane" id="notes">
         Notes Grid Goes Here

@@ -30,3 +30,9 @@ code {
 }
 
 .navbar-brand {font-family: 'Pacifico', cursive; font-size: 26px;}
+
+.tab-pane {
+    border: 1px solid #ddd;
+    border-top: none;
+    padding: 8px;
+}

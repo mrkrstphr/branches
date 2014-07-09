@@ -57,6 +57,29 @@ class Family extends AbstractEntity
         return $this->parents;
     }
 
+    public function getParent($index)
+    {
+        if ($this->parents) {
+            foreach ($this->parents as $parent) {
+                if ($index == 0 && $parent->getGender() == 'M') {
+                    return $parent;
+                } else if ($index == 1 && $parent->getGender() == 'F') {
+                    return $parent;
+                }
+            }
+
+            if (count($this->parents) > 1) {
+                return $this->parents[$index];
+            }
+
+            if (count($this->parents) == 1 && $index == 1) {
+                return $this->parents[0];
+            }
+        }
+
+        return null;
+    }
+
     /**
      * @param \Doctrine\Common\Collections\ArrayCollection $parents
      * @return $this
