@@ -11,7 +11,7 @@ class AbstractEntity
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @return int

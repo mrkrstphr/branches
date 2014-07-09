@@ -1,0 +1,61 @@
+<div class="page-header">
+    <h2><?= $this->escapeHtml($this->person->getDisplayName()) ?></h2>
+    <?php if ($this->person->hasParents()): ?>
+    <p>
+        Son of
+        <?= $this->person->getPreferredParent(0)->getDisplayName() ?>
+        and
+        <?= $this->person->getPreferredParent(1)->getDisplayName() ?>
+    </p>
+    <?php endif; ?>
+</div>
+
+<p>
+    <?= nl2br($this->escapeHtml($this->person->getDescription())) ?>
+</p>
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="active">
+        <a href="#events" role="tab" data-toggle="tab"><i class="fa fa-calendar"></i> Events</a>
+    </li>
+    <li>
+        <a href="#attributes" role="tab" data-toggle="tab"><i class="fa fa-heart"></i> Attributes</a>
+    </li>
+    <li>
+        <a href="#parents" role="tab" data-toggle="tab"><i class="fa fa-child"></i> Parents</a>
+    </li>
+    <li>
+        <a href="#notes" role="tab" data-toggle="tab"><i class="fa fa-pencil"></i> Notes</a>
+    </li>
+    <li>
+        <a href="#sources" role="tab" data-toggle="tab"><i class="fa fa-book"></i> Sources</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="events">
+        Events Grid Goes Here
+    </div>
+    <div class="tab-pane" id="attributes">
+        Attributes Grid Goes Here
+    </div>
+    <div class="tab-pane" id="parents">
+        Parents Grid Goes Here
+    </div>
+    <div class="tab-pane" id="notes">
+        Notes Grid Goes Here
+    </div>
+    <div class="tab-pane" id="sources">
+        Sources Grid Goes Here
+    </div>
+</div>
+
+<h3>Relationships</h3>
+
+<ul>
+    <?php foreach ($this->person->getRelationships() as $relationship): ?>
+    <li>
+        <?= $relationship->getPartner($this->person)->getDisplayName() ?>
+    </li>
+    <?php endforeach; ?>
+</ul>

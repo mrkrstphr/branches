@@ -1,0 +1,24 @@
+Branches\Domain\Entity\Family\Child:
+  type: entity
+  table: family_children
+  id:
+    id:
+      type: bigint
+      generator:
+        strategy: IDENTITY
+  fields:
+    pedigree:
+      length: 20
+  manyToOne:
+    family:
+      targetEntity: Branches\Domain\Entity\Family\Family
+      inversedBy: children
+      joinColumn:
+        name: family_id
+        referencedColumnName: id
+    child:
+      targetEntity: Branches\Domain\Entity\Person\Person
+      inversedBy: parents
+      joinColumn:
+        name: child_id
+        referencedColumnName: id

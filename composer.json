@@ -9,6 +9,8 @@
     "require": {
         "zendframework/zendframework": "2.3.*",
         "zendframework/zend-developer-tools": "0.0.*",
-        "doctrine/collections": "1.*"
+        "doctrine/collections": "1.*",
+        "doctrine/doctrine-orm-module": "0.8.*",
+        "symfony/yaml": "2.5.*"
     }
 }
