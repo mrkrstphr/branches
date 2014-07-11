@@ -27,6 +27,11 @@ class Person extends AbstractEntity
     protected $relationships;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    protected $events;
+
+    /**
      * @var string
      */
     protected $gender;
@@ -44,6 +49,7 @@ class Person extends AbstractEntity
         $this->names = new ArrayCollection();
         $this->parents = new ArrayCollection();
         $this->relationships = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     /**
@@ -184,6 +190,24 @@ class Person extends AbstractEntity
     public function setRelationships($relationships)
     {
         $this->relationships = $relationships;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * @param ArrayCollection $events
+     * @return $this
+     */
+    public function setEvents($events)
+    {
+        $this->events = $events;
         return $this;
     }
 }

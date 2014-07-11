@@ -16,25 +16,51 @@
 
 <ul class="nav nav-tabs" role="tablist">
     <li class="active">
-        <a href="#events" role="tab" data-toggle="tab"><i class="fa fa-calendar"></i> Events</a>
+        <a href="#events" role="tab" data-toggle="tab">
+            <i class="fa fa-calendar"></i>
+            Events <span class="badge"><?= count($this->person->getEvents()) ?></span></a>
     </li>
     <li>
-        <a href="#attributes" role="tab" data-toggle="tab"><i class="fa fa-heart"></i> Attributes</a>
+        <a href="#attributes" role="tab" data-toggle="tab">
+            <i class="fa fa-heart"></i>
+            Attributes <span class="badge">??</span></a>
     </li>
     <li>
-        <a href="#parents" role="tab" data-toggle="tab"><i class="fa fa-child"></i> Parents</a>
+        <a href="#parents" role="tab" data-toggle="tab">
+            <i class="fa fa-child"></i>
+            Parents <span class="badge"><?= count($this->person->getParents()) ?></span></a>
     </li>
     <li>
-        <a href="#notes" role="tab" data-toggle="tab"><i class="fa fa-pencil"></i> Notes</a>
+        <a href="#notes" role="tab" data-toggle="tab">
+            <i class="fa fa-pencil"></i>
+            Notes <span class="badge">??</span></a>
     </li>
     <li>
-        <a href="#sources" role="tab" data-toggle="tab"><i class="fa fa-book"></i> Sources</a>
+        <a href="#sources" role="tab" data-toggle="tab">
+            <i class="fa fa-book"></i>
+            Sources <span class="badge">??</span></a>
     </li>
 </ul>
 
 <div class="tab-content">
     <div class="tab-pane active" id="events">
-        Events Grid Goes Here
+        <button class="btn btn-primary">Add Event</button>
+        <table class="table table-striped">
+            <tr>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th></th>
+            </tr>
+            <?php foreach ($this->person->getEvents() as $event): ?>
+                <tr>
+                    <td><?= $event->getType()->getName() ?></td>
+                    <td><?= $event->getDate() ?></td>
+                    <td><?= $event->getPlace() ?></td>
+                    <td></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
     </div>
     <div class="tab-pane" id="attributes">
         Attributes Grid Goes Here
@@ -45,7 +71,7 @@
                 <th>Father</th>
                 <th>Mother</th>
                 <th>Type</th>
-                <th>Primary</th>
+                <th></th>
             </tr>
             <?php foreach ($this->person->getParents() as $family): ?>
             <tr>
@@ -53,7 +79,15 @@
                 <td><?= $family->getFamily()->getParent(1)->getDisplayName() ?></td>
                 <td><?= ucwords($family->getPedigree()) ?></td>
                 <td>
-                    <i class="fa fa-star text-primary"></i>
+                    <div class="btn-toolbar" role="toolbar">
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-primary"><i class="fa fa-star text-yellow"></i></button>
+                            <button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i></button>
+                            <button type="button" class="btn btn-primary"><i class="fa fa-file-text-o"></i></button>
+                            <button type="button" class="btn btn-primary"><i class="fa fa-book"></i></button>
+                            <button type="button" class="btn btn-primary"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                    </div>
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -67,12 +101,55 @@
     </div>
 </div>
 
-<h3>Relationships</h3>
+<h3>Relationships  <span class="badge"><?= count($this->person->getRelationships()) ?></span></h3>
 
-<ul>
-    <?php foreach ($this->person->getRelationships() as $relationship): ?>
-    <li>
-        <?= $relationship->getPartner($this->person)->getDisplayName() ?>
+<ul class="nav nav-tabs" role="tablist">
+    <?php foreach ($this->person->getRelationships() as $index => $relationship): ?>
+    <li class="<?= $index == 0 ? 'active' : '' ?>">
+        <a href="#"><?= $relationship->getPartner($this->person)->getDisplayName() ?></a>
     </li>
     <?php endforeach; ?>
 </ul>
+
+<div class="tab-content">
+    <?php foreach ($this->person->getRelationships() as $index => $relationship): ?>
+    <div class="tab-pane <?= $index == 0 ? 'active' : '' ?>" id="rel-<?= $index ?>">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#children-<?= $index ?>" role="tab" data-toggle="tab">
+                    <i class="fa fa-child"></i>
+                    Children <span class="badge">???</span></a>
+            </li>
+            <li>
+                <a href="#events-<?= $index ?>" role="tab" data-toggle="tab">
+                    <i class="fa fa-calendar"></i>
+                    Events <span class="badge">???</span></a>
+            </li>
+            <li>
+                <a href="#notes-<?= $index ?>" role="tab" data-toggle="tab">
+                    <i class="fa fa-pencil"></i>
+                    Notes <span class="badge">???</span></a>
+            </li>
+            <li>
+                <a href="#sources-<?= $index ?>" role="tab" data-toggle="tab">
+                    <i class="fa fa-book"></i>
+                    Sources <span class="badge">???</span></a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="children-<?= $index ?>">
+                Children...
+            </div>
+            <div class="tab-pane" id="events-<?= $index ?>">
+                Events...
+            </div>
+            <div class="tab-pane" id="notes-<?= $index ?>">
+                Notes...
+            </div>
+            <div class="tab-pane" id="sources-<?= $index ?>">
+                Sources...
+            </div>
+        </div>
+    </div>
+    <?php endforeach; ?>
+</div>
