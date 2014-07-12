@@ -1,0 +1,17 @@
+<button class="btn btn-primary" data-toggle="modal" data-target="#add-event-modal">Add Event</button>
+<table class="table table-striped">
+    <tr>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Place</th>
+        <th></th>
+    </tr>
+    <?php foreach ($this->person->getEvents() as $event): ?>
+        <tr>
+            <td><?= $event->getType()->getName() ?></td>
+            <td><?= $event->getDate() ?></td>
+            <td><?= $event->getPlace() ?></td>
+            <td></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
