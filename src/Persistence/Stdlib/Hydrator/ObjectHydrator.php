@@ -35,8 +35,16 @@ class ObjectHydrator extends DoctrineObject implements HydratorInterface, Strate
             return null;
         }
 
-        if (isset($value['id']) && empty($value['id'])) {
-            unset($value['id']);
+        if (is_array($value)) {
+            foreach ($value as $id => $val) {
+                if (empty($val)) {
+                    unset($value[$id]);
+                }
+            }
+
+            if (empty($value)) {
+                return null;
+            }
         }
 
         return parent::toOne($target, $value);

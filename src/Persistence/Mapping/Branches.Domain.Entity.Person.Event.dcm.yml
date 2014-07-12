@@ -30,3 +30,4 @@ Branches\Domain\Entity\Person\Event:
       joinColumn:
         name: place_id
         referencedColumnName: id
+      cascade: ["persist", "merge"]

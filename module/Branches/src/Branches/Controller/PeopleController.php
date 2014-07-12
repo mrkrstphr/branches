@@ -95,7 +95,6 @@ class PeopleController extends AbstractActionController
             if ($this->eventForm->isValid()) {
                 $this->eventRepositoy
                     ->persist($event)
-                    ->persist($event->getPlace())
                     ->flush();
 
                 return new JsonModel(['success' => true]);

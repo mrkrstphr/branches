@@ -116,10 +116,10 @@ class Event extends AbstractEntity
     }
 
     /**
-     * @param \Branches\Domain\Entity\Place\Place $place
+     * @param \Branches\Domain\Entity\Place\Place|null $place
      * @return $this
      */
-    public function setPlace($place)
+    public function setPlace($place = null)
     {
         $this->place = $place;
         return $this;
