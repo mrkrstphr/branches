@@ -10,4 +10,9 @@ use Branches\Domain\Repository\RepositoryInterface;
  */
 interface PlaceRepositoryInterface extends RepositoryInterface
 {
+    /**
+     * @param string $query
+     * @return array
+     */
+    public function getPlacesLike($query);
 }

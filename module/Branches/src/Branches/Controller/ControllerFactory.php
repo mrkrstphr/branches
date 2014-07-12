@@ -63,6 +63,9 @@ class ControllerFactory implements FactoryInterface
      */
     public function createBranchesControllerPlaces(ControllerManager $cm)
     {
-        return new PlacesController();
+        return new PlacesController(
+            $cm->getServiceLocator()->get('Branches\Repository\Place\PlaceRepository'),
+            $cm->getServiceLocator()->get('Branches\Service\Json\Serializer')
+        );
     }
 }

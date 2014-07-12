@@ -12,7 +12,7 @@ $form->setAttribute(
 <?= $this->formHidden($this->form->get('event')->get('place')->get('id')) ?>
 <?= $this->standardSelectElement($this->form, 'event.type.id') ?>
 <?= $this->standardTextElement($this->form, 'event.date') ?>
-<?= $this->standardTextElement($this->form, 'event.place.description') ?>
+<?= $this->standardTextElement($this->form, 'event.place.description', ['class' => 'typeahead']) ?>
 
 <?php /*
     <div class="form-group">
@@ -38,19 +38,23 @@ $form->setAttribute(
 <?= $this->form()->closeTag() ?>
 
 <script type="text/javascript">
-    var placesTemplate = [
-        '<div><strong>{{description}}</strong></div>',
-        '<div>{{address1}}, {{city}}, {{state_province}}, {{postal_code}}</div>'
-    ].join('');
-
-    $('form#person-event-form .typeahead').typeahead(null, {
-        name: 'places',
-        displayKey: 'description',
-        template: placesTemplate,
-        source: places.ttAdapter()
-    });
-
-    $('form#person-event-form .typeahead').bind('typeahead:selected', function(obj, datum, name) {
-        $('input[name="event[place][id]"]').val(datum.id);
+    $('form#person-event-form .typeahead').autocomplete({
+        source: function(request, response) {
+            $.getJSON('/places/list-json', {q: request.term}, function(data) {
+                response($.map(data, function(m) {
+                    return {
+                        id: m.id,
+                        label: m.description,
+                        value: m.description
+                    };
+                }));
+            });
+        },
+        minLength: 2,
+        select: function( event, ui ) {
+            $('input[name="event[place][id]"]').val(ui.item.id);
+        }
+    }).on('keypress', function () {
+        $('input[name="event[place][id]"]').val('');
     });
 </script>

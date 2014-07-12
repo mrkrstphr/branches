@@ -68,6 +68,9 @@ class PeopleController extends AbstractActionController
         ];
     }
 
+    /**
+     * @return ViewModel
+     */
     public function reloadEventsAction()
     {
         $id = $this->params()->fromRoute('id');
@@ -81,6 +84,9 @@ class PeopleController extends AbstractActionController
         return $viewModel;
     }
 
+    /**
+     * @return JsonModel|ViewModel
+     */
     public function addEventAction()
     {
         $id = $this->params()->fromRoute('id');

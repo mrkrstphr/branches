@@ -7,7 +7,7 @@ use Zend\Form\View\Helper\AbstractHelper;
 
 class StandardTextElement extends AbstractHelper
 {
-    public function __invoke(Form $form, $path)
+    public function __invoke(Form $form, $path, array $attributes = [])
     {
         $paths = explode('.', $path);
 
@@ -17,7 +17,9 @@ class StandardTextElement extends AbstractHelper
             $element = $element->get($path);
         }
 
-        $element->setAttribute('class', 'form-control');
+        $classes = 'form-control' . (!empty($attributes['class']) ? ' ' . $attributes['class'] : '');
+
+        $element->setAttribute('class', $classes);
 
         $html = '<div class="form-group">' .
             $this->getView()->formLabel($element) .
