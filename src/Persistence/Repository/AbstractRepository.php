@@ -68,4 +68,30 @@ abstract class AbstractRepository implements RepositoryInterface
     {
         return $this->entityManager->find($this->entityClass, $id);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getBy(array $conditions = [], array $sort = [], $limit = null, $offset = null)
+    {
+        return $this->entityManager->getRepository($this->entityClass)->findBy($conditions, $sort, $limit, $offset);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function persist($entity)
+    {
+        $this->entityManager->persist($entity);
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function flush()
+    {
+        $this->entityManager->flush();
+        return $this;
+    }
 }

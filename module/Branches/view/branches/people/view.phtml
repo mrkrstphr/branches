@@ -16,7 +16,7 @@
 
 <ul class="nav nav-tabs" role="tablist">
     <li class="active">
-        <a href="#events" role="tab" data-toggle="tab">
+        <a href="#person-events" role="tab" data-toggle="tab">
             <i class="fa fa-calendar"></i>
             Events <span class="badge"><?= count($this->person->getEvents()) ?></span></a>
     </li>
@@ -43,24 +43,8 @@
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane active" id="events">
-        <button class="btn btn-primary">Add Event</button>
-        <table class="table table-striped">
-            <tr>
-                <th>Type</th>
-                <th>Date</th>
-                <th>Location</th>
-                <th></th>
-            </tr>
-            <?php foreach ($this->person->getEvents() as $event): ?>
-                <tr>
-                    <td><?= $event->getType()->getName() ?></td>
-                    <td><?= $event->getDate() ?></td>
-                    <td><?= $event->getPlace() ?></td>
-                    <td></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
+    <div class="tab-pane active" id="person-events">
+        <?= $this->partial('branches/people/partial/events.phtml', ['person' => $this->person]) ?>
     </div>
     <div class="tab-pane" id="attributes">
         Attributes Grid Goes Here
@@ -152,4 +136,8 @@
         </div>
     </div>
     <?php endforeach; ?>
+</div>
+
+<div id="add-event" class="automodal" data-modal-id="add-event-modal" data-modal-title="Events" data-url="/people/add-event/<?= $this->person->getId() ?>" data-on-save="onEventSave">
+    SOME FOOBAR!
 </div>

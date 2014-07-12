@@ -15,19 +15,12 @@ class RepositoryFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $sl)
     {
         $class = func_get_arg(2);
-        $factory = 'create' . func_get_arg(1);
+        $class = str_replace('Branches\\', 'Branches\\Persistence\\', $class);
 
-        if (method_exists($this, $factory)) {
-            return $this->$factory($sl);
+        if (class_exists($class, true)) {
+            return new $class($sl->get('Doctrine\ORM\EntityManager'));
         }
 
         throw new RuntimeException('Unknown Repository requested: ' . $class);
-    }
-
-    public function createBranchesRepositoryPersonRepository(ServiceLocatorInterface $sl)
-    {
-        return new PersonRepository(
-            $sl->get('Doctrine\ORM\EntityManager')
-        );
     }
 }

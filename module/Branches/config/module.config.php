@@ -37,6 +37,29 @@ return [
                     ],
                 ],
             ],
+            'places' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/places',
+                    'defaults' => [
+                        'controller' => 'Branches\Controller\Places',
+                        'action' => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'default' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/[:action[/:id]]',
+                            'constraints' => [
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id' => '[0-9]*',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     'service_manager' => [
@@ -60,6 +83,7 @@ return [
         'doctype' => 'HTML5',
         'not_found_template' => 'error/file-not-found',
         'exception_template' => 'error/index',
+        'strategies' => ['ViewJsonStrategy'],
         'template_map' => [
             'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',

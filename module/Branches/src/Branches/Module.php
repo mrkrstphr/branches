@@ -39,4 +39,12 @@ class Module
     {
         return include __DIR__ . '/../../config/service.config.php';
     }
+
+    /**
+     * @return array
+     */
+    public function getViewHelperCOnfig()
+    {
+        return include __DIR__ . '/../../config/view.helper.config.php';
+    }
 }

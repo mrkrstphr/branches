@@ -2,6 +2,8 @@
 
 namespace Branches\Controller;
 
+use Branches\Form\People\EventForm;
+use Branches\Persistence\Stdlib\Hydrator\ObjectHydrator;
 use RUntimeException;
 use Zend\Mvc\Controller\ControllerManager;
 use Zend\ServiceManager\FactoryInterface;
@@ -43,8 +45,24 @@ class ControllerFactory implements FactoryInterface
      */
     public function createBranchesControllerPeople(ControllerManager $cm)
     {
+        $hydrator = new ObjectHydrator($cm->getServiceLocator()->get('Doctrine\ORM\EntityManager'));
+        $form = new EventForm($cm->getServiceLocator()->get('Branches\Repository\Event\PersonEventTypeRepository'));
+        $form->setHydrator($hydrator);
+
         return new PeopleController(
-            $cm->getServiceLocator()->get('Branches\Repository\PersonRepository')
+            $form,
+            $cm->getServiceLocator()->get('Branches\Repository\PersonRepository'),
+            $cm->getServiceLocator()->get('Branches\Repository\Person\EventRepository'),
+            $cm->getServiceLocator()->get('Branches\Repository\Place\PlaceRepository')
         );
+    }
+
+    /**
+     * @param ControllerManager $cm
+     * @return DashboardController
+     */
+    public function createBranchesControllerPlaces(ControllerManager $cm)
+    {
+        return new PlacesController();
     }
 }
