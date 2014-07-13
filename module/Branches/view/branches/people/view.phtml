@@ -138,6 +138,8 @@
     <?php endforeach; ?>
 </div>
 
+<script type="text/javascript">var personId = <?= $this->person->getId() ?>;</script>
+
 <div id="add-event" class="automodal" data-modal-id="add-event-modal"
      data-modal-title="Events" data-url="/people/events/add/<?= $this->person->getId() ?>"
      data-on-save="onEventSave"></div>

@@ -1,12 +1,12 @@
 function onEventSave() {
     $.ajax({
-        url: '/people/events/add/1441',
+        url: '/people/events/add/' + personId,
         method: 'post',
         data: $('form#person-event-form').serialize(),
         success: function (result) {
             if (typeof(result) == 'object' && 'success' in result) {
                 if (result.success == true) {
-                    $('#person-events').load('/people/events/index/1441', function () {
+                    $('#person-events').load('/people/events/index/' + personId, function () {
                         $('a[href="#person-events"] span.badge').html(
                             $('div#person-events tr').length - 1
                         );
@@ -23,13 +23,13 @@ function onEventSave() {
 
 function onAttributeSave() {
     $.ajax({
-        url: '/people/attributes/add/1441',
+        url: '/people/attributes/add/' + personId,
         method: 'post',
         data: $('form#person-attribute-form').serialize(),
         success: function (result) {
             if (typeof(result) == 'object' && 'success' in result) {
                 if (result.success == true) {
-                    $('#person-attributes').load('/people/attributes/index/1441', function () {
+                    $('#person-attributes').load('/people/attributes/index/' + personId, function () {
                         $('a[href="#person-attributes"] span.badge').html(
                             $('div#person-attributes tr').length - 1
                         );
