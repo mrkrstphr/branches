@@ -15,23 +15,51 @@ return [
                 ],
             ],
             'people' => [
-                'type'    => 'Literal',
+                'type' => 'Literal',
                 'options' => [
-                    'route'    => '/people',
+                    'route' => '/people',
                     'defaults' => [
                         'controller' => 'Branches\Controller\People',
-                        'action'        => 'index',
+                        'action' => 'index',
                     ],
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
-                    'default' => [
-                        'type'    => 'Segment',
+                    'attributes' => [
+                        'type' => 'Segment',
                         'options' => [
-                            'route'    => '/[:action[/:id]]',
+                            'route' => '/attributes[/:action[/:id]]',
                             'constraints' => [
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'id'     => '[0-9]*',
+                                'id' => '[0-9]*',
+                            ],
+                            'defaults' => [
+                                'controller' => 'Branches\Controller\People\Attributes',
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'events' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/events[/:action[/:id]]',
+                            'constraints' => [
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id' => '[0-9]*',
+                            ],
+                            'defaults' => [
+                                'controller' => 'Branches\Controller\People\Events',
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'default' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/[:action[/:id]]',
+                            'constraints' => [
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id' => '[0-9]*',
                             ],
                         ],
                     ],
@@ -71,7 +99,7 @@ return [
         'locale' => 'en_US',
         'translation_file_patterns' => [
             [
-                'type'     => 'gettext',
+                'type' => 'gettext',
                 'base_dir' => __DIR__ . '/../language',
                 'pattern'  => '%s.mo',
             ],

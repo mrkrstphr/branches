@@ -22,6 +22,9 @@ Branches\Domain\Entity\Person\Person:
     events:
       targetEntity: Branches\Domain\Entity\Person\Event
       mappedBy: person
+    attributes:
+      targetEntity: Branches\Domain\Entity\Person\Attribute
+      mappedBy: person
   manyToMany:
     relationships:
       targetEntity: Branches\Domain\Entity\Family\Family

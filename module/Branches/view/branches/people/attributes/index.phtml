@@ -1,0 +1,19 @@
+<button class="btn btn-primary" data-toggle="modal" data-target="#add-attribute-modal">Add Attribute</button>
+<table class="table table-striped">
+    <tr>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Place</th>
+        <th></th>
+    </tr>
+    <?php foreach ($this->person->getAttributes() as $attribute): ?>
+        <tr>
+            <td><?= $attribute->getType()->getName() ?></td>
+            <td><?= $attribute->getDescription() ?></td>
+            <td><?= $attribute->getDate() ?></td>
+            <td><?= $attribute->getPlace() ?></td>
+            <td></td>
+        </tr>
+    <?php endforeach; ?>
+</table>

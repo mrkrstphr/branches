@@ -2,9 +2,12 @@
 
 namespace Branches\Controller;
 
+use Branches\Controller\People\AttributesController;
+use Branches\Controller\People\EventsController;
+use Branches\Form\People\AttributeForm;
 use Branches\Form\People\EventForm;
 use Branches\Persistence\Stdlib\Hydrator\ObjectHydrator;
-use RUntimeException;
+use RuntimeException;
 use Zend\Mvc\Controller\ControllerManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -45,15 +48,40 @@ class ControllerFactory implements FactoryInterface
      */
     public function createBranchesControllerPeople(ControllerManager $cm)
     {
+        return new PeopleController(
+            $cm->getServiceLocator()->get('Branches\Repository\PersonRepository')
+        );
+    }
+
+    /**
+     * @param ControllerManager $cm
+     * @return AttributesController
+     */
+    public function createBranchesControllerPeopleAttributes(ControllerManager $cm)
+    {
+        $hydrator = new ObjectHydrator($cm->getServiceLocator()->get('Doctrine\ORM\EntityManager'));
+        $form = new AttributeForm($cm->getServiceLocator()->get('Branches\Repository\Person\AttributeTypeRepository'));
+        $form->setHydrator($hydrator);
+
+        return new AttributesController(
+            $cm->getServiceLocator()->get('Branches\Repository\PersonRepository'),
+            $form
+        );
+    }
+
+    /**
+     * @param ControllerManager $cm
+     * @return AttributesController
+     */
+    public function createBranchesControllerPeopleEvents(ControllerManager $cm)
+    {
         $hydrator = new ObjectHydrator($cm->getServiceLocator()->get('Doctrine\ORM\EntityManager'));
         $form = new EventForm($cm->getServiceLocator()->get('Branches\Repository\Event\PersonEventTypeRepository'));
         $form->setHydrator($hydrator);
 
-        return new PeopleController(
-            $form,
+        return new EventsController(
             $cm->getServiceLocator()->get('Branches\Repository\PersonRepository'),
-            $cm->getServiceLocator()->get('Branches\Repository\Person\EventRepository'),
-            $cm->getServiceLocator()->get('Branches\Repository\Place\PlaceRepository')
+            $form
         );
     }
 

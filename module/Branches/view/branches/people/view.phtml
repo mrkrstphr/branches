@@ -21,9 +21,9 @@
             Events <span class="badge"><?= count($this->person->getEvents()) ?></span></a>
     </li>
     <li>
-        <a href="#attributes" role="tab" data-toggle="tab">
+        <a href="#person-attributes" role="tab" data-toggle="tab">
             <i class="fa fa-heart"></i>
-            Attributes <span class="badge">??</span></a>
+            Attributes <span class="badge"><?= count($this->person->getAttributes()) ?></span></a>
     </li>
     <li>
         <a href="#parents" role="tab" data-toggle="tab">
@@ -44,10 +44,10 @@
 
 <div class="tab-content">
     <div class="tab-pane active" id="person-events">
-        <?= $this->partial('branches/people/partial/events.phtml', ['person' => $this->person]) ?>
+        <?= $this->partial('branches/people/events/index', ['person' => $this->person]) ?>
     </div>
-    <div class="tab-pane" id="attributes">
-        Attributes Grid Goes Here
+    <div class="tab-pane" id="person-attributes">
+        <?= $this->partial('branches/people/attributes/index', ['person' => $this->person]) ?>
     </div>
     <div class="tab-pane" id="parents">
         <table class="table table-striped">
@@ -138,6 +138,10 @@
     <?php endforeach; ?>
 </div>
 
-<div id="add-event" class="automodal" data-modal-id="add-event-modal" data-modal-title="Events" data-url="/people/add-event/<?= $this->person->getId() ?>" data-on-save="onEventSave">
-    SOME FOOBAR!
-</div>
+<div id="add-event" class="automodal" data-modal-id="add-event-modal"
+     data-modal-title="Events" data-url="/people/events/add/<?= $this->person->getId() ?>"
+     data-on-save="onEventSave"></div>
+
+<div id="add-attribute" class="automodal" data-modal-id="add-attribute-modal"
+     data-modal-title="Attributes" data-url="/people/attributes/add/<?= $this->person->getId() ?>"
+     data-on-save="onAttributeSave"></div>

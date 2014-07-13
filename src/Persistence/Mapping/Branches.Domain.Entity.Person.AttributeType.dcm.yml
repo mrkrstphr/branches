@@ -1,0 +1,10 @@
+Branches\Domain\Entity\Person\AttributeType:
+  type: entity
+  table: person_attribute_types
+  id:
+    id:
+      type: bigint
+      generator:
+        strategy: IDENTITY
+  fields:
+    name:

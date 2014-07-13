@@ -1,0 +1,61 @@
+<?php
+$form = $this->form;
+$form->prepare();
+$form->setAttribute('method', 'post');
+$form->setAttribute(
+    'action',
+    $this->url('people/attributes', ['action' => 'add', 'id' => $this->id])
+);
+?>
+
+<?= $this->form()->openTag($this->form) ?>
+<?= $this->formHidden($this->form->get('attribute')->get('place')->get('id')) ?>
+<?= $this->standardSelectElement($this->form, 'attribute.type.id') ?>
+<?= $this->standardTextElement($this->form, 'attribute.description') ?>
+<?= $this->standardTextElement($this->form, 'attribute.date') ?>
+<?= $this->standardTextElement($this->form, 'attribute.place.description', ['class' => 'typeahead']) ?>
+
+<?php /*
+    <div class="form-group">
+        <?= $this->standardFormElement('event.type.id') ?>
+        <?= $this->formLabel($this->form->get('event')->get('type')->get('id')) ?>
+        <?= $this->formSelect($this->form->get('event')->get('type')->get('id')->setAttribute('class', 'form-control')) ?>
+        <?= $this->formElementErrors($this->form->get('event')->get('type')->get('id'), ['class' => 'form-errors']) ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formLabel($this->form->get('event')->get('date')) ?>
+        <?= $this->formText($this->form->get('event')->get('date')->setAttribute('class', 'form-control')) ?>
+        <?= $this->formElementErrors($this->form->get('event')->get('date'), ['class' => 'form-errors']) ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formHidden($this->form->get('event')->get('place')->get('id')) ?>
+        <?= $this->formLabel($this->form->get('event')->get('place')->get('description')) ?>
+        <?= $this->formText($this->form->get('event')->get('place')->get('description')
+                ->setAttribute('class', 'form-control typeahead')) ?>
+        <?= $this->formElementErrors($this->form->get('event')->get('place')->get('description'), ['class' => 'form-errors']) ?>
+    </div>
+ */ ?>
+
+<?= $this->form()->closeTag() ?>
+
+<script type="text/javascript">
+    $('form#person-event-form .typeahead').autocomplete({
+        source: function(request, response) {
+            $.getJSON('/places/list-json', {q: request.term}, function(data) {
+                response($.map(data, function(m) {
+                    return {
+                        id: m.id,
+                        label: m.description,
+                        value: m.description
+                    };
+                }));
+            });
+        },
+        minLength: 2,
+        select: function( event, ui ) {
+            $('input[name="attribute[place][id]"]').val(ui.item.id);
+        }
+    }).on('keypress', function () {
+        $('input[name="attribute[place][id]"]').val('');
+    });
+</script>

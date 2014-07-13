@@ -51,5 +51,8 @@
     <script src="/js/vendor/bootstrap.min.js"></script>
     <script src="/js/application/app.js"></script>
     <script src="/js/vendor/typeahead.bundle.min.js"></script>
+
+    <?= $this->viewBasedJs($this->viewModel()->getCurrent()) ?>
+    <?= $this->headScript() ?>
 </body>
 </html>

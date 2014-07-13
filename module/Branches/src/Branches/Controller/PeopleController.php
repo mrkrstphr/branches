@@ -2,14 +2,8 @@
 
 namespace Branches\Controller;
 
-use Branches\Domain\Entity\Person\Event;
-use Branches\Domain\Repository\Person\EventRepositoryInterface;
 use Branches\Domain\Repository\PersonRepositoryInterface;
-use Branches\Form\People\EventForm;
-use Branches\Domain\Repository\Place\PlaceRepositoryInterface;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\JsonModel;
-use Zend\View\Model\ViewModel;
 
 /**
  * Class PeopleController
@@ -18,41 +12,15 @@ use Zend\View\Model\ViewModel;
 class PeopleController extends AbstractActionController
 {
     /**
-     * @var EventForm
-     */
-    protected $eventForm;
-
-    /**
      * @var PersonRepositoryInterface
      */
     protected $personRepository;
 
     /**
-     * @var EventRepositoryInterface
-     */
-    protected $eventRepositoy;
-
-    /**
-     * @var PlaceRepositoryInterface
-     */
-    protected $placeRepository;
-
-    /**
-     * @param EventForm $eventForm
      * @param PersonRepositoryInterface $personRepository
-     * @param EventRepositoryInterface $eventRepository
-     * @param PlaceRepositoryInterface $placeRepository
      */
-    public function __construct(
-        EventForm $eventForm,
-        PersonRepositoryInterface $personRepository,
-        EventRepositoryInterface $eventRepository,
-        PlaceRepositoryInterface $placeRepository
-    ) {
-        $this->eventForm = $eventForm;
+    public function __construct(PersonRepositoryInterface $personRepository) {
         $this->personRepository = $personRepository;
-        $this->eventRepositoy = $eventRepository;
-        $this->placeRepository = $placeRepository;
     }
 
     /**
@@ -66,50 +34,5 @@ class PeopleController extends AbstractActionController
         return [
             'person' => $person
         ];
-    }
-
-    /**
-     * @return ViewModel
-     */
-    public function reloadEventsAction()
-    {
-        $id = $this->params()->fromRoute('id');
-        $person = $this->personRepository->getById($id);
-
-        $viewModel = new ViewModel(['person' => $person]);
-        $viewModel
-            ->setTemplate('branches/people/partial/events')
-            ->setTerminal(true);
-
-        return $viewModel;
-    }
-
-    /**
-     * @return JsonModel|ViewModel
-     */
-    public function addEventAction()
-    {
-        $id = $this->params()->fromRoute('id');
-        $person = $this->personRepository->getById($id);
-
-        $event = (new Event())->setPerson($person);
-
-        $this->eventForm->bind($event);
-
-        if ($this->getRequest()->isPost()) {
-            $this->eventForm->setData($this->request->getPost());
-            if ($this->eventForm->isValid()) {
-                $this->eventRepositoy
-                    ->persist($event)
-                    ->flush();
-
-                return new JsonModel(['success' => true]);
-            }
-        }
-
-        return (new ViewModel([
-            'id' => $id,
-            'form' => $this->eventForm
-        ]))->setTerminal(true);
     }
 }

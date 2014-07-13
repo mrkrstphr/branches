@@ -1,4 +1,3 @@
-var places = null;
 $(document).ready(function() {
     $('.automodal').each(function (index, modal) {
         var $close = $('<button>')
@@ -73,41 +72,4 @@ $(document).ready(function() {
             });
         }
     });
-
-    places = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('description'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        limit: 10,
-        remote: {
-            url: '/places/list-json',
-            filter: function(list) {
-                return $.map(list, function(place) { return place; });
-            }
-        }
-    });
-
-    places.initialize();
 });
-
-function onEventSave() {
-    $.ajax({
-        url: '/people/add-event/1441',
-        method: 'post',
-        data: $('form#person-event-form').serialize(),
-        success: function (result) {
-            if (typeof(result) == 'object' && 'success' in result) {
-                if (result.success == true) {
-                    $('#person-events').load('/people/reload-events/1441', function () {
-                        $('a[href="#person-events"] span.badge').html(
-                            $('div#person-events tr').length - 1
-                        );
-                    });
-                    $('#add-event-modal').modal('hide');
-                }
-                return;
-            }
-
-            $('#add-event').html(result);
-        }
-    });
-}
