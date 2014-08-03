@@ -3,6 +3,7 @@
 namespace Branches\Domain\Entity\Person;
 
 use Branches\Domain\Entity\AbstractEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Event
@@ -34,6 +35,19 @@ class Event extends AbstractEntity
      * @var \Branches\Domain\Entity\Place\Place
      */
     protected $place;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    protected $sources;
+
+    /**
+     * Set us up the class!
+     */
+    public function __construct()
+    {
+        $this->sources = new ArrayCollection();
+    }
 
     /**
      * @return Person
@@ -122,6 +136,24 @@ class Event extends AbstractEntity
     public function setPlace($place = null)
     {
         $this->place = $place;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSources()
+    {
+        return $this->sources;
+    }
+
+    /**
+     * @param ArrayCollection $sources
+     * @return $this
+     */
+    public function setSources($sources)
+    {
+        $this->sources = $sources;
         return $this;
     }
 }

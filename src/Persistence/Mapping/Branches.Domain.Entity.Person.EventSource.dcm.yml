@@ -1,0 +1,23 @@
+Branches\Domain\Entity\Person\EventSource:
+  type: entity
+  table: person_event_sources
+  id:
+    id:
+      type: bigint
+      generator:
+        strategy: IDENTITY
+  fields:
+    page:
+      nullable: true
+  manyToOne:
+    event:
+      targetEntity: Branches\Domain\Entity\Person\Event
+      inversedBy: sources
+      joinColumn:
+        name: person_event_id
+        referencedColumnName: id
+    source:
+      targetEntity: Branches\Domain\Entity\Source\Source
+      joinColumn:
+        name: source_id
+        referencedColumnName: id

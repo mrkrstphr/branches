@@ -1,0 +1,10 @@
+Branches\Domain\Entity\Source\Source:
+  type: entity
+  table: sources
+  id:
+    id:
+      type: bigint
+      generator:
+        strategy: IDENTITY
+  fields:
+    name:

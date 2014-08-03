@@ -3,6 +3,7 @@
 namespace Branches\Controller\People;
 
 use Branches\Domain\Entity\Person\Event;
+use Branches\Domain\Repository\Person\EventRepositoryInterface;
 use Branches\Domain\Repository\PersonRepositoryInterface;
 use Branches\Form\People\EventForm;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -21,17 +22,27 @@ class EventsController extends AbstractActionController
     protected $personRepository;
 
     /**
+     * @var EventRepositoryInterface
+     */
+    protected $eventRepository;
+
+    /**
      * @var EventForm
      */
     protected $eventForm;
 
     /**
      * @param PersonRepositoryInterface $personRepository
+     * @param EventRepositoryInterface $eventRepository
      * @param EventForm $eventForm
      */
-    public function __construct(PersonRepositoryInterface $personRepository, EventForm $eventForm)
-    {
+    public function __construct(
+        PersonRepositoryInterface $personRepository,
+        EventRepositoryInterface $eventRepository,
+        EventForm $eventForm
+    ) {
         $this->personRepository = $personRepository;
+        $this->eventRepository = $eventRepository;
         $this->eventForm = $eventForm;
     }
 
@@ -60,8 +71,8 @@ class EventsController extends AbstractActionController
      */
     public function addAction()
     {
-        $id = $this->params()->fromRoute('id');
-        $person = $this->personRepository->getById($id);
+        $personId = $this->params()->fromRoute('id');
+        $person = $this->personRepository->getById($personId);
 
         $event = (new Event())->setPerson($person);
 
@@ -79,8 +90,31 @@ class EventsController extends AbstractActionController
         }
 
         return (new ViewModel([
-            'id' => $id,
+            'id' => $personId,
             'form' => $this->eventForm
         ]))->setTerminal(true)->setTemplate('branches/people/events/add');
+    }
+
+    /**
+     * @return ViewModel
+     */
+    public function sourcesAction()
+    {
+        $eventId = $this->params()->fromRoute('id');
+        $event = $this->eventRepository->getById($eventId);
+
+        return (new ViewModel(['event' => $event]))
+            ->setTerminal(true)
+            ->setTemplate('branches/people/events/sources');
+    }
+
+    public function addSourceAction()
+    {
+        $eventId = $this->params()->fromRoute('id');
+
+        return (new ViewModel([
+            'id' => $eventId,
+            //'form' => ???
+        ]))->setTerminal(true)->setTemplate('branches/people/events/add-source');
     }
 }

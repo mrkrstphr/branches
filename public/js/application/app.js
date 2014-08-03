@@ -48,8 +48,11 @@ $(document).ready(function() {
                 $('<button>')
                     .attr({"type": "button", "class": "btn btn-default", "data-dismiss": "modal"})
                     .text('Close')
-            )
-            .append($save);
+            );
+
+        if ($(modal).data('save') == null || $(modal).data('save') == 'true') {
+            $footer.append($save);
+        }
 
         var $modal = $('<div>')
             .attr({"id": $(modal).data('modal-id'), "class": "modal fade"})
@@ -66,10 +69,14 @@ $(document).ready(function() {
 
         var loadUrl = $(modal).data('url');
 
-        if (loadUrl) {
-            $modal.on('show.bs.modal', function() {
+        $modal.on('show.bs.modal', function(e) {
+            var buttonUrl = $(e.relatedTarget).data('url');
+
+            if (buttonUrl) {
+                $(modal).load(buttonUrl);
+            } else if (loadUrl) {
                 $(modal).load(loadUrl);
-            });
-        }
+            }
+        });
     });
 });

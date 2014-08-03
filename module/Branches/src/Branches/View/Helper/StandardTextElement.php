@@ -5,6 +5,10 @@ namespace Branches\View\Helper;
 use Zend\Form\Form;
 use Zend\Form\View\Helper\AbstractHelper;
 
+/**
+ * Class StandardTextElement
+ * @package Branches\View\Helper
+ */
 class StandardTextElement extends AbstractHelper
 {
     public function __invoke(Form $form, $path, array $attributes = [])

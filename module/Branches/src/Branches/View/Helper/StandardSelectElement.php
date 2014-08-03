@@ -5,6 +5,10 @@ namespace Branches\View\Helper;
 use Zend\Form\Form;
 use Zend\Form\View\Helper\AbstractHelper;
 
+/**
+ * Class StandardSelectElement
+ * @package Branches\View\Helper
+ */
 class StandardSelectElement extends AbstractHelper
 {
     public function __invoke(Form $form, $path)
