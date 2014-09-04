@@ -11,6 +11,8 @@ interface RepositoryInterface
     public function getById($id);
     public function getBy(array $conditions = [], array $sort = [], $limit = null, $offset = null);
 
+    public function getList($key, $label);
+
     /**
      * @param mixed $entity
      * @return $this

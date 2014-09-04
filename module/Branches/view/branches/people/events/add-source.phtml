@@ -1,1 +1,20 @@
-Add source todo FOO
+<?php
+$this->form->prepare();
+$this->form->setAttribute('method', 'post');
+$this->form->setAttribute('data-id', $this->id);
+$this->form->setAttribute(
+    'action',
+    $this->url('people/events', ['action' => 'add-source', 'id' => $this->id])
+);
+?>
+
+<?= $this->form()->openTag($this->form) ?>
+<?= $this->standardSelectElement($this->form, 'citation.source.id') ?>
+<?= $this->standardTextElement($this->form, 'citation.page') ?>
+<?= $this->standardTextAreaElement($this->form, 'citation.text') ?>
+
+<?= $this->form()->closeTag() ?>
+
+<script type="text/javascript">
+
+</script>

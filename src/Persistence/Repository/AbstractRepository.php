@@ -2,6 +2,7 @@
 
 namespace Branches\Persistence\Repository;
 
+use Doctrine\DBAL\Query\QueryBuilder;
 use RuntimeException;
 use Branches\Domain\Repository\RepositoryInterface;
 use Doctrine\ORM\EntityManager;
@@ -75,6 +76,27 @@ abstract class AbstractRepository implements RepositoryInterface
     public function getBy(array $conditions = [], array $sort = [], $limit = null, $offset = null)
     {
         return $this->entityManager->getRepository($this->entityClass)->findBy($conditions, $sort, $limit, $offset);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getList($key, $label)
+    {
+        $builder = $this->getEntityManager()->createQueryBuilder();
+        $builder->select('a.' . $key, 'a.' . $label)
+            ->from($this->entityClass, 'a')
+            ->orderBy('a.' . $label);
+
+        $rows = $builder->getQuery()->getArrayResult();
+
+        $results = [];
+
+        foreach ($rows as $row) {
+            $results[$row[$key]] = $row[$label];
+        }
+
+        return $results;
     }
 
     /**

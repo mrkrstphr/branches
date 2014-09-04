@@ -3,7 +3,12 @@
         <th>Type</th>
         <th>Date</th>
         <th>Place</th>
-        <th></th>
+        <th>
+            <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#add-event-modal">
+                <i class="fa fa-plus-circle"></i> &nbsp;
+                Add Event
+            </button>
+        </th>
     </tr>
     <?php foreach ($this->person->getEvents() as $event): ?>
         <tr>
@@ -34,5 +39,4 @@
     <?php endforeach; ?>
 </table>
 
-<button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#add-event-modal">Add Event</button>
 <div class="clearfix"></div>

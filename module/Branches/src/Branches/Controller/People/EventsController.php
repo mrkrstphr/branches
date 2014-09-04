@@ -5,6 +5,7 @@ namespace Branches\Controller\People;
 use Branches\Domain\Entity\Person\Event;
 use Branches\Domain\Repository\Person\EventRepositoryInterface;
 use Branches\Domain\Repository\PersonRepositoryInterface;
+use Branches\Form\People\Event\SourceCitationForm;
 use Branches\Form\People\EventForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -32,18 +33,26 @@ class EventsController extends AbstractActionController
     protected $eventForm;
 
     /**
+     * @var SourceCitationForm
+     */
+    protected $sourceForm;
+
+    /**
      * @param PersonRepositoryInterface $personRepository
      * @param EventRepositoryInterface $eventRepository
      * @param EventForm $eventForm
+     * @param SourceCitationForm $sourceForm
      */
     public function __construct(
         PersonRepositoryInterface $personRepository,
         EventRepositoryInterface $eventRepository,
-        EventForm $eventForm
+        EventForm $eventForm,
+        SourceCitationForm $sourceForm
     ) {
         $this->personRepository = $personRepository;
         $this->eventRepository = $eventRepository;
         $this->eventForm = $eventForm;
+        $this->sourceForm = $sourceForm;
     }
 
     /**
@@ -112,9 +121,26 @@ class EventsController extends AbstractActionController
     {
         $eventId = $this->params()->fromRoute('id');
 
+        $event = $this->eventRepository->getById($eventId);
+
+        if ($this->getRequest()->isPost()) {
+            $this->sourceForm->setData($this->request->getPost());
+            if ($this->sourceForm->isValid()) {
+                $citation = $this->sourceForm->getObject();
+                $citation->setEvent($event);
+
+                $this->eventRepository->persist($citation)->flush();
+
+                return new JsonModel([
+                    'success' => true,
+                    'sources' => count($event->getSources())
+                ]);
+            }
+        }
+
         return (new ViewModel([
             'id' => $eventId,
-            //'form' => ???
+            'form' => $this->sourceForm
         ]))->setTerminal(true)->setTemplate('branches/people/events/add-source');
     }
 }

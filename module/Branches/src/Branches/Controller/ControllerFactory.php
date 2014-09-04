@@ -82,7 +82,8 @@ class ControllerFactory implements FactoryInterface
         return new EventsController(
             $cm->getServiceLocator()->get('Branches\Repository\PersonRepository'),
             $cm->getServiceLocator()->get('Branches\Repository\Person\EventRepository'),
-            $form
+            $form,
+            $cm->getServiceLocator()->get('Branches\Form\SourceCitation')
         );
     }
 

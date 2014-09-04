@@ -10,10 +10,18 @@
             <td><?= $source->getSource()->getName() ?></td>
             <td><?= $source->getPage() ?></td>
             <td>???</td>
-            <td></td>
+            <td>
+                <div class="btn-toolbar pull-right" role="toolbar">
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="event-sources btn btn-success">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </div>
+                </div>
+            </td>
         </tr>
     <?php endforeach; ?>
 </table>
-
-<!--<button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#add-event-modal">Add Event</button>-->
-<!--<div class="clearfix"></div>-->
