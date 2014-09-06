@@ -11,6 +11,7 @@
         "zendframework/zend-developer-tools": "0.0.*",
         "doctrine/collections": "1.*",
         "doctrine/doctrine-orm-module": "0.8.*",
+        "mrkrstphr/php-gedcom": "dev-streaming-parser",
         "symfony/yaml": "2.5.*",
         "jms/serializer": "0.*"
     }
