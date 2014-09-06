@@ -2,10 +2,18 @@
     <h2><?= $this->escapeHtml($this->person->getDisplayName()) ?></h2>
     <?php if ($this->person->hasParents()): ?>
     <p>
-        Son of
-        <?= $this->person->getPreferredParent(0)->getDisplayName() ?>
+        <?= $this->person->getGender() == 'F' ? 'Daughter' : 'Son' ?> of
+        <?php if ($this->person->getPreferredParent(0)): ?>
+        <a href="/people/view/<?= $this->person->getPreferredParent(0)->getId() ?>">
+            <?= $this->person->getPreferredParent(0)->getDisplayName() ?></a>
+        <?php endif; ?>
+        <?php if ($this->person->getPreferredParent(0) && $this->person->getPreferredParent(1)): ?>
         and
-        <?= $this->person->getPreferredParent(1)->getDisplayName() ?>
+        <?php endif; ?>
+        <?php if ($this->person->getPreferredParent(1)): ?>
+        <a href="/people/view/<?= $this->person->getPreferredParent(1)->getId() ?>">
+            <?= $this->person->getPreferredParent(1)->getDisplayName() ?></a>
+        <?php endif; ?>
     </p>
     <?php endif; ?>
 </div>
@@ -59,8 +67,16 @@
             </tr>
             <?php foreach ($this->person->getParents() as $family): ?>
             <tr>
-                <td><?= $family->getFamily()->getParent(0)->getDisplayName() ?></td>
-                <td><?= $family->getFamily()->getParent(1)->getDisplayName() ?></td>
+                <td>
+                    <?php if ($family->getFamily()->getParent(0)): ?>
+                    <?= $family->getFamily()->getParent(0)->getDisplayName() ?>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <?php if ($family->getFamily()->getParent(1)): ?>
+                    <?= $family->getFamily()->getParent(1)->getDisplayName() ?>
+                    <?php endif; ?>
+                </td>
                 <td><?= ucwords($family->getPedigree()) ?></td>
                 <td>
                     <div class="btn-toolbar" role="toolbar">
@@ -90,7 +106,11 @@
 <ul class="nav nav-tabs" role="tablist">
     <?php foreach ($this->person->getRelationships() as $index => $relationship): ?>
     <li class="<?= $index == 0 ? 'active' : '' ?>">
+        <?php if ($relationship->getPartner($this->person)): ?>
         <a href="#"><?= $relationship->getPartner($this->person)->getDisplayName() ?></a>
+        <?php else: ?>
+        <a href="#">Unknown?</a>
+        <?php endif; ?>
     </li>
     <?php endforeach; ?>
 </ul>

@@ -71,10 +71,6 @@ class Family extends AbstractEntity
             if (count($this->parents) > 1) {
                 return $this->parents[$index];
             }
-
-            if (count($this->parents) == 1 && $index == 1) {
-                return $this->parents[0];
-            }
         }
 
         return null;

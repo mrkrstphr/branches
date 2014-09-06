@@ -169,12 +169,8 @@ class Person extends AbstractEntity
                 }
             }
 
-            if (count($parents) > 1) {
-                return $parents[$index];
-            }
-
-            if (count($parents) == 1 && $index == 1) {
-                return $parents[0];
+            if (count($parents->getFamily()->getParents()) > 1) {
+                return $parents->getFamily()->getParents()[$index];
             }
         }
 
