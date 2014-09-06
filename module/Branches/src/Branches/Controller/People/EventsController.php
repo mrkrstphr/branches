@@ -4,6 +4,7 @@ namespace Branches\Controller\People;
 
 use Branches\Domain\Entity\Person\Event;
 use Branches\Domain\Repository\Person\EventRepositoryInterface;
+use Branches\Domain\Repository\Person\EventSourceRepositoryInterface;
 use Branches\Domain\Repository\PersonRepositoryInterface;
 use Branches\Form\People\Event\SourceCitationForm;
 use Branches\Form\People\EventForm;
@@ -28,6 +29,11 @@ class EventsController extends AbstractActionController
     protected $eventRepository;
 
     /**
+     * @var EventSourceRepositoryInterface
+     */
+    protected $eventSourceRepository;
+
+    /**
      * @var EventForm
      */
     protected $eventForm;
@@ -40,17 +46,20 @@ class EventsController extends AbstractActionController
     /**
      * @param PersonRepositoryInterface $personRepository
      * @param EventRepositoryInterface $eventRepository
+     * @param EventSourceRepositoryInterface $eventSourceRepository
      * @param EventForm $eventForm
      * @param SourceCitationForm $sourceForm
      */
     public function __construct(
         PersonRepositoryInterface $personRepository,
         EventRepositoryInterface $eventRepository,
+        EventSourceRepositoryInterface $eventSourceRepository,
         EventForm $eventForm,
         SourceCitationForm $sourceForm
     ) {
         $this->personRepository = $personRepository;
         $this->eventRepository = $eventRepository;
+        $this->eventSourceRepository = $eventSourceRepository;
         $this->eventForm = $eventForm;
         $this->sourceForm = $sourceForm;
     }
@@ -133,6 +142,7 @@ class EventsController extends AbstractActionController
 
                 return new JsonModel([
                     'success' => true,
+                    'eventId' => $event->getId(),
                     'sources' => count($event->getSources())
                 ]);
             }
@@ -142,5 +152,23 @@ class EventsController extends AbstractActionController
             'id' => $eventId,
             'form' => $this->sourceForm
         ]))->setTerminal(true)->setTemplate('branches/people/events/add-source');
+    }
+
+    /**
+     * @return JsonModel
+     */
+    public function deleteSourceAction()
+    {
+        $source = $this->eventSourceRepository->getById($this->params()->fromRoute('id'));
+        $event = $source->getEvent();
+
+        $this->eventSourceRepository->remove($source)->flush();
+
+        return new JsonModel([
+                'success' => true,
+                'eventId' => $event->getId(),
+                'sources' => count($event->getSources())
+            ]
+        );
     }
 }

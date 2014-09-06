@@ -69,6 +69,26 @@ $(document).ready(function () {
             $eventSourceDialog.modalX('setUrl', '/people/events/add-source/' + eventId);
         }
     });
+
+    $eventSourcesDialog.on('click', 'button.delete-source', function () {
+        var citationId = $(this).data('id');
+
+        bootbox.confirm('Delete this source citation?', function(result) {
+            if (result) {
+                $.ajax({
+                    url: '/people/events/delete-source/' + citationId,
+                    method: 'post',
+                    success: function (result) {
+                        $('button.event-sources[data-id="' + result.eventId + '"] span.badge').text(
+                            result.sources
+                        );
+
+                        $eventSourcesDialog.modalX('reload');
+                    }
+                });
+            }
+        });
+    });
 });
 
 function onEventSave() {

@@ -20,6 +20,12 @@ interface RepositoryInterface
     public function persist($entity);
 
     /**
+     * @param mixed $entity
+     * @return $this
+     */
+    public function remove($entity);
+
+    /**
      * @return $this
      */
     public function flush();

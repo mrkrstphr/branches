@@ -111,6 +111,15 @@ abstract class AbstractRepository implements RepositoryInterface
     /**
      * {@inheritDoc}
      */
+    public function remove($entity)
+    {
+        $this->getEntityManager()->remove($entity);
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function flush()
     {
         $this->entityManager->flush();

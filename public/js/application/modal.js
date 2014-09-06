@@ -14,6 +14,9 @@ $.widget('ui.modalX', {
     setUrl: function (url) {
         this.options.url = url;
     },
+    reload: function () {
+        $('.modal-body', this.element).load(this.options.url);
+    },
     _decorateModal: function () {
         var template = '<div class="modal-dialog">' +
             '<div class="modal-content">' +
@@ -50,6 +53,7 @@ $.widget('ui.modalX', {
             var onLoadCallback = function () {_this.options.onLoad(e)};
 
             if (buttonUrl) {
+                _this.options.url = buttonUrl;
                 $('div.modal-body', _this.element).load(buttonUrl, onLoadCallback);
             } else if (_this.options.url) {
                 $('div.modal-body', _this.element).load(_this.options.url, onLoadCallback);
