@@ -1,27 +1,43 @@
-<table class="table table-striped">
+<table class="table table-hover">
     <tr>
         <th>Source</th>
         <th>Page</th>
-        <th>Text</th>
         <th></th>
     </tr>
     <?php foreach ($this->event->getSources() as $source): ?>
         <tr>
-            <td><?= $source->getSource()->getName() ?></td>
-            <td><?= $source->getPage() ?></td>
-            <td>???</td>
+            <td><?= $this->escapeHtml($source->getSource()->getName()) ?></td>
+            <td><?= $this->escapeHtml($source->getPage()) ?></td>
             <td>
                 <div class="btn-toolbar pull-right" role="toolbar">
                     <div class="btn-group btn-group-sm">
-                        <button type="button" class="event-sources btn btn-success">
+                        <?php if ($source->getText()): ?>
+                        <button type="button" class="btn btn-primary" data-toggle="collapse"
+                            data-target="#source-text-<?= $source->getId() ?>" title="Show Cited Text">
+                            <i class="fa fa-expand"></i>
+                        </button>
+                        <?php endif; ?>
+                        <button type="button" class="event-sources btn btn-success" title="Edit Citation">
                             <i class="fa fa-pencil"></i>
                         </button>
-                        <button type="button" class="btn btn-danger delete-source" data-id="<?= $source->getId() ?>">
+                        <button type="button" class="btn btn-danger delete-source"
+                            data-id="<?= $this->escapeHtmlAttr($source->getId()) ?>" title="Delete Citation">
                             <i class="fa fa-trash-o"></i>
                         </button>
                     </div>
                 </div>
             </td>
         </tr>
+        <?php if ($source->getText()): ?>
+        <tr id="source-text-<?= $source->getId() ?>" class="collapse">
+            <td colspan="3">
+                <div style="max-height: 200px; overflow: auto">
+                    <blockquote class="small" style="margin-bottom: 0">
+                        <?= nl2br($this->escapeHtml($source->getText())) ?>
+                    </blockquote>
+                </div>
+            </td>
+        </tr>
+        <?php endif; ?>
     <?php endforeach; ?>
 </table>

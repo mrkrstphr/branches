@@ -9,6 +9,9 @@ Branches\Domain\Entity\Person\EventSource:
   fields:
     page:
       nullable: true
+    text:
+      type: text
+      nullable: true
   manyToOne:
     event:
       targetEntity: Branches\Domain\Entity\Person\Event

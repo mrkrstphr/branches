@@ -26,6 +26,11 @@ class EventSource extends AbstractEntity
     protected $page;
 
     /**
+     * @var string
+     */
+    protected $text;
+
+    /**
      * @return Event
      */
     public function getEvent()
@@ -76,6 +81,24 @@ class EventSource extends AbstractEntity
     public function setPage($page)
     {
         $this->page = $page;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     * @return $this
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
         return $this;
     }
 }
