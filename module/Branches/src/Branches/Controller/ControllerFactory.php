@@ -44,6 +44,15 @@ class ControllerFactory implements FactoryInterface
 
     /**
      * @param ControllerManager $cm
+     * @return LoginController
+     */
+    public function createBranchesControllerLogin(ControllerManager $cm)
+    {
+        return new LoginController();
+    }
+
+    /**
+     * @param ControllerManager $cm
      * @return PeopleController
      */
     public function createBranchesControllerPeople(ControllerManager $cm)

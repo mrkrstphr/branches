@@ -4,6 +4,47 @@
 return [
     'router' => [
         'routes' => [
+            'login' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/login',
+                    'defaults' => [
+                        'controller' => 'Branches\Controller\Login',
+                        'action' => 'login',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'reset-password-start' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/reset-password-start',
+                            'defaults' => [
+                                'action' => 'reset-password-start'
+                            ],
+                        ],
+                    ],
+                    'reset-password' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/reset-password/:resetKey',
+                            'defaults' => [
+                                'action' => 'reset-password'
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'logout' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/logout',
+                    'defaults' => [
+                        'controller' => 'Branches\Controller\Login',
+                        'action' => 'logout',
+                    ],
+                ],
+            ],
             'home' => [
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => [

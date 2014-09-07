@@ -5,7 +5,7 @@ return [
         'Branches',
         'DoctrineModule',
         'DoctrineORMModule',
-        'ZendDeveloperTools',
+        //'ZendDeveloperTools',
     ],
     'module_listener_options' => [
         'module_paths' => [

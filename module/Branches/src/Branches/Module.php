@@ -2,6 +2,10 @@
 
 namespace Branches;
 
+use Branches\Service\Authentication\AuthenticationHandler;
+use Zend\Http\Request;
+use Zend\Mvc\MvcEvent;
+
 /**
  * Class Module
  * @package Branches
@@ -46,5 +50,19 @@ class Module
     public function getViewHelperCOnfig()
     {
         return include __DIR__ . '/../../config/view.helper.config.php';
+    }
+
+    /**
+     * @param MvcEvent $e
+     */
+    public function onBootstrap(MvcEvent $e)
+    {
+        $em = $e->getApplication()->getEventManager();
+        $em->attach(MvcEvent::EVENT_ROUTE, function (MvcEvent $event) {
+            return (new AuthenticationHandler())->onRequestEvent($event);
+        });
+//        [$this, 'onRoute']
+//});
+        //$em->attach(MvcEvent::EVENT_DISPATCH_ERROR, [$this, 'onDispatchError'], -999);
     }
 }

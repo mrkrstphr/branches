@@ -9,20 +9,30 @@ return [
         'Branches\Repository\Person\EventSourceRepository' => 'Branches\Persistence\Repository\RepositoryFactory',
         'Branches\Repository\Place\PlaceRepository' => 'Branches\Persistence\Repository\RepositoryFactory',
         'Branches\Repository\Source\SourceRepository' => 'Branches\Persistence\Repository\RepositoryFactory',
+        'Branches\Repository\UserRepository' => 'Branches\Persistence\Repository\RepositoryFactory',
         'Branches\Service\Json\Serializer' => 'Branches\Service\ServiceFactory',
         'Branches\Fieldset\SourceSelection' => function ($sm) {
-            return new \Branches\Form\Source\SourceSelectionFieldset(
+            return new Branches\Form\Source\SourceSelectionFieldset(
                 $sm->get('Branches\Repository\Source\SourceRepository'),
                 'source'
             );
         },
         'Branches\Form\SourceCitation' => function ($sm) {
-            $fieldset = (new \Branches\Form\People\Event\SourceCitationFieldset(
+            $fieldset = (new Branches\Form\People\Event\SourceCitationFieldset(
                 $sm->get('Branches\Fieldset\SourceSelection')
             ))
-                ->setHydrator(new \DoctrineModule\Stdlib\Hydrator\DoctrineObject($sm->get('Doctrine\ORM\EntityManager')))
-                ->setObject(new \Branches\Domain\Entity\Person\EventSource());
-            return new \Branches\Form\People\Event\SourceCitationForm($fieldset);
+                ->setHydrator(new DoctrineModule\Stdlib\Hydrator\DoctrineObject($sm->get('Doctrine\ORM\EntityManager')))
+                ->setObject(new Branches\Domain\Entity\Person\EventSource());
+            return new Branches\Form\People\Event\SourceCitationForm($fieldset);
+        },
+        'Branches\Service\Authentication' => function ($sm) {
+            return new Zend\Authentication\AuthenticationService();
+        },
+        'Branches\Service\Authentication\Adapter\UserRepositoryAdapter' => function ($sm) {
+            return new Branches\Service\Authentication\Adapter\UserRepositoryAdapter(
+                $sm->get('Branches\Repository\UserRepository'),
+                new Branches\Service\Authentication\PasswordFactory()
+            );
         }
     ]
 ];
