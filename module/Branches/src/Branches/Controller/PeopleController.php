@@ -23,6 +23,11 @@ class PeopleController extends AbstractActionController
         $this->personRepository = $personRepository;
     }
 
+    public function addAction()
+    {
+
+    }
+
     /**
      * @return array
      */

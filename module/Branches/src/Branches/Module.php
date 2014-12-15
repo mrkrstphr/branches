@@ -57,10 +57,10 @@ class Module
      */
     public function onBootstrap(MvcEvent $e)
     {
-        $em = $e->getApplication()->getEventManager();
-        $em->attach(MvcEvent::EVENT_ROUTE, function (MvcEvent $event) {
-            return (new AuthenticationHandler())->onRequestEvent($event);
-        });
+//        $em = $e->getApplication()->getEventManager();
+//        $em->attach(MvcEvent::EVENT_ROUTE, function (MvcEvent $event) {
+//            return (new AuthenticationHandler())->onRequestEvent($event);
+//        });
 //        [$this, 'onRoute']
 //});
         //$em->attach(MvcEvent::EVENT_DISPATCH_ERROR, [$this, 'onDispatchError'], -999);
