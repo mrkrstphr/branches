@@ -1,4 +1,0 @@
-Branches\Domain\Entity\Place\Place:
-  exclusion_policy: ALL
-  properties:
-    description:

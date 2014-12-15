@@ -7,12 +7,12 @@
         }
     },
     "require": {
-        "zendframework/zendframework": "2.3.*",
-        "zendframework/zend-developer-tools": "0.0.*",
-        "doctrine/collections": "1.*",
-        "doctrine/doctrine-orm-module": "0.8.*",
-        "mrkrstphr/php-gedcom": "dev-streaming-parser",
-        "symfony/yaml": "2.5.*",
-        "jms/serializer": "0.*"
+        "symfony/yaml": "~2.6",
+        "doctrine/orm": "~2.4"
+    },
+    "require-dev": {
+        "peridot-php/peridot": "~1.8",
+        "peridot-php/peridot-prophecy-plugin": "~1.1",
+        "peridot-php/peridot-watcher-plugin": "~1.3"
     }
 }
