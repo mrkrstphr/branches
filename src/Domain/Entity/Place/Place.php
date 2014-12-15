@@ -55,6 +55,11 @@ class Place extends AbstractEntity
     /**
      * @var string
      */
+    protected $jurisdictionHierarchy;
+
+    /**
+     * @var string
+     */
     protected $phone;
 
     /**
@@ -179,6 +184,22 @@ class Place extends AbstractEntity
     public function setPostalCode($postalCode)
     {
         $this->postalCode = $postalCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getJurisdictionHierarchy()
+    {
+        return $this->jurisdictionHierarchy;
+    }
+
+    /**
+     * @param string $jurisdictionHierarchy
+     */
+    public function setJurisdictionHierarchy($jurisdictionHierarchy)
+    {
+        $this->jurisdictionHierarchy = $jurisdictionHierarchy;
     }
 
     /**
