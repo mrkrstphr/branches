@@ -3,6 +3,8 @@
 namespace Branches\Domain\Entity\Source;
 
 use Branches\Domain\Entity\AbstractEntity;
+use Branches\Domain\Entity\NotedTrait;
+use Branches\Domain\Entity\TimestampedTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -11,6 +13,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Source extends AbstractEntity
 {
+    use NotedTrait;
+    use TimestampedTrait;
+
     /**
      * @var string
      */
