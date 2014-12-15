@@ -4,6 +4,7 @@ namespace Branches\Domain\Entity\Place;
 
 use Branches\Domain\Entity\AbstractEntity;
 use Branches\Domain\Entity\NotedTrait;
+use Branches\Domain\Entity\SourcedTrait;
 use Branches\Domain\Entity\TimestampedTrait;
 
 /**
@@ -13,6 +14,7 @@ use Branches\Domain\Entity\TimestampedTrait;
 class Place extends AbstractEntity
 {
     use NotedTrait;
+    use SourcedTrait;
     use TimestampedTrait;
 
     /**
