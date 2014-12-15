@@ -3,6 +3,7 @@
 namespace Branches\Domain\Entity\Source;
 
 use Branches\Domain\Entity\AbstractEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Source
@@ -13,23 +14,155 @@ class Source extends AbstractEntity
     /**
      * @var string
      */
-    protected $name;
+    protected $title;
+
+    /**
+     * @var string
+     */
+    protected $author;
+
+    /**
+     * @var string
+     */
+    protected $publication;
+
+    /**
+     * @var string
+     */
+    protected $agency;
+
+    /**
+     * @var string
+     */
+    protected $abbr;
+
+    /**
+     * @var string
+     */
+    protected $text;
+
+    /**
+     * @var string
+     */
+    protected $rin;
+
+    /**
+     *
+     */
+    public function __construct()
+    {
+        $this->notes = new ArrayCollection();
+    }
+
+    /**
+     * @param string $abbr
+     */
+    public function setAbbr($abbr)
+    {
+        $this->abbr = $abbr;
+    }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getAbbr()
     {
-        return $this->name;
+        return $this->abbr;
     }
 
     /**
-     * @param string $name
-     * @return $this
+     * @param string $agency
      */
-    public function setName($name)
+    public function setAgency($agency)
     {
-        $this->name = $name;
-        return $this;
+        $this->agency = $agency;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAgency()
+    {
+        return $this->agency;
+    }
+
+    /**
+     * @param string $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param string $publication
+     */
+    public function setPublication($publication)
+    {
+        $this->publication = $publication;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPublication()
+    {
+        return $this->publication;
+    }
+
+    /**
+     * @param string $rin
+     */
+    public function setRin($rin)
+    {
+        $this->rin = $rin;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRin()
+    {
+        return $this->rin;
+    }
+
+    /**
+     * @param string $text
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }
