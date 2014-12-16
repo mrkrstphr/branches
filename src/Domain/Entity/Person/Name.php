@@ -3,6 +3,9 @@
 namespace Branches\Domain\Entity\Person;
 
 use Branches\Domain\Entity\AbstractEntity;
+use Branches\Domain\Entity\NotedTrait;
+use Branches\Domain\Entity\SourcedTrait;
+use Branches\Domain\Entity\TimestampedTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -11,6 +14,10 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Name extends AbstractEntity
 {
+    use NotedTrait;
+    use SourcedTrait;
+    use TimestampedTrait;
+
     /**
      * @var \Branches\Domain\Entity\Person\Person
      */
@@ -47,20 +54,16 @@ class Name extends AbstractEntity
     private $suffix;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    private $sources;
-
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    private $notes;
-
-    /**
      * Set us up the class!
+     *
+     * @param string $given
+     * @param string $surname
      */
-    public function __construct()
+    public function __construct($given = '', $surname = '')
     {
+        $this->given = $given;
+        $this->surname = $surname;
+
         $this->sources = new ArrayCollection();
         $this->notes = new ArrayCollection();
     }
@@ -189,42 +192,6 @@ class Name extends AbstractEntity
     public function setSuffix($suffix)
     {
         $this->suffix = $suffix;
-        return $this;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getSources()
-    {
-        return $this->sources;
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $sources
-     * @return $this
-     */
-    public function setSources($sources)
-    {
-        $this->sources = $sources;
-        return $this;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getNotes()
-    {
-        return $this->notes;
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $notes
-     * @return $this
-     */
-    public function setNotes($notes)
-    {
-        $this->notes = $notes;
         return $this;
     }
 
