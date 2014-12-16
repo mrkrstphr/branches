@@ -114,7 +114,7 @@ class Family extends AbstractEntity
      */
     public function addChild(Child $child)
     {
-        // todo $child->add or ->set
+        $child->setFamily($this);
         $this->children->add($child);
         return $this;
     }
