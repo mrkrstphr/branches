@@ -3,7 +3,10 @@
 namespace Branches\Domain\Entity\Family;
 
 use Branches\Domain\Entity\AbstractEntity;
+use Branches\Domain\Entity\NotedTrait;
 use Branches\Domain\Entity\Person\Person;
+use Branches\Domain\Entity\SourcedTrait;
+use Branches\Domain\Entity\TimestampedTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -12,6 +15,10 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Family extends AbstractEntity
 {
+    use NotedTrait;
+    use SourcedTrait;
+    use TimestampedTrait;
+
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      */
@@ -28,16 +35,6 @@ class Family extends AbstractEntity
     protected $events;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    protected $notes;
-
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    protected $sources;
-
-    /**
      * Set us up the class!
      */
     public function __construct()
@@ -45,8 +42,6 @@ class Family extends AbstractEntity
         $this->parents = new ArrayCollection();
         $this->children = new ArrayCollection();
         $this->events = new ArrayCollection();
-        $this->notes = new ArrayCollection();
-        $this->sources = new ArrayCollection();
     }
 
     /**
@@ -57,19 +52,17 @@ class Family extends AbstractEntity
         return $this->parents;
     }
 
-    public function getParent($index)
+    /**
+     * Return the parent in this family who is not the passed $person.
+     *
+     * @param Person $person
+     * @return Person|null
+     */
+    public function getPartner(Person $person)
     {
-        if ($this->parents) {
-            foreach ($this->parents as $parent) {
-                if ($index == 0 && $parent->getGender() == 'M') {
-                    return $parent;
-                } else if ($index == 1 && $parent->getGender() == 'F') {
-                    return $parent;
-                }
-            }
-
-            if (count($this->parents) > 1) {
-                return $this->parents[$index];
+        foreach ($this->getParents() as $parent) {
+            if ($parent != $person) {
+                return $parent;
             }
         }
 
@@ -83,6 +76,17 @@ class Family extends AbstractEntity
     public function setParents($parents)
     {
         $this->parents = $parents;
+        return $this;
+    }
+
+    /**
+     * @param Person $parent
+     * @return $this
+     */
+    public function addParent(Person $parent)
+    {
+        // todo parent->add or ->set?
+        $this->parents->add($parent);
         return $this;
     }
 
@@ -105,7 +109,18 @@ class Family extends AbstractEntity
     }
 
     /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
+     * @param Child $child
+     * @return $this
+     */
+    public function addChild(Child $child)
+    {
+        // todo $child->add or ->set
+        $this->children->add($child);
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
      */
     public function getEvents()
     {
@@ -113,59 +128,10 @@ class Family extends AbstractEntity
     }
 
     /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $events
-     * @return $this
+     * @param ArrayCollection $events
      */
     public function setEvents($events)
     {
         $this->events = $events;
-        return $this;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getNotes()
-    {
-        return $this->notes;
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $notes
-     * @return $this
-     */
-    public function setNotes($notes)
-    {
-        $this->notes = $notes;
-        return $this;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getSources()
-    {
-        return $this->sources;
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $sources
-     * @return $this
-     */
-    public function setSources($sources)
-    {
-        $this->sources = $sources;
-        return $this;
-    }
-
-    public function getPartner(Person $person)
-    {
-        foreach ($this->getParents() as $parent) {
-            if ($parent != $person) {
-                return $parent;
-            }
-        }
-
-        return null;
     }
 }
