@@ -9,10 +9,25 @@ describe('Name', function () {
             assert('William Jefferson Clinton' === (string)$name, 'incorrect name result');
         });
 
-        it('should include the surname prefix when present');
+        it('should include the surname prefix when present', function () {
+            $name = new Name('John', 'Jong');
+            $name->setSurnamePrefix('de');
 
-        it('should include the surname suffix when present');
+            assert('John de Jong' == (string)$name, 'incorrect name with surname prefix');
+        });
 
-        it('should include the name prefix when present');
+        it('should include the suffix when present', function () {
+            $name = new Name('John', 'Williams');
+            $name->setSuffix('Jr');
+
+            assert('John Williams Jr' === (string)$name, 'incorrect name with suffix');
+        });
+
+        it('should include the name prefix when present', function () {
+            $name = new Name('Samuel', 'Wilson');
+            $name->setPrefix('Uncle');
+
+            assert('Uncle Samuel Wilson' === (string)$name, 'incorrect name with prefix');
+        });
     });
 });
