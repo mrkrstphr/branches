@@ -3,18 +3,23 @@
 namespace Branches\Domain\Entity\Family;
 
 use Branches\Domain\Entity\AbstractEntity;
+use Branches\Domain\Entity\Person\Person;
 
+/**
+ * Class Child
+ * @package Branches\Domain\Entity\Family
+ */
 class Child extends AbstractEntity
 {
     /**
-     * @var \Branches\Domain\Entity\Family\Family
+     * @var Family
      */
     protected $family;
 
     /**
-     * @var \Branches\Domain\Entity\Person\Person
+     * @var Person
      */
-    protected $child;
+    protected $person;
 
     /**
      * @var string
@@ -36,6 +41,24 @@ class Child extends AbstractEntity
     public function setFamily($family)
     {
         $this->family = $family;
+        return $this;
+    }
+
+    /**
+     * @return Person
+     */
+    public function getPerson()
+    {
+        return $this->person;
+    }
+
+    /**
+     * @param Person $person
+     * @return $this
+     */
+    public function setPerson($person)
+    {
+        $this->person = $person;
         return $this;
     }
 
