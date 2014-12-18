@@ -3,6 +3,7 @@
 namespace Branches\Domain\Entity\Person;
 
 use Branches\Domain\Entity\AbstractEntity;
+use Branches\Domain\Entity\TimestampedTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -11,6 +12,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Person extends AbstractEntity
 {
+    use TimestampedTrait;
+
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      */
@@ -113,11 +116,21 @@ class Person extends AbstractEntity
     }
 
     /**
+     * @param Name $name
+     * @return $this
+     */
+    public function addName(Name $name)
+    {
+        $name->setPerson($this);
+        $this->names->add($name);
+        return $this;
+    }
+
+    /**
      * @return Name
      */
-    public function getDisplayName()
+    public function getPreferredName()
     {
-        // todo fixme
         return $this->names[0];
     }
 
@@ -152,7 +165,6 @@ class Person extends AbstractEntity
      */
     public function getPreferredParents()
     {
-        // todo fixme
         return $this->parents[0];
     }
 
