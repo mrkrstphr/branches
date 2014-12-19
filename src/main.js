@@ -6,3 +6,6 @@ require('script!angular-bootstrap/ui-bootstrap.js');
 require('script!angular-bootstrap/ui-bootstrap-tpls.js');
 
 require('./app.js');
+
+require('./modules/home-page/home-page.js');
+require('./modules/home-page/home-page-controller.js');
