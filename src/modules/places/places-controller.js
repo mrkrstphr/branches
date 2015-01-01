@@ -1,4 +1,6 @@
 (function() {
+  'use strict';
+
   PlaceListController.$inject = ['$scope', 'Place'];
 
   function PlaceListController($scope, Place) {
