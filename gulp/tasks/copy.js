@@ -13,14 +13,9 @@ gulp.task('copy-images', ['clean'], function() {
     .pipe(gulp.dest(config.dist.root + '/images'));
 });
 
-gulp.task('copy-index', ['clean'], function() {
-  gulp.src(config.src.root + '/index.html')
-    .pipe(gulp.dest(config.dist.root));
-});
-
 gulp.task('copy-templates', ['clean'], function() {
-  gulp.src(config.src.root + '/**/*.html')
+  gulp.src([config.src.root + '/**/*.html', config.src.root + '/*.html'])
     .pipe(gulp.dest(config.dist.root));
 });
 
-gulp.task('copy', ['copy-fonts', 'copy-images', 'copy-templates', 'copy-index']);
+gulp.task('copy', ['copy-fonts', 'copy-images', 'copy-templates']);
