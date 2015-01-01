@@ -25,6 +25,11 @@ router.route('/places')
   });
 
 app.use('/api', router);
+app.use(express.static('dist'));
+
+app.get('*', function(req, res){
+  res.sendFile('index.html', {root: 'dist'});
+});
 
 var port = process.env.PORT || 8080;
 
