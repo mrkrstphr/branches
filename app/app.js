@@ -3,35 +3,33 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var app = express();
-var router = express.Router();
-
-
 var Place = require('./models/place');
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+module.exports = function () {
+  var app = express();
+  var router = express.Router();
 
-mongoose.connect('mongodb://localhost/branches');
+  app.use(bodyParser.urlencoded({extended: true}));
+  app.use(bodyParser.json());
 
-router.route('/places')
-  .get(function(req, res) {
-    Place.find(function(err, places) {
-      if (err)
-        res.send(err);
+  mongoose.connect('mongodb://localhost/branches');
 
-      res.json({places: places});
+  router.route('/places')
+    .get(function (req, res) {
+      Place.find(function (err, places) {
+        if (err)
+          res.send(err);
+
+        res.json({places: places, foo: 'bar'});
+      });
     });
+
+  app.use('/api', router);
+  app.use(express.static('dist'));
+
+  app.get('*', function (req, res) {
+    res.sendFile('index.html', {root: 'dist'});
   });
 
-app.use('/api', router);
-app.use(express.static('dist'));
-
-app.get('*', function(req, res){
-  res.sendFile('index.html', {root: 'dist'});
-});
-
-var port = process.env.PORT || 8080;
-
-app.listen(port);
-console.log('Server running on http://localhost:' + port);
+  return app;
+};

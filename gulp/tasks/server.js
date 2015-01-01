@@ -4,20 +4,16 @@
 
 var config = require('../config');
 var http = require('http');
-var express = require('express');
+var app = require('../../app/app.js');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var morgan = require('morgan');
 
+
 gulp.task('server', ['build'], function() {
-  var server = express();
+  var server = app();
 
   server.use(morgan('dev'));
-  server.use(express.static(config.dist.root));
-
-  server.all('/*', function(req, res) {
-      res.sendFile('index.html', { root: config.dist.root });
-  });
 
   var s = http.createServer(server);
   s.on('error', function(err){

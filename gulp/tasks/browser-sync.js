@@ -1,10 +1,10 @@
 'use strict';
 
-var config      = require('../config');
+var config = require('../config');
+var gulp = require('gulp');
 var browserSync = require('browser-sync');
-var gulp        = require('gulp');
 
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', ['server'], function() {
   browserSync({
     proxy: 'localhost:' + config.serverport
   });
