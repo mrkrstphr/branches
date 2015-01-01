@@ -7,5 +7,11 @@ require('script!angular-bootstrap/ui-bootstrap-tpls.js');
 
 require('./app.js');
 
+require('./components/resources/resources.js');
+require('./components/resources/place-resource.js');
+
 require('./modules/home-page/home-page.js');
 require('./modules/home-page/home-page-controller.js');
+
+require('./modules/places/places.js');
+require('./modules/places/places-controller.js');

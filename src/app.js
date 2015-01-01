@@ -3,7 +3,9 @@
 
   angular.module('branches', [
     'ui.bootstrap',
-    'branches.home_page'
+    'branches.resources',
+    'branches.home_page',
+    'branches.places'
   ])
 
   .config(['$locationProvider', function($locationProvider) {
