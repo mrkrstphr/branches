@@ -2,29 +2,8 @@
 
 var _ = require('lodash');
 var Place = require('../models/place');
-
-var placeCollectionViewModel = function (data) {
-  return {
-    places: _.map(data, function (place) {
-      place.id = place._id;
-      delete place._id;
-
-      return {
-        id: place._id,
-        name: place.name
-      };
-    })
-  };
-};
-
-var placeViewModel = function (data) {
-  return {
-    places: {
-      id: data.id,
-      name: data.name
-    }
-  };
-};
+var placeViewModel = require('../view-models/place');
+var placeCollectionViewModel = require('../view-models/place-collection');
 
 module.exports = function (router) {
   router.route('/places')
