@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var placeViewModel = require('./place');
 
 module.exports = function (data) {
   return {
@@ -6,10 +7,7 @@ module.exports = function (data) {
       place.id = place._id;
       delete place._id;
 
-      return {
-        id: place._id,
-        name: place.name
-      };
+      return placeViewModel(place)['places'];
     })
   };
 };
