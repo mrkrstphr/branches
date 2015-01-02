@@ -1,0 +1,11 @@
+<h2>Places</h2>
+
+<a href="/places/create" class="btn btn-success">Create</a>
+
+<table class="table table-striped">
+    <tr ng-repeat="place in controller.places.places">
+        <td>
+            <a href="/places/view/{{place.id}}">{{place.name}}</a>
+        </td>
+    </tr>
+</table>

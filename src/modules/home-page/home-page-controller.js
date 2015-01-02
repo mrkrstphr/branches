@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 
-  HomeController.$inject = ['$scope'];
+  HomeController.$inject = [];
 
-  function HomeController($scope) {
-    this.$scope = $scope;
+  function HomeController() {
+
   }
 
   angular.module('branches.home_page')

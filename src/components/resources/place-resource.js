@@ -5,13 +5,9 @@
   PlaceFactory.$inject = ['$resource'];
 
   function PlaceFactory($resource) {
-    var Place = $resource('/api/places/:id');
-
-    Place.create = function(data) {
-      return new Place({places: data});
-    };
-
-    return Place;
+    return $resource('/api/places/:id', {}, {
+      query: {method:'GET', params:{id:'places'}, isArray:true}
+    });
   }
 
   angular.module('branches.resources')

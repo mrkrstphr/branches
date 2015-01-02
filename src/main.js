@@ -14,4 +14,6 @@ require('./modules/home-page/home-page.js');
 require('./modules/home-page/home-page-controller.js');
 
 require('./modules/places/places.js');
-require('./modules/places/places-controller.js');
+require('./modules/places/place-list-controller.js');
+require('./modules/places/create-place-controller.js');
+require('./modules/places/view-place-controller.js');
