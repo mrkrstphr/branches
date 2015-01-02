@@ -1,14 +1,11 @@
 'use strict';
 
-// stolen/adapted from: https://github.com/jakemmarsh/angularjs-gulp-browserify-boilerplate
-
 var config = require('../config');
 var http = require('http');
-var app = require('../../app/app.js');
+var app = require('../../app/app');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var morgan = require('morgan');
-
 
 gulp.task('server', ['build'], function() {
   var server = app();
