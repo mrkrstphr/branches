@@ -1,0 +1,25 @@
+<div class="page-header clearfix">
+    <h2 class="pull-left">People</h2>
+    <a href="/people/create" class="btn btn-success pull-right">Create</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Born</th>
+            <th>Died</th>
+        </tr>
+    </thead>
+    <tr ng-repeat="person in controller.people">
+        <td>
+            <a href="/people/view/{{person.id}}">{{person.getPreferredName(true)}}</a>
+        </td>
+        <td>
+            {{person.getPreferredEvent('birth').date}}
+        </td>
+        <td>
+            {{person.getPreferredEvent('death').date}}
+        </td>
+    </tr>
+</table>

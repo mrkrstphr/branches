@@ -5,7 +5,8 @@
     'ui.bootstrap',
     'branches.resources',
     'branches.home_page',
-    'branches.places'
+    'branches.places',
+    'branches.people'
   ])
 
   .config(['$locationProvider', function($locationProvider) {

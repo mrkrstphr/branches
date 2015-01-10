@@ -6,7 +6,7 @@
 
   function PlaceFactory($resource) {
     return $resource('/api/places/:id', {}, {
-      query: {method:'GET', params:{id:'places'}, isArray:true}
+      query: {method:'GET', params:{id:''}, isArray:true}
     });
   }
 

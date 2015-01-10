@@ -28,4 +28,32 @@ module.exports = function (router) {
         res.json(placeViewModel(place));
       });
     });
+
+  router.route('/people')
+    .get(function (req, res) {
+      res.json({
+        people: [
+          {
+            id: 101281,
+            names: [{given: 'Kristopher', surname: 'Wilson'}],
+            events: [{type: 'birth', date: '04 Oct 1983'}]
+          },
+          {id: 101282, names: [{given: 'Ashley', surname: 'Coleman'}]}
+        ]
+      })
+    });
+
+  router.route('/people/:id')
+    .get(function (req, res) {
+      res.json({
+        people: {
+          id: req.params.id,
+          names: [{given: 'Tillotson', surname: 'Terrell'}],
+          events: [
+            {type: 'death', date: '1838-12-23'},
+            {type: 'birth', date: '1785-05-01'}
+          ]
+        }
+      })
+    });
 };
