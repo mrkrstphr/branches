@@ -15,6 +15,12 @@
       controller: 'ViewPersonController',
       controllerAs: 'controller'
     });
+
+    $routeProvider.when('/people/create', {
+      templateUrl: '/modules/people/create-person.html',
+      controller: 'CreatePersonController',
+      controllerAs: 'controller'
+    });
   }
 
   angular.module('branches.people', ['ngRoute', 'branches.resources'])

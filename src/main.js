@@ -22,4 +22,5 @@ require('./modules/places/view-place-controller.js');
 
 require('./modules/people/people.js');
 require('./modules/people/people-list-controller.js');
+require('./modules/people/create-person-controller.js');
 require('./modules/people/view-person-controller.js');
